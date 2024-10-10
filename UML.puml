@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class User {
+ - userId : String
+ - userName : String
+ <<abstract>> void addBook()
+ <<abstract>> void deleteBook()
+ <<abstract>> void checkList()
+ <<abstract>> void searchBook()
+}
+class ReaderAccount extends User {
+
+}
+class Librarian extends User {
+
+}
+@enduml
