@@ -4,10 +4,11 @@
 class User {
  - userId : String
  - userName : String
- <<abstract>> void addBook()
- <<abstract>> void deleteBook()
- <<abstract>> void checkList()
- <<abstract>> void searchBook()
+ - passWord : String
+ <<abstract>> addBook() : void
+ <<abstract>> deleteBook() : void
+ <<abstract>> checkList() : void
+ <<abstract>> searchBook() : void
 }
 class ReaderAccount extends User {
 
@@ -15,4 +16,80 @@ class ReaderAccount extends User {
 class Librarian extends User {
 
 }
+
+class Book {
+  - id : String
+  - title : String
+  - author :String
+  - isBorrowed : boolean
+}
+
+class DocumentManager {
+    - groupByAuthor : ArrayList<Document>
+    - groupByTitle : ArrayList<Document>
+    //group theo tìm kiếm title gần giống (%)
+}
+
+class Author {
+    - name : String
+    - dateOfBirth : String
+    - Bio : String
+    getInfor() : void
+}
+
+class DataBaseSQL {
+     //
+     bookSearch(String) : ArrayList<Book>
+     authorSearch(String) : ArrayList<Author>
+     //
+     getAllDocument() : ArrayList<Book>
+     //
+     libraryAddBook(Book book)
+     libraryRemoveBook(Book book)
+}
+
+class DataBaseMySQL extends DataBaseSQL {
+    - connection : Connection
+    - password : String
+    - jdbcURL : String
+    - ins ; DataBaseMySQL
+    - username : String
+    - prepareStatement : PrepareStatement
+    - resultSet : ResultSet
+
+    bookSearch(String) : ArrayList<Book>
+    authorSearch(String) : ArrayList<Author>
+    //
+    getAllDocument() : ArrayList<Book>
+    //
+    libraryAddBook(Book book)
+    libraryRemoveBook(Book book)
+
+}
+
+class SearchBar {
+    // hiện lịch sử tìm kiếm
+    // gợi ý dựa trên lịch sử tìm kiem
+    // groupByAuthor,groupByTitle...
+    // goi y dua tren luot muon nhieu
+    // goi y dua tren sach moi nhap kho
+    -
+    -
+}
+
+class SuggestSearch {
+    // Luu lich su tim kiem
+    SaveSearch() : void
+    //
+    BestSearch() : ArrayList<Book>
+    // New Book
+    NewBook() : ArrayList<Book>
+}
+
+class GUI {}
+class RegisterGUI extends GUI{}
+class HomeGUI extends GUI{}
+class UserGUI extends GUI{}
+class ManagerGUI extends GUI{}
+
 @enduml
