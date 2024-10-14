@@ -7,14 +7,40 @@ class User {
  - passWord : String
  <<abstract>> addBook() : void
  <<abstract>> deleteBook() : void
- <<abstract>> checkList() : void
+ <<abstract>> getList()
  <<abstract>> searchBook() : void
 }
-class ReaderAccount extends User {
 
+class ReaderAccount extends User {
+    - dateBorrowed : String
+    // action and make request
+    // add request in queue
+    //
+    getList() : ArrayList<Book>
+    addBook() : void
+    deleteBook() : void
+    searchBook() : void
 }
 class Librarian extends User {
 
+}
+
+class HoldRequest {
+
+}
+
+class Notification {
+
+    - notification : String
+
+    // neu den date tra sach thi
+    // gui cho nguoi doc thong bao qua giao dien
+    reader : ReaderAccount
+    reader.getList() : ArrayList
+    //check co sach dang trong tinh trang chuan bi het han
+    //->
+    isDueDate : boolean
+    if ( isDueDate ) -> "Qua han tra sach"
 }
 
 class Book {
@@ -25,8 +51,8 @@ class Book {
 }
 
 class DocumentManager {
-    - groupByAuthor : ArrayList<Document>
-    - groupByTitle : ArrayList<Document>
+    - groupByAuthor : ArrayList<Book>
+    - groupByTitle : ArrayList<Book>
     //group theo tìm kiếm title gần giống (%)
 }
 
@@ -37,22 +63,27 @@ class Author {
     getInfor() : void
 }
 
+Author----->DocumentManager
+Book-----> DocumentManager
+
 class DataBaseSQL {
-     //
+
+     //book storage in DataBase
      bookSearch(String) : ArrayList<Book>
      authorSearch(String) : ArrayList<Author>
-     //
      getAllDocument() : ArrayList<Book>
-     //
      libraryAddBook(Book book)
      libraryRemoveBook(Book book)
+
+     //user storage in DataBase
+
 }
 
-class DataBaseMySQL extends DataBaseSQL {
+class BookDataBase extends DataBaseSQL {
     - connection : Connection
     - password : String
     - jdbcURL : String
-    - ins ; DataBaseMySQL
+    //- ins ; DataBaseMySQL
     - username : String
     - prepareStatement : PrepareStatement
     - resultSet : ResultSet
@@ -67,6 +98,17 @@ class DataBaseMySQL extends DataBaseSQL {
 
 }
 
+class UserDataBase extends DataBaseSQL {
+    - connection : Connection
+    - password : String
+    - jdbcURL : String
+        //- ins ; DataBaseMySQL
+    - username : String
+    - prepareStatement : PrepareStatement
+    - resultSet : ResultSet
+
+
+}
 class SearchBar {
     // hiện lịch sử tìm kiếm
     // gợi ý dựa trên lịch sử tìm kiem
@@ -84,12 +126,16 @@ class SuggestSearch {
     BestSearch() : ArrayList<Book>
     // New Book
     NewBook() : ArrayList<Book>
+    // Star Book : Give the star from 1->5
+
 }
 
 class GUI {}
-class RegisterGUI extends GUI{}
-class HomeGUI extends GUI{}
-class UserGUI extends GUI{}
-class ManagerGUI extends GUI{}
+class RegisterGUI extends GUI {
+}
+class HomeGUI extends GUI {}
+class UserGUI extends GUI {}
+class ManagerGUI extends GUI {}
+
 
 @enduml
