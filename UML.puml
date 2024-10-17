@@ -95,7 +95,6 @@ class BookDataBase extends DataBaseSQL {
     //
     libraryAddBook(Book book)
     libraryRemoveBook(Book book)
-
 }
 
 class UserDataBase extends DataBaseSQL {
@@ -106,7 +105,6 @@ class UserDataBase extends DataBaseSQL {
     - username : String
     - prepareStatement : PrepareStatement
     - resultSet : ResultSet
-
 
 }
 class SearchBar {
@@ -131,11 +129,29 @@ class SuggestSearch {
 }
 
 class GUI {}
-class RegisterGUI extends GUI {
-}
+class RegisterGUI extends GUI {}
 class HomeGUI extends GUI {}
 class UserGUI extends GUI {}
 class ManagerGUI extends GUI {}
+
+class UserException {
+    + UserException(message :String)
+}
+class RegisterException extends UserException {
+    // Dang nhap sai -> Message Box
+    // ???
+}
+
+class MakeRequestException extends UserException {
+    // Khi so luong sach = 0 , khong the muon sach
+    // ????
+}
+
+class LicenseException extends UserException {
+    // ReaderAccount khong the add book vao gia sach
+    //  nhu Librarian
+    //  ???
+}
 
 
 @enduml
