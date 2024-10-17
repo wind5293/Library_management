@@ -140,17 +140,27 @@ class UserException {
 class RegisterException extends UserException {
     // Dang nhap sai -> Message Box
     // ???
+
+    //Nen gop vao thanh wrong password or username ko
+    wrongUsername(User user): String
+    wrongPassword(User user): String
 }
 
 class MakeRequestException extends UserException {
     // Khi so luong sach = 0 , khong the muon sach
-    // ????
+    // Khi sach can tim ko co trong thu vien
+
+    bookNotAvail(dtb: BookDataBase , booksName: String): String
+    bookNotFound(dtb: BookDataBase , booksName: String): String
+    authorNotFound(dtb: BookDataBase , booksName: String): String
 }
 
 class LicenseException extends UserException {
     // ReaderAccount khong the add book vao gia sach
     //  nhu Librarian
     //  ???
+
+    permissionDeny(ReaderAccount reader): String
 }
 
 
