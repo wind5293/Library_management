@@ -130,12 +130,26 @@ class SuggestSearch {
 
 }
 
-class GUI {}
-class RegisterGUI extends GUI {
+
+class RegisterGUI  {
+    
 }
-class HomeGUI extends GUI {}
-class UserGUI extends GUI {}
-class ManagerGUI extends GUI {}
+
+class LoginGUI {
+    @FXML
+    - usernameTextField: TextField
+    - passwordTextField: TextField
+    - loginButton: Button
+    //
+    loginButtonClick: void
+}
+
+class HomeGUI {
+    @FXML
+    -
+}
+class UserGUI  {}
+class ManagerGUI  {}
 
 
 @enduml
