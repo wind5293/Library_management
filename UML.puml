@@ -21,6 +21,8 @@ class ReaderAccount extends User {
     deleteBook() : void
     searchBook() : void
 }
+
+
 class Librarian extends User {
 
 }
