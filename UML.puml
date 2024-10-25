@@ -67,7 +67,10 @@ Author----->DocumentManager
 Book-----> DocumentManager
 
 class DataBaseSQL {
-
+     - connection : Connection
+     - password : String
+     - jdbcURL : String
+     - username : String
      //book storage in DataBase
      bookSearch(String) : ArrayList<Book>
      authorSearch(String) : ArrayList<Author>
@@ -80,31 +83,25 @@ class DataBaseSQL {
 }
 
 class BookDataBase extends DataBaseSQL {
-    - connection : Connection
-    - password : String
-    - jdbcURL : String
     //- ins ; DataBaseMySQL
-    - username : String
     - prepareStatement : PrepareStatement
     - resultSet : ResultSet
-
+    //Name of table that contains books' data
+    - bookTable: String
     bookSearch(String) : ArrayList<Book>
     authorSearch(String) : ArrayList<Author>
     //
     getAllDocument() : ArrayList<Book>
-    //
     libraryAddBook(Book book)
     libraryRemoveBook(Book book)
 }
 
 class UserDataBase extends DataBaseSQL {
-    - connection : Connection
-    - password : String
-    - jdbcURL : String
         //- ins ; DataBaseMySQL
-    - username : String
     - prepareStatement : PrepareStatement
     - resultSet : ResultSet
+    //Name of table that contains users' data
+    - userTable: String
 
 }
 class SearchBar {
