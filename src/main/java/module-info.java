@@ -4,6 +4,6 @@ module org.example.library_management {
     requires java.desktop;
 
 
-    opens org.example.library_management to javafx.fxml;
-    exports org.example.library_management;
+    opens GUI to javafx.fxml;
+    exports GUI;
 }

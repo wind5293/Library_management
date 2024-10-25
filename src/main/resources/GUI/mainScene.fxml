@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="634.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.library_management.mainStage">
+<AnchorPane prefHeight="634.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.mainStage">
    <children>
       <SplitPane dividerPositions="0.5, 0.5" prefHeight="76.0" prefWidth="1048.0">
          <items>
