@@ -31,7 +31,7 @@ public class loginStage {
 
         System.out.println(username + " " + password);
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainStage.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/library_management/GUI/mainStage.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(root);

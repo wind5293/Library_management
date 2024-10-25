@@ -128,12 +128,6 @@ class SuggestSearch {
 
 }
 
-<<<<<<< HEAD
-
-class RegisterGUI  {
-    
-}
-
 class LoginGUI {
     @FXML
     - usernameTextField: TextField
@@ -141,21 +135,24 @@ class LoginGUI {
     - loginButton: Button
     //
     loginButtonClick: void
+    loginSucceed() : boolean
 }
 
 class HomeGUI {
     @FXML
     -
 }
-class UserGUI  {}
+class UserGUI  {
+    +initializeLogin (loginSucceed)
+    //neu thanh cong goi ham LoginGUI
+    // chuyen sang
 class ManagerGUI  {}
-=======
+
 class GUI {}
 class RegisterGUI extends GUI {}
 class HomeGUI extends GUI {}
 class UserGUI extends GUI {}
 class ManagerGUI extends GUI {}
->>>>>>> 62988fb4e4f3c6b860240ec9a228603dbed106e2
 
 class UserException {
     + UserException(message :String)
