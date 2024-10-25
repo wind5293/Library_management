@@ -130,26 +130,6 @@ class SuggestSearch {
 
 }
 
-class LoginGUI {
-    @FXML
-    - usernameTextField: TextField
-    - passwordTextField: TextField
-    - loginButton: Button
-    //
-    loginButtonClick: void
-    loginSucceed() : boolean
-}
-
-class HomeGUI {
-    @FXML
-    -
-}
-class UserGUI  {
-    +initializeLogin (loginSucceed)
-    //neu thanh cong goi ham LoginGUI
-    // chuyen sang
-class ManagerGUI  {}
-
 class GUI {}
 class RegisterGUI extends GUI {}
 class HomeGUI extends GUI {}
