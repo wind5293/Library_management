@@ -26,6 +26,7 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
       <object connection-id="6ce1dfdf-9c9f-4530-aedb-3c5961a4e3b0" object-ref="consoles/LibraryDataBase " />
+      <object connection-id="6ce1dfdf-9c9f-4530-aedb-3c5961a4e3b0" object-ref="schemas/library/tables/book_database" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
