@@ -32,19 +32,20 @@ public class UserManagement {
      * Dang nhap sai -> exception.
      * Khong tim thay account, dang nhap sai mk
      */
-    public boolean checkLogin(ReaderAccount loginAccount) {
-        for(int i = 0; i < readerAccountsList.size() ; i++) {
-            if (account.getUsername().equals(loginAccount.getUsername())) {
-                    // Kiểm tra mật khẩu
-                if (account.getPassword().equals(loginAccount.getPassword())) {
-                    return true;
-                } else {
-                    throw new Exception("Sai mật khẩu.");
-                }
-            }
-        }
-
-        throw new Exception("Không tìm thấy tài khoản.");
-    }
+//    public boolean checkLogin(ReaderAccount loginAccount) {
+//        for(int i = 0; i < readerAccountsList.size() ; i++) {
+//            ReaderAccount account = readerAccountsList.get(i);
+//            if (account.getUserName().equals(loginAccount.getUserName())) {
+//                    // Kiểm tra mật khẩu
+//                if (account.getPassWord().equals(loginAccount.getPassWord())) {
+//                    return true;
+//                } else {
+//                    throw new Exception("Sai mật khẩu.");
+//                }
+//            }
+//        }
+//
+//        throw new Exception("Không tìm thấy tài khoản.");
+//    }
 }
 

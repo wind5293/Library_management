@@ -1,4 +1,4 @@
 package LibraryException;
 
-public class SearchException extends LibraryManagementException {
-}
+//public class SearchException extends LibraryManagementException {
+//}

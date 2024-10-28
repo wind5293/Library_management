@@ -8,6 +8,8 @@ public abstract class User {
     private String userName;
     private String passWord;
 
+
+
     public String getUserId() {
         return userId;
     }
