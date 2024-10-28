@@ -5,8 +5,8 @@ public class LoginException extends LibraryManagementException {
         super(message);
     }
 
-//    public LoginException(String message, Throwable cause) {
-//        super(message, cause);
-//
-//    }
+    public LoginException(String message, Throwable cause) {
+        super(message, cause);
+
+    }
 }
