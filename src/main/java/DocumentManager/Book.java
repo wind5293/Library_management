@@ -6,6 +6,15 @@ public class Book {
     private Author author;
 
     /**
+     * Contructor.
+     */
+    public Book(String id, String title, Author author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+    }
+
+    /**
      * Getter n Setter.
      */
     public String getId() {
@@ -22,5 +31,13 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * Get info.
+     */
+    public String getBookInfo() {
+        return String.format("Ma sach:%s\nTen sach:%s\nTac gia :%s\n",
+                this.id, this.title, author.toString());
     }
 }
