@@ -6,6 +6,21 @@ public class Author {
     private String authorBio;
 
     /**
+     *
+     */
+    public Author() {
+    }
+
+    /**
+     * Contructor.
+     */
+    public Author(String authorName, String authorDoB, String authorBio) {
+        this.authorName = authorName;
+        this.authorBio = authorBio;
+        this.authorDoB = authorDoB;
+    }
+
+    /**
      * Getter n Setter.
      */
     public String getAuthorBio() {
@@ -35,5 +50,9 @@ public class Author {
     /**
      * Get Information.
      */
+    public String toString() {
+        return String.format("Tac gia: %s\nNgay sinh:%s\nTieu su:%s\n",
+                this.authorName, this.authorDoB, this.authorBio);
+    }
 
 }
