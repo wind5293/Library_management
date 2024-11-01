@@ -10,22 +10,26 @@ import java.util.Set;
 public class SearchBook {
 
     /**
-     *
-     * @param sentences
-     * @param input
-     * @return Book has same.
+     * Tim kiem gan dung.
+     * Tra trong danh sach co Sach nao chua cac chu cai trong Input
+     * Input la ten tim kiem
      */
-    public static List<String> searchByWordsInSentence(List<String> sentences, String input) {
+    public static List<Book> searchByWordsInSentence(List<Book> bookList, String input) {
         Set<String> keywords = extractWords(input);
-        List<String> result = new ArrayList<>();
+        List<Book> result = new ArrayList<>();
 
-        for (String sentence : sentences) {
-            if (containsAnyWord(sentence, keywords)) {
-                result.add(sentence);
+        for (Book book : bookList) {
+            // Lấy tiêu đề của cuốn sách hiện tại
+            String title = book.getTitle();
+
+            // Kiểm tra xem tiêu đề có chứa bất kỳ từ khóa nào không
+            if (containsAnyWord(title, keywords)) {
+                result.add(book);  // Thêm sách vào kết quả nếu có từ khóa trùng
             }
         }
         return result;
     }
+
     private static Set<String> extractWords(String sentence) {
         String[] words = sentence.split("\\s+");
         Set<String> wordSet = new HashSet<>();
@@ -43,4 +47,8 @@ public class SearchBook {
         }
         return false;
     }
+
+    /**
+     * Tim kiem chinh xac ten sach
+     */
 }
