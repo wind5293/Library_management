@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" scaleShape="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" scaleShape="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainStage">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4c95a8" height="662.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.2" width="246.0">
          <effect>
@@ -28,14 +27,14 @@
             <Font name="Gadugi" size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="704.0" layoutY="18.0" prefHeight="25.0" prefWidth="381.0" promptText="Search something here...." />
-      <Button layoutX="1099.0" layoutY="18.0" mnemonicParsing="false" text="Search" />
+      <TextField fx:id="searchText" layoutX="704.0" layoutY="18.0" prefHeight="25.0" prefWidth="381.0" promptText="Search something here...." />
+      <Button fx:id="searchButton" layoutX="1099.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchButtonClicked" text="Search" />
       <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="1186.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@sourceImage/R.png" />
          </image>
       </ImageView>
-      <Label layoutX="6.0" layoutY="67.0" prefHeight="50.0" prefWidth="240.0" text="   Home page" textFill="WHITE">
+      <Label layoutX="6.0" layoutY="67.0" prefHeight="50.0" prefWidth="246.0" text="   Home page" textFill="WHITE">
          <font>
             <Font name="Gadugi Bold" size="16.0" />
          </font>
@@ -43,6 +42,30 @@
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@sourceImage/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label layoutX="6.0" layoutY="123.0" prefHeight="50.0" prefWidth="240.0" text="   Manage books" textFill="WHITE">
+         <font>
+            <Font name="Gadugi Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@sourceImage/book.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label layoutX="6.0" layoutY="217.0" prefHeight="50.0" prefWidth="240.0" text="   Search " textFill="WHITE">
+         <font>
+            <Font name="Gadugi Bold" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@sourceImage/search-icon-png-transparent-18.jpg" />
                </image>
             </ImageView>
          </graphic>
