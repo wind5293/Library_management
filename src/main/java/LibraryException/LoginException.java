@@ -1,12 +1,12 @@
 package LibraryException;
 
-//public class LoginException extends LibraryManagementException {
-//    public LoginException (String message) {
-//        super(message);
-//    }
+public class LoginException extends LibraryManagementException {
+    public LoginException (String message) {
+        super(message);
+    }
+
+//    public LoginException(String message, Throwable cause) {
+//        super(message, cause);
 //
-////    public LoginException(String message, Throwable cause) {
-////        super(message, cause);
-////
-////    }
-//}
+//    }
+}

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class BookManagement {
     private ArrayList<Book> bookList;
 
+    public BookManagement() {
+        this.bookList = new ArrayList<>();
+    }
     /**
      * Add Book.
      */
@@ -35,4 +38,9 @@ public class BookManagement {
     /**
      *
      */
+    public void getBookListInfo() {
+        for(Book book: bookList) {
+            System.out.println(book.getBookInfo());
+        }
+    }
 }

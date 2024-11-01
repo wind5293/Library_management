@@ -1,5 +1,6 @@
 package Function;
 
+import LibraryException.LoginException;
 import User.ReaderAccount;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class UserManagement {
      * Kiem tra username da co
      * Neu da co -> throw exception
      * Commandline luu vao Array
+     * App luu vao trong DB.
      */
     public void addReaderAccount(ReaderAccount newAccount) throws Exception {
         for (ReaderAccount account : readerAccountsList) {
@@ -32,20 +34,21 @@ public class UserManagement {
      * Dang nhap sai -> exception.
      * Khong tim thay account, dang nhap sai mk
      */
-//    public boolean checkLogin(ReaderAccount loginAccount) {
-//        for(int i = 0; i < readerAccountsList.size() ; i++) {
-//            ReaderAccount account = readerAccountsList.get(i);
-//            if (account.getUserName().equals(loginAccount.getUserName())) {
-//                    // Kiểm tra mật khẩu
-//                if (account.getPassWord().equals(loginAccount.getPassWord())) {
-//                    return true;
-//                } else {
-//                    throw new Exception("Sai mật khẩu.");
-//                }
-//            }
-//        }
-//
-//        throw new Exception("Không tìm thấy tài khoản.");
-//    }
+    public boolean checkLogin(ReaderAccount loginAccount) throws LoginException {
+        boolean check = false;
+        for (ReaderAccount account : readerAccountsList) {
+            if (account.getUserName().equals(loginAccount.getUserName())) {
+                // Kiểm tra mật khẩu
+                if (account.getPassWord().equals(loginAccount.getPassWord())) {
+                    return true;
+                } else {
+                    throw new LoginException("Sai mật khẩu.");
+                }
+            }
+        }
+        //throw new LoginException("Không tìm thấy tài khoản.");
+        return false;
+
+    }
 }
 
