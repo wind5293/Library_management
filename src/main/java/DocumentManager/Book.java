@@ -4,14 +4,31 @@ public class Book {
     private String id;
     private String title;
     private Author author;
+    private int numberOfBook;
+    private boolean isBorrowed;
+
+    /**
+     *
+     */
+    public Book() {
+    }
 
     /**
      * Contructor.
      */
-    public Book(String id, String title, Author author) {
+    public Book(String id, String title, int numberOfBook, Author author) {
         this.id = id;
         this.title = title;
+        this.numberOfBook = numberOfBook;
         this.author = author;
+    }
+
+    /**
+     * Constructor 3.
+     */
+    public Book(String title, Author author) {
+        this.author = author;
+        this.title = title;
     }
 
     /**
@@ -39,6 +56,14 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        isBorrowed = borrowed;
     }
 
     /**
