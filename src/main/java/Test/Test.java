@@ -1,15 +1,18 @@
 package Test;
 
+import DataBaseSQL.BookDataBase;
 import DocumentManager.Author;
 import DocumentManager.Book;
 import Function.BookManagement;
 import Function.SuggestionFunc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        Author author1 = new Author("Hung","12/9/1998","Nam Dinh");
+     /**   Author author1 = new Author("Hung","12/9/1998","Nam Dinh");
         Author author2 = new Author("THung","12/9/1998","Nam Dinh");
         Author author3 = new Author("PHung","12/9/1998","Nam Dinh");
 
@@ -40,6 +43,21 @@ public class Test {
         List<Book> suggestionBook2 = s.getSuggestionBook2(a2,b);
         for(Book book : suggestionBook2) {
             System.out.println(String.format("Sach:%s\nTac gia:%s\n",book.getTitle(),book.getAuthor().getAuthorName()));
+        }
+      **/
+        BookDataBase bdb = new BookDataBase();
+        try{
+            //bdb.addToDataBase("Nếu một mai tôi có bay lên trời", "Nguyễn Nhật Ánh", 5);
+            ResultSet rs = bdb.searchFromDataBase("Nếu một mai tôi có bay lên trời");
+            while(rs.next()){
+                int id = rs.getInt("bookId"); // Adjust column name as necessary
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                System.out.println("ID: " + id + ", title " + title + ", author: " + author);
+            }
+            //bdb.deleteFromDataBase("Nếu một mai tôi có bay lên trời", "Nguyễn Nhật Ánh");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -2,24 +2,22 @@ package DataBaseSQL;
 
 import java.sql.*;
 
-public class BookDataBase extends DataBaseSQL {
+public class UserDataBase extends DataBaseSQL {
 
     /**
-     * Method to add Document to Library Database.
-     *
-     * @param title  book's title
+     * Method to add new User to DataBase
+     * @param title book's title
      * @param author author's name
      * @throws SQLException catch exception
      */
     @Override
-    public void addToDataBase(String title, String author, int quantity) throws SQLException {
-        String arg = "insert into bookTable(author, title, quantity) VALUES (?, ?, ?);";
+    public void addToDataBase(String title, String author, int num) throws SQLException {
+        String arg = "insert into bookTable(author, title) VALUES (?, ?)";
         Connection con = DriverManager.getConnection(jdbcUrl);
 
         PreparedStatement preparedStatement = con.prepareStatement(arg);
         preparedStatement.setString(1, author);
         preparedStatement.setString(2, title);
-        preparedStatement.setInt(3, quantity);
 
         preparedStatement.executeUpdate();
 
@@ -28,8 +26,7 @@ public class BookDataBase extends DataBaseSQL {
 
     /**
      * Delete a document from library DataBase.
-     *
-     * @param title  name of document
+     * @param title name of document
      * @param author author's name
      * @throws SQLException catch error if query not executed
      */
@@ -49,7 +46,6 @@ public class BookDataBase extends DataBaseSQL {
 
     /**
      * Method to search for Document in DataBase.
-     *
      * @param arg name of author or book
      * @return ResultSet include bookId, title, author
      * @throws SQLException catch exception if not found
@@ -68,10 +64,9 @@ public class BookDataBase extends DataBaseSQL {
 
     /**
      * Method to update Document in DataBase.
-     *
      * @param oldBookId ID of the book that user wants to change
-     * @param title     changed title of the book
-     * @param author    changed author
+     * @param title changed title of the book
+     * @param author changed author
      * @throws SQLException catch exception
      */
     @Override
@@ -91,7 +86,7 @@ public class BookDataBase extends DataBaseSQL {
 
     @Override
     public int numberOfRows() throws SQLException {
-        String query = "Select Count(*) from bookTable";
+        String query = "Select Count(*) from readerAccount";
         Connection con = DriverManager.getConnection(jdbcUrl);
 
         PreparedStatement preparedStatement = con.prepareStatement(query);
