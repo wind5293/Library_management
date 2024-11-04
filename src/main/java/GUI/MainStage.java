@@ -14,9 +14,9 @@ public class MainStage {
     @FXML
     private Button searchButton;
 
-    public void searchButtonClicked(ActionEvent event) {
+    public String searchButtonClicked(ActionEvent event) {
         String searchContent = searchText.getText();
-        System.out.println(searchContent);
+        return searchContent;
     }
 
 
