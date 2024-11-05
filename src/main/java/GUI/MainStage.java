@@ -14,15 +14,9 @@ public class MainStage {
     @FXML
     private Button searchButton;
 
-//    @FXML
-//    private TextField searchText;
-//    @FXML
-//    private Button searchButton;
-//
-//    public String searchButtonClicked(ActionEvent event) {
-//        String searchContent = searchText.getText();
-//        return searchContent;
-//    }
-
+    public void searchButtonClicked(ActionEvent event) {
+        String searchContent = searchText.getText();
+        System.out.println(searchContent);
+    }
 
 }
