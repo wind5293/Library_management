@@ -16,7 +16,7 @@ public class MainStage {
 
     public void searchButtonClicked(ActionEvent event) {
         String searchContent = searchText.getText();
-        System.out.println(searchContent);
+
     }
 
 
