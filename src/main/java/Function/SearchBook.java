@@ -9,15 +9,24 @@ import java.util.Set;
 
 public class SearchBook {
 
+
+
+
+
+
+
+    /**
+     * Use for commandline version.
+     */
     /**
      * Tim kiem gan dung.
      * Tra trong danh sach co Sach nao chua cac chu cai trong Input
      * Input la ten tim kiem
      */
-    public static List<Book> searchByWordsInSentence(List<Book> bookList, String input) {
+    public List<Book> searchByWordsInSentence(BookManagement bookManagement, String input) {
         Set<String> keywords = extractWords(input);
         List<Book> result = new ArrayList<>();
-
+        List<Book> bookList = bookManagement.getBookList();
         for (Book book : bookList) {
             // Lấy tiêu đề của cuốn sách hiện tại
             String title = book.getTitle();
@@ -49,6 +58,23 @@ public class SearchBook {
     }
 
     /**
-     * Tim kiem chinh xac ten sach
+     * Tim kiem chinh xac ten sach.
      */
+    public Book searchExactly (BookManagement bookManagement, String input) {
+        List<Book> bookList = bookManagement.getBookList();
+        for(Book book : bookList) {
+            if(book.getTitle().equalsIgnoreCase(book.getTitle())) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public boolean searchSucceed (BookManagement bookManagement, String input) {
+        List<Book> bl = searchByWordsInSentence(bookManagement, input);
+        if (bl.size() == 0 && searchExactly(bookManagement, input) == null) {
+            return false;
+        }
+        return true;
+    }
 }

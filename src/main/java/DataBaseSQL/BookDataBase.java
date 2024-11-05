@@ -10,6 +10,11 @@ public class BookDataBase extends DataBaseSQL{
      * @param author author's name
      * @throws SQLException catch exception
      */
+
+    /**
+     * can them so luong vao ham nay
+     */
+
     @Override
     public void addToDataBase(String title, String author) throws SQLException {
         String arg = "insert into bookTable(author, title) VALUES (?, ?)";
@@ -30,6 +35,7 @@ public class BookDataBase extends DataBaseSQL{
      * @param author author's name
      * @throws SQLException catch error if query not executed
      */
+
     @Override
     public void deleteFromDataBase(String title, String author) throws SQLException {
         String arg = "Delete from bookTable where title = ? AND author = ?";
@@ -61,4 +67,8 @@ public class BookDataBase extends DataBaseSQL{
 
         return preparedStatement.executeQuery();
     }
+
+    /**
+     * Hien thi toan bo sach.
+     */
 }

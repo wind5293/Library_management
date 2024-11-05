@@ -6,9 +6,14 @@ import java.util.List;
 public abstract class User {
     private String userId;
     private String userName;
-    private String passWord;
+    private String password;
 
-
+    public User(String userId, String userName,
+                String password) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+    }
 
     public String getUserId() {
         return userId;
@@ -27,14 +32,19 @@ public abstract class User {
     }
 
     public String getPassWord() {
-        return passWord;
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassWord(String password) {
+        this.password = password;
     }
 
-    //Tao 1 account quan ly ->Constant
-    //Them sua xoa trong de co danh sach muon sach la cua nguoi dung
-    //Nguoi quan ly truy xuat so luong sach, nguoi dung,.....
+    public abstract void addBook(Book book);
+
+    public abstract String getUserType();
+
+    @Override
+    public String toString() {
+        return "User ID: " + userId + ", User Name: " + userName;
+    }
 }
