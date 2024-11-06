@@ -50,7 +50,7 @@ public class Test {
         BookDataBase bdb = new BookDataBase();
         try{
             //bdb.addToDataBase("Nếu một mai tôi có bay lên trời", "Nguyễn Nhật Ánh", 5);
-            ResultSet rs = bdb.searchFromDataBase("Nếu một mai tôi có bay lên trời");
+            ResultSet rs = bdb.searchFromDataBase("Haruki Murakami");
             while(rs.next()){
                 int id = rs.getInt("bookId"); // Adjust column name as necessary
                 String title = rs.getString("title");

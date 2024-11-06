@@ -22,9 +22,9 @@ public class ManagerAccount {
     /**
      * Thêm sách vào cơ sở dữ liệu.
      */
-    public void addBookToDatabase(String title, String author) {
+    public void addBookToDatabase(String title, String author, int quantity) {
         try {
-            bookDataBase.addToDataBase(title, author);
+            bookDataBase.addToDataBase(title, author, quantity);
             System.out.println("Book added to database.");
         } catch (SQLException e) {
             System.err.println("Failed to add book: " + e.getMessage());

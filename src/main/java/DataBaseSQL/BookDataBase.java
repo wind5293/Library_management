@@ -9,6 +9,7 @@ public class BookDataBase extends DataBaseSQL {
      *
      * @param title  book's title
      * @param author author's name
+     * @param quantity number of books added
      * @throws SQLException catch exception
      */
     @Override

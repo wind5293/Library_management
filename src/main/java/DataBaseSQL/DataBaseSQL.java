@@ -16,19 +16,3 @@ public abstract class DataBaseSQL {
 
     public abstract int numberOfRows() throws SQLException;
 }
-
-/**
- *     public void test () throws SQLException {
- *         Connection con = DriverManager.getConnection(url);
- *         Statement st = con.createStatement();
- *         ResultSet rs = st.executeQuery("SELECT * FROM bookTable;");
- *
- *             // Process the results
- *             while (rs.next()) {
- *                 int id = rs.getInt("bookId"); // Adjust column name as necessary
- *                 String title = rs.getString("title");
- *                 String author = rs.getString("author");
- *                 System.out.println("ID: " + id + ", title " + title + ", Password: " + author);
- *             }
- *     }
- **/
