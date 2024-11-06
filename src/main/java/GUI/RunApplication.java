@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class Main extends Application {
+public class RunApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start (Stage stage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/mainStage.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/searchStage.fxml")));
             Scene scene = new Scene(root);
 
             stage.setScene(scene);

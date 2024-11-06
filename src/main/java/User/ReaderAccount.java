@@ -6,45 +6,41 @@ import java.util.List;
 
 public class ReaderAccount extends User {
 
-    private List<Book>bookList;
+    private List<Book> listBookBorrowed;
+    private int bookBorrowedCount;
 
 
-    /**
-     * Methods
-     */
+    public ReaderAccount(String userId, String userName, String password,
+                         List<Book> listBookBorrowed, int bookBorrowedCount) {
+        super(userId, userName, password);
+        this.listBookBorrowed = listBookBorrowed;
+        this.bookBorrowedCount = bookBorrowedCount;
+    }
 
     /**
      * Add book.
-     * Lua chon sach de muon.
      */
-    public void addBook(Book book) {
-        bookList.add(book);
+    public void addBookToCart(Book book) {
+
     }
+
+
 
     /**
      * Delete book.
      * Xoa khoi danh sach lua chon.
      */
     public void deleteBook(Book book) {
-        bookList.remove(book);
+        
     }
 
-    /**
-     * Lay danh sach tu lua chon cua nguoi doc.
-     */
-    public List<Book> getList(Book book) {
-        // Ban CommandLine -> in theo dong
-        return bookList;
+    @Override
+    public void addBook(Book book) {
+
     }
 
-    /**
-     * SearchBook in DataBase.
-     */
-    //public List<Book> searchBook() {
-
-    //}
-
-    /**
-     * Search Func.
-     */
+    @Override
+    public String getUserType() {
+        return "";
+    }
 }

@@ -29,7 +29,7 @@ public class BookDataBase extends DataBaseSQL {
     /**
      * Delete a document from library DataBase.
      *
-     * @param title  name of document
+     * @param title name of document
      * @param author author's name
      * @throws SQLException catch error if query not executed
      */
@@ -65,6 +65,10 @@ public class BookDataBase extends DataBaseSQL {
 
         return preparedStatement.executeQuery();
     }
+
+    /**
+     * Hien thi toan bo sach.
+     */
 
     /**
      * Method to update Document in DataBase.

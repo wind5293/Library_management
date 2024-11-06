@@ -19,5 +19,4 @@ public class MainStage {
         System.out.println(searchContent);
     }
 
-
 }

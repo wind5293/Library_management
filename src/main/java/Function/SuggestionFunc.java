@@ -26,7 +26,6 @@ public class SuggestionFunc {
     /**
      * Khi tra sach A co tac gia A1
      * (Sau khi nguoi doc tra 1 quyen sach)
-     *
      * Goi y tac pham cung tac gia.
      * Command line lay du lieu sach tu List.
      */
