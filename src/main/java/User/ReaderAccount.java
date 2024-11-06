@@ -24,7 +24,7 @@ public class ReaderAccount extends User {
 
     }
 
-    public
+
 
     /**
      * Delete book.
@@ -34,4 +34,13 @@ public class ReaderAccount extends User {
         
     }
 
+    @Override
+    public void addBook(Book book) {
+
+    }
+
+    @Override
+    public String getUserType() {
+        return "";
+    }
 }

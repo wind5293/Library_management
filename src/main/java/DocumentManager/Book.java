@@ -4,7 +4,6 @@ public class Book {
     private String id;
     private String title;
     private Author author;
-    private int numberOfBook;
     private boolean isBorrowed;
 
     /**
@@ -14,12 +13,11 @@ public class Book {
     }
 
     /**
-     * Contructor.
+     * Constructor.
      */
-    public Book(String id, String title, int numberOfBook, Author author) {
+    public Book(String id, String title, Author author) {
         this.id = id;
         this.title = title;
-        this.numberOfBook = numberOfBook;
         this.author = author;
     }
 
