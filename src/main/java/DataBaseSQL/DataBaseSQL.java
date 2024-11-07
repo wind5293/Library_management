@@ -3,8 +3,9 @@ package DataBaseSQL;
 import java.sql.*;
 
 public abstract class DataBaseSQL {
-    protected static final String jdbcUrl = "jdbc:sqlite:Library_management/src/main/" +
-            "java/DataBaseSQL/DataBaseSQL.db";
+    //protected static final String jdbcUrl = "jdbc:sqlite:Library_management/src/main/" +
+           // "java/DataBaseSQL/DataBaseSQL.db";
+    protected static final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public abstract void addToDataBase(String arg1, String arg2, int num) throws SQLException;
 

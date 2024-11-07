@@ -9,67 +9,99 @@ public class BookDataBase extends DataBaseSQL {
      *
      * @param title  book's title
      * @param author author's name
-     * @param quantity number of books added
+     * @param releasedYear the year that the book was published
      * @throws SQLException catch exception
      */
     @Override
-    public void addToDataBase(String title, String author, int quantity) throws SQLException {
-        String arg = "insert into bookTable(author, title, quantity) VALUES (?, ?, ?);";
-        Connection con = DriverManager.getConnection(jdbcUrl);
+    public void addToDataBase(String title, String author, int releasedYear) throws SQLException {
+        String arg = "insert into library(BookAuthor, BookName, ReleaseYear) VALUES (?, ?, ?);";
+        try(Connection con = databaseConnection.getDBConnection()) {
+            try(PreparedStatement preparedStatement = con.prepareStatement(arg)) {
+                preparedStatement.setString(1, author);
+                preparedStatement.setString(2, title);
+                preparedStatement.setInt(3, releasedYear);
 
-        PreparedStatement preparedStatement = con.prepareStatement(arg);
-        preparedStatement.setString(1, author);
-        preparedStatement.setString(2, title);
-        preparedStatement.setInt(3, quantity);
-
-        preparedStatement.executeUpdate();
-
-        con.close();
+                preparedStatement.executeUpdate();
+            } catch (SQLException e){
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e){
+            System.err.println("DataBase is not Connected");
+            throw e;
+        }
     }
 
     /**
      * Delete a document from library DataBase.
-     *
      * @param title name of document
      * @param author author's name
      * @throws SQLException catch error if query not executed
      */
     @Override
     public void deleteFromDataBase(String title, String author) throws SQLException {
-        String arg = "Delete from bookTable where title = ? AND author = ?";
-        Connection con = DriverManager.getConnection(jdbcUrl);
+        String arg = "Delete from library where BookName = ? AND BookAuthor = ?;";
+        try(Connection con = databaseConnection.getDBConnection()) {
+            try(PreparedStatement preparedStatement = con.prepareStatement(arg)) {
+                preparedStatement.setString(1, title);
+                preparedStatement.setString(2, author);
 
-        PreparedStatement preparedStatement = con.prepareStatement(arg);
-        preparedStatement.setString(1, title);
-        preparedStatement.setString(2, author);
-
-        preparedStatement.executeUpdate();
-
-        con.close();
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
     }
 
     /**
-     * Method to search for Document in DataBase.
-     *
+     * Method to search for Document in DataBase using book's name or author's name.
      * @param arg name of author or book
-     * @return ResultSet include bookId, title, author
+     * @return ResultSet include bookId, book name, author and release year
      * @throws SQLException catch exception if not found
      */
     @Override
     public ResultSet searchFromDataBase(String arg) throws SQLException {
-        String query = "SELECT bookId, title, author From bookTable where title = ? or author = ?";
-        Connection con = DriverManager.getConnection(jdbcUrl);
+        String query = "SELECT BookID, BookName, BookAuthor, ReleaseYear" +
+                " From library where BookName = ? or BookAuthor = ?;";
+        try(Connection con = databaseConnection.getDBConnection()) {
+            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                preparedStatement.setString(1, arg);
+                preparedStatement.setString(2, arg);
 
-        PreparedStatement preparedStatement = con.prepareStatement(query);
-        preparedStatement.setString(1, arg);
-        preparedStatement.setString(2, arg);
-
-        return preparedStatement.executeQuery();
+                return preparedStatement.executeQuery();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
     }
 
     /**
-     * Hien thi toan bo sach.
+     * Method to get Info of all the books.
+     * @return ResultSet of all Documents.
+     * @throws SQLException handle exception
      */
+    public ResultSet getAllDocument() throws SQLException {
+        String query = "select * from library;";
+        try(Connection con = databaseConnection.getDBConnection()){
+            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                return preparedStatement.executeQuery();
+            }  catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
+    }
 
     /**
      * Method to update Document in DataBase.
@@ -81,29 +113,41 @@ public class BookDataBase extends DataBaseSQL {
      */
     @Override
     public void updateDataBase(int oldBookId, String title, String author) throws SQLException {
-        String query = "Update bookTable Set title = ?, author = ? where bookId = ?";
-        Connection con = DriverManager.getConnection(jdbcUrl);
+        String query = "Update library Set BookName = ?, BookAuthor = ? where BookID = ?;";
+        try(Connection con = databaseConnection.getDBConnection()) {
+            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                preparedStatement.setString(1, title);
+                preparedStatement.setString(2, author);
+                preparedStatement.setInt(3, oldBookId);
 
-        PreparedStatement preparedStatement = con.prepareStatement(query);
-        preparedStatement.setString(1, title);
-        preparedStatement.setString(2, author);
-        preparedStatement.setInt(3, oldBookId);
-
-        preparedStatement.executeUpdate();
-
-        con.close();
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
     }
 
     @Override
     public int numberOfRows() throws SQLException {
-        String query = "Select Count(*) from bookTable";
-        Connection con = DriverManager.getConnection(jdbcUrl);
+        String query = "Select Count(*) from library;";
+        try(Connection con = databaseConnection.getDBConnection()) {
+            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
 
-        PreparedStatement preparedStatement = con.prepareStatement(query);
+                ResultSet result = preparedStatement.executeQuery();
 
-        ResultSet result = preparedStatement.executeQuery();
-
-        result.next();
-        return result.getInt(1);
+                result.next();
+                return result.getInt(1);
+            }  catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
     }
 }
