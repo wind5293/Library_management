@@ -19,9 +19,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SearchStageController implements Initializable {
-    @FXML
-    public TextField searchText;
+public class ManageBooksStageController implements Initializable {
     @FXML
     public TextField SearchBookTextField;
     @FXML
@@ -34,12 +32,7 @@ public class SearchStageController implements Initializable {
     private TableColumn<LibraryManagementModel, String> BookAuthorColumn;
     @FXML
     private TableColumn<LibraryManagementModel, Integer> BookReleaseYearColumn;
-    @FXML
-    private TableColumn<LibraryManagementModel, String> StatusColumn;
-    @FXML
-    private TableColumn<LibraryManagementModel, Date> LoanDateColumn;
-    @FXML
-    private TableColumn<LibraryManagementModel, Date> ReturnDateColumn;
+
 
     ObservableList<LibraryManagementModel> libraryManagementModelObservableList = FXCollections.observableArrayList();
 
@@ -48,37 +41,37 @@ public class SearchStageController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String libraryViewQuery = "select BookID, BookName, BookAuthor, ReleaseYear, status, loanDate, returnDate from library";
+        String libraryViewQuery = "select bookID, title, author, ReleaseYear from booktable";
 
         try {
 
+            /*
+             * Get books info table from database
+             */
             Statement statement = connectDB.createStatement();
             ResultSet queryOutput = statement.executeQuery(libraryViewQuery);
 
             while (queryOutput.next()) {
                 Integer queryBookID = queryOutput.getInt("BookID");
-                String queryBookName = queryOutput.getString("BookName");
-                String queryBookAuthor = queryOutput.getString("BookAuthor");
+                String queryTitle = queryOutput.getString("name");
+                String queryAuthor = queryOutput.getString("author");
                 Integer queryReleaseDate = queryOutput.getInt("ReleaseYear");
-                String queryStatus = queryOutput.getString("status");
-                Date queryLoanDate = queryOutput.getDate("loanDate");
-                Date queryReturnDate = queryOutput.getDate("returnDate");
 
-                libraryManagementModelObservableList.add(new LibraryManagementModel(queryBookID, queryBookName, queryBookAuthor,
-                                                                                    queryReleaseDate, queryStatus,
-                                                                                    queryLoanDate, queryReturnDate));
+                libraryManagementModelObservableList.add(new LibraryManagementModel(queryBookID, queryTitle, queryAuthor,
+                                                                                    queryReleaseDate));
             }
 
             BookIDColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
             BookAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("bookAuthor"));
             BookReleaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
-            StatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-            LoanDateColumn.setCellValueFactory(new PropertyValueFactory<>("loanDate"));
-            ReturnDateColumn.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
 
             BookTable.setItems(libraryManagementModelObservableList);
 
+
+            /*
+              Search event: Users type in search text field.
+             */
             FilteredList<LibraryManagementModel> filteredData = new FilteredList<>(libraryManagementModelObservableList, b -> true);
 
             SearchBookTextField.textProperty().addListener(((observable, oldValue, newValue) -> {
@@ -96,8 +89,6 @@ public class SearchStageController implements Initializable {
                         return true;
                     } else if (libraryManagementModel.getReleaseYear().toString().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true;
-                    } else if (libraryManagementModel.getStatus().toLowerCase().indexOf(searchKeyword) > -1) {
-                        return true;
                     } else
                         return false;
                 });
@@ -110,7 +101,7 @@ public class SearchStageController implements Initializable {
             BookTable.setItems(sortedData);
 
         } catch (SQLException e) {
-            Logger.getLogger(SearchStageController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ManageBooksStageController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
