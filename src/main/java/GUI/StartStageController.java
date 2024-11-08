@@ -1,4 +1,5 @@
 package GUI;
 
-public class StartStage {
+public class StartStageController {
+
 }

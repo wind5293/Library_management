@@ -13,7 +13,7 @@ public class UserDataBase extends DataBaseSQL {
     @Override
     public void addToDataBase(String title, String author, int num) throws SQLException {
         String arg = "insert into bookTable(author, title) VALUES (?, ?)";
-        Connection con = DriverManager.getConnection(jdbcUrl);
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/librarymanagement", );
 
         PreparedStatement preparedStatement = con.prepareStatement(arg);
         preparedStatement.setString(1, author);

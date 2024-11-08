@@ -8,10 +8,10 @@ public class DatabaseConnection {
 
     public Connection getDBConnection() {
 
-        String databaseName = "librarymanagement";
+        String databaseName = "";
         String databaseUser = "root";
-        String databasePassword = "#Oop2023";
-        String url = "jdbc:mysql://localhost/" + databaseName;
+        String databasePassword = "Soulofwind@1";
+        String url = "jdbc:mysql://localhost/librarymanagement" + databaseName;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
