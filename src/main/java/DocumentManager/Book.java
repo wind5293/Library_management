@@ -14,7 +14,7 @@ public class Book {
      * Constructor.
      */
 
-    public Book(Integer bookID, int bookNums, String bookAuthor, String bookName) {
+    public Book(Integer bookID, String bookName, String bookAuthor, int bookNums) {
         this.bookID = bookID;
         this.bookNums = bookNums;
         this.bookAuthor = bookAuthor;

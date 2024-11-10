@@ -1,7 +1,8 @@
 package GUI;
 
 import DataBaseSQL.DatabaseConnection;
-import DataBaseSQL.LibraryManagementModel;
+//import DataBaseSQL.LibraryManagementModel;
+import DocumentManager.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -23,18 +24,18 @@ public class ManageBooksStageController implements Initializable {
     @FXML
     public TextField SearchBookTextField;
     @FXML
-    private TableView<LibraryManagementModel> BookTable;
+    private TableView<Book> BookTable;
     @FXML
-    private TableColumn<LibraryManagementModel, Integer> BookIDColumn;
+    private TableColumn<Book, Integer> BookIDColumn;
     @FXML
-    private TableColumn<LibraryManagementModel, String> BookNameColumn;
+    private TableColumn<Book, String> BookNameColumn;
     @FXML
-    private TableColumn<LibraryManagementModel, String> BookAuthorColumn;
+    private TableColumn<Book, String> BookAuthorColumn;
     @FXML
-    private TableColumn<LibraryManagementModel, Integer> BookReleaseYearColumn;
+    private TableColumn<Book, Integer> BookNumsColumn;
 
 
-    ObservableList<LibraryManagementModel> libraryManagementModelObservableList = FXCollections.observableArrayList();
+    ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resource) {
@@ -52,49 +53,49 @@ public class ManageBooksStageController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(libraryViewQuery);
 
             while (queryOutput.next()) {
-                Integer queryBookID = queryOutput.getInt("BookID");
-                String queryTitle = queryOutput.getString("name");
-                String queryAuthor = queryOutput.getString("author");
-                Integer queryReleaseDate = queryOutput.getInt("ReleaseYear");
+                Integer queryBookID = queryOutput.getInt("bookID");
+                String queryBookName = queryOutput.getString("bookName");
+                String queryBookAuthor = queryOutput.getString("bookAuthor");
+                Integer queryBookNums = queryOutput.getInt("bookNums");
 
-                libraryManagementModelObservableList.add(new LibraryManagementModel(queryBookID, queryTitle, queryAuthor,
-                                                                                    queryReleaseDate));
+                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor,
+                        queryBookNums));
             }
 
             BookIDColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
             BookAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("bookAuthor"));
-            BookReleaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+            BookNumsColumn.setCellValueFactory(new PropertyValueFactory<>("bookNums"));
 
-            BookTable.setItems(libraryManagementModelObservableList);
+            BookTable.setItems(bookObservableList);
 
 
             /*
               Search event: Users type in search text field.
              */
-            FilteredList<LibraryManagementModel> filteredData = new FilteredList<>(libraryManagementModelObservableList, b -> true);
+            FilteredList<Book> filteredData = new FilteredList<>(bookObservableList, b -> true);
 
             SearchBookTextField.textProperty().addListener(((observable, oldValue, newValue) -> {
 
-                filteredData.setPredicate(libraryManagementModel -> {
+                filteredData.setPredicate(book -> {
                     if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                         return true;
                     }
 
                     String searchKeyword = newValue.toLowerCase();
 
-                    if (libraryManagementModel.getBookName().toLowerCase().indexOf(searchKeyword) > -1) {
+                    if (book.getBookName().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true;
-                    } else if (libraryManagementModel.getBookAuthor().toLowerCase().indexOf(searchKeyword) > -1) {
+                    } else if (book.getBookAuthor().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true;
-                    } else if (libraryManagementModel.getReleaseYear().toString().toLowerCase().indexOf(searchKeyword) > -1) {
+                    } else if (book.getBookNums.toString().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true;
                     } else
                         return false;
                 });
             }));
 
-            SortedList<LibraryManagementModel> sortedData = new SortedList<>(filteredData);
+            SortedList<Book> sortedData = new SortedList<>(filteredData);
 
             sortedData.comparatorProperty().bind(BookTable.comparatorProperty());
 
