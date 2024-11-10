@@ -1,46 +1,39 @@
 package User;
 
+import DataBaseSQL.BookDataBase;
+import DataBaseSQL.BorrowedBookDataBase;
 import DocumentManager.Book;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReaderAccount extends User {
+    private BorrowedBookDataBase borrowedBookDataBase = new BorrowedBookDataBase();
 
-    private List<Book> listBookBorrowed;
-    private int bookBorrowedCount;
-
-
-    public ReaderAccount(String userId, String userName, String password,
-                         List<Book> listBookBorrowed, int bookBorrowedCount) {
+    public ReaderAccount(String userId, String userName, String password) {
         super(userId, userName, password);
-        this.listBookBorrowed = listBookBorrowed;
-        this.bookBorrowedCount = bookBorrowedCount;
+    }
+    //private UserDataBase
+
+    // Thêm sách vào cơ sở dữ liệu borrowedBooks
+    public void borrowBook(String userName, String bookName) throws SQLException {
+        try {
+            borrowedBookDataBase.borrowBook(this.getUserName(), bookName);
+            System.out.println("Sách '" + bookName + "' đã được thêm vào cơ sở dữ liệu.");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+            throw e;
+        }
     }
 
-    /**
-     * Add book.
-     */
-    public void addBookToCart(Book book) {
-
-    }
-
-
-
-    /**
-     * Delete book.
-     * Xoa khoi danh sach lua chon.
-     */
-    public void deleteBook(Book book) {
-        
-    }
-
-    @Override
-    public void addBook(Book book) {
-
-    }
-
-    @Override
-    public String getUserType() {
-        return "";
+    // Xóa sách khỏi cơ sở dữ liệu borrowedBooks.
+    public void removeBookFromBorrowed(String bookName, String bookAuthor) throws SQLException {
+        try {
+            borrowedBookDataBase.removeBookFromBorrowed(bookName, bookAuthor);
+            System.out.println("Sách '" + bookName + "' đã được xóa khỏi phieu muon.");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi xóa sách: " + e.getMessage());
+            throw e;
+        }
     }
 }

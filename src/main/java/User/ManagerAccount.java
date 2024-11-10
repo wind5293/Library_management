@@ -1,92 +1,54 @@
 package User;
 
 import DataBaseSQL.BookDataBase;
-import DocumentManager.Author;
-import DocumentManager.Book;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class ManagerAccount {
-    private List<ReaderAccount> readerManageList;
-    private BookDataBase bookDataBase;
+    /**
+     * Quan ly sach.
+     */
+    private BookDataBase bookDataBase = new BookDataBase();
 
-    public ManagerAccount(BookDataBase bookDataBase) {
-        this.readerManageList = new ArrayList<>();
-        this.bookDataBase = bookDataBase;
+    // Thêm sách vào cơ sở dữ liệu
+    public void addBook(String bookName, String bookAuthor, int bookNums) throws SQLException {
+        try {
+            bookDataBase.addToDataBase(bookName, bookAuthor, bookNums);
+            System.out.println("Sách '" + bookName + "' đã được thêm vào cơ sở dữ liệu.");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+            throw e;
+        }
     }
 
-    /**
-     * Thêm sách vào cơ sở dữ liệu.
-     */
-    public void addBookToDatabase(String title, String author, int quantity) {
+    // Cập nhật thông tin sách trong cơ sở dữ liệu
+    public void updateDataBase(String bookName, String bookAuthor, int oldBookId) throws SQLException {
+        // Đầu tiên tìm và cập nhật thông tin sách
         try {
-            bookDataBase.addToDataBase(title, author, quantity);
-            System.out.println("Book added to database.");
+            // Cập nhật thông tin sách
+            bookDataBase.updateDataBase(bookName, bookAuthor, oldBookId);
+            System.out.println("Sách đã được cập nhật thành công!");
         } catch (SQLException e) {
-            System.err.println("Failed to add book: " + e.getMessage());
+            System.err.println("Lỗi khi cập nhật sách: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    // Xóa sách khỏi cơ sở dữ liệu
+    public void deleteBook(String bookName, String bookAuthor) throws SQLException {
+        try {
+            bookDataBase.deleteFromDataBase(bookName, bookAuthor);
+            System.out.println("Sách '" + bookName + "' đã được xóa khỏi cơ sở dữ liệu.");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi xóa sách: " + e.getMessage());
+            throw e;
         }
     }
 
     /**
-     * Xóa sách khỏi cơ sở dữ liệu.
+     * Quan ly user.
      */
-    public void deleteBookFromDatabase(String title, String author) {
-        try {
-            bookDataBase.deleteFromDataBase(title, author);
-            System.out.println("Book deleted from database.");
-        } catch (SQLException e) {
-            System.err.println("Failed to delete book: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Tìm sách trong cơ sở dữ liệu.
-     */
-    public List<Book> searchBooksInDatabase(String searchQuery) {
-        List<Book> foundBooks = new ArrayList<>();
-        try {
-            ResultSet resultSet = bookDataBase.searchFromDataBase(searchQuery);
-            while (resultSet.next()) {
-                String title = resultSet.getString("Title");
-                String authorName = resultSet.getString("Author");
-                Author author = new Author(authorName);
-                foundBooks.add(new Book(title, author));
-            }
-            resultSet.close();
-        } catch (SQLException e) {
-            System.err.println("Failed to search for book: " + e.getMessage());
-        }
-        return foundBooks;
-    }
-
-    /**
-     * Update Library.
-     */
-
-
-//    /**
-//     * Display Library
-//     */
-//    public List<Book> displayAllBooks() {
-//        List<Book> allBooks = new ArrayList<>();
-//        try {
-//            ResultSet resultSet = bookDataBase.getAllBooks();
-//            while (resultSet.next()) {
-//                String title = resultSet.getString("title");
-//                String authorName = resultSet.getString("author");
-//                Author author = new Author(authorName);
-//                allBooks.add(new Book(title, author));
-//            }
-//            resultSet.close();
-//        } catch (SQLException e) {
-//            System.err.println("Failed to retrieve books: " + e.getMessage());
-//        }
-//        return allBooks;
-//    }
 
 }
 

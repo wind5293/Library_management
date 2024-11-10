@@ -1,64 +1,66 @@
 package DocumentManager;
 
 public class Book {
-    private String id;
-    private String title;
-    private Author author;
-
+    private Integer bookID;
+    private String bookName, bookAuthor;
+    private int bookNums;
     /**
      *
      */
-    public Book() {}
+    public Book() {
+    }
 
     /**
      * Constructor.
      */
-    public Book(String id, String title, Author author) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-    }
 
-    /**
-     * Constructor 3.
-     */
-    public Book(String title, Author author) {
-        this.author = author;
-        this.title = title;
+    public Book(Integer bookID, int bookNums, String bookAuthor, String bookName) {
+        this.bookID = bookID;
+        this.bookNums = bookNums;
+        this.bookAuthor = bookAuthor;
+        this.bookName = bookName;
     }
 
     /**
      * Getter n Setter.
      */
-    public String getId() {
-        return id;
+    public Integer getBookID() {
+        return bookID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBookID(Integer bookID) {
+        this.bookID = bookID;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public Author getAuthor() {
-        return author;
+    public String getBookAuthor() {
+        return bookAuthor;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public int getBookNums() {
+        return bookNums;
+    }
+
+    public void setBookNums(int bookNums) {
+        this.bookNums = bookNums;
     }
 
     /**
      * Get info.
      */
-    public String getBookInfo() {
-        return String.format("Ma sach:%s\nTen sach:%s\nTac gia :%s\n",
-                this.id, this.title, author.toString());
-    }
+//    public String getBookInfo() {
+//        return String.format("Ma sach:%s\nTen sach:%s\nTac gia :%s\n",
+//                this.id, this.title, author.toString());
+//    }
 }
