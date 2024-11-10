@@ -39,9 +39,9 @@ public abstract class User {
         this.password = password;
     }
 
-    public abstract void addBook(Book book);
+    //public abstract void addBook(Book book);
 
-    public abstract String getUserType();
+    //public abstract String getUserType();
 
     @Override
     public String toString() {

@@ -20,18 +20,16 @@ public class ReaderAccount extends User {
     /**
      * Add book.
      */
-    public void addBookToCart(Book book) {
-
-    }
-
-    public
+//    public void addBookToCart(Book book) {
+//
+//    }
 
     /**
      * Delete book.
      * Xoa khoi danh sach lua chon.
      */
-    public void deleteBook(Book book) {
-        
-    }
+//    public void deleteBook(Book book) {
+//
+//    }
 
 }
