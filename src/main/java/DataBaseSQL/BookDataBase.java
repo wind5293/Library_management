@@ -1,48 +1,82 @@
 package DataBaseSQL;
+
 import java.sql.*;
 
-public class BookDataBase  {
+public class BookDataBase {
 
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private final DatabaseConnection databaseConnection = new DatabaseConnection();
+
     /**
      * Method to add Document to Library Database.
      *
-     * @param bookName  book's title
+     * @param bookName   book's title
      * @param bookAuthor author's name
-     * @param bookNums the year that the book was published
+     * @param bookNums   quantity of book
      * @throws SQLException catch exception
      */
-   //@Override
+    //@Override
     public void addToDataBase(String bookName, String bookAuthor, int bookNums) throws SQLException {
-        String arg = "insert into bookTable(bookName, bookAuthor, bookNums) VALUES (?, ?, ?);";
-        try(Connection con = databaseConnection.getDBConnection()) {
-            try(PreparedStatement preparedStatement = con.prepareStatement(arg)) {
-                preparedStatement.setString(1, bookName);
-                preparedStatement.setString(2, bookAuthor);
-                preparedStatement.setInt(3, bookNums);
+        //Query to add new rows
+        String insert = "insert into bookTable(bookName, bookAuthor, bookNums) VALUES (?, ?, ?);";
+        //Query to check for existing book in Database
+        String check = "Select bookName, bookAuthor, bookNums from bookTable where " +
+                "bookName = ? AND bookAuthor = ?;";
+        //Query to add book to existed book in Database
+        String update = "UPDATE bookTable SET bookNums = bookNums + ? WHERE " +
+                "bookName = ? AND bookAuthor = ?;";
 
-                preparedStatement.executeUpdate();
-            } catch (SQLException e){
-                System.err.println(e.getMessage() + "add DataBase had ERROR!" + e.getErrorCode());
-                throw e;
+        try (Connection con = databaseConnection.getDBConnection()) {
+
+            //check if book is in database or not
+            try (PreparedStatement checkCondition = con.prepareStatement(check)) {
+                checkCondition.setString(1, bookName);
+                checkCondition.setString(2, bookAuthor);
+
+                try (ResultSet rs = checkCondition.executeQuery()) {
+
+                    if(rs.next()){
+                        //if book is in database
+                        try(PreparedStatement updateDB = con.prepareStatement(update)) {
+                            //increase book by bookNums
+                            updateDB.setInt(1, bookNums);
+                            updateDB.setString(2, bookName);
+                            updateDB.setString(3, bookAuthor);
+                            updateDB.executeUpdate();
+                        }
+                        //if book is not in database
+                    } else {
+                        //add new row
+                        try (PreparedStatement preparedStatement = con.prepareStatement(insert)) {
+                            preparedStatement.setString(1, bookName);
+                            preparedStatement.setString(2, bookAuthor);
+                            preparedStatement.setInt(3, bookNums);
+
+                            preparedStatement.executeUpdate();
+                        } catch (SQLException e) {
+                            System.err.println(e.getMessage() + "add DataBase had ERROR!" + e.getErrorCode());
+                            throw e;
+                        }
+                    }
+                }
             }
-        } catch (SQLException e){
-            System.err.println("DataBase is not Connected");
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
             throw e;
         }
     }
 
     /**
      * Delete a document from library DataBase.
-     * @param bookName name of document
+     *
+     * @param bookName   name of document
      * @param bookAuthor author's name
      * @throws SQLException catch error if query not executed
      */
     //@Override
     public void deleteFromDataBase(String bookName, String bookAuthor) throws SQLException {
-        String arg = "Delete from library where bookName = ? AND bookAuthor = ?;";
-        try(Connection con = databaseConnection.getDBConnection()) {
-            try(PreparedStatement preparedStatement = con.prepareStatement(arg)) {
+        String arg = "Delete from bookTable where bookName = ? AND bookAuthor = ?;";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(arg)) {
                 preparedStatement.setString(1, bookName);
                 preparedStatement.setString(2, bookAuthor);
 
@@ -86,15 +120,16 @@ public class BookDataBase  {
 
     /**
      * Method to get Info of all the books.
+     *
      * @return ResultSet of all Documents.
      * @throws SQLException handle exception
      */
     public ResultSet getAllDocument() throws SQLException {
-        String query = "select * from library;";
-        try(Connection con = databaseConnection.getDBConnection()){
-            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
+        String query = "select * from bookTable;";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 return preparedStatement.executeQuery();
-            }  catch (SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getMessage() + " " + e.getErrorCode());
                 throw e;
             }
@@ -107,16 +142,16 @@ public class BookDataBase  {
     /**
      * Method to update Document in DataBase.
      *
-     * @param oldBookId ID of the book that user wants to change
-     * @param bookName     changed title of the book
-     * @param bookAuthor    changed author
+     * @param oldBookId  ID of the book that user wants to change
+     * @param bookName   changed title of the book
+     * @param bookAuthor changed author
      * @throws SQLException catch exception
      */
     //@Override
     public void updateDataBase(String bookName, String bookAuthor, int oldBookId) throws SQLException {
-        String query = "Update library Set bookName = ?, bookAuthor = ? where bookId = ?;";
-        try(Connection con = databaseConnection.getDBConnection()) {
-            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
+        String query = "Update bookTable Set bookName = ?, bookAuthor = ? where bookId = ?;";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 preparedStatement.setString(1, bookName);
                 preparedStatement.setString(2, bookAuthor);
                 preparedStatement.setInt(3, oldBookId);
@@ -135,14 +170,14 @@ public class BookDataBase  {
     //@Override
     public int numberOfRows() throws SQLException {
         String query = "Select Count(*) from library;";
-        try(Connection con = databaseConnection.getDBConnection()) {
-            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 
                 ResultSet result = preparedStatement.executeQuery();
 
                 result.next();
                 return result.getInt(1);
-            }  catch (SQLException e) {
+            } catch (SQLException e) {
                 System.err.println(e.getMessage() + " " + e.getErrorCode());
                 throw e;
             }

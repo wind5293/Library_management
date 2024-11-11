@@ -1,9 +1,10 @@
 package DataBaseSQL;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class BorrowedBookDataBase {
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void borrowBook(String userName, String bookName) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
@@ -12,7 +13,10 @@ public class BorrowedBookDataBase {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 preparedStatement.setString(1, userName);  // Liên kết với UserDataBase
                 preparedStatement.setString(2, bookName);
-                //preparedStatement.setDate(3, returnDate);
+
+                //set return date = 7 days after the day the book was borrowed
+                LocalDate returnDate = LocalDate.now(). plusWeeks(1);
+                preparedStatement.setDate(3, Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
                 System.out.println("Book " + bookName + " borrowed by " + userName);
