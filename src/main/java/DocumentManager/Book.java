@@ -1,12 +1,9 @@
 package DocumentManager;
 
 public class Book {
-    private String id;
-    private String title;
-    private Author author;
-    private int numberOfBook;
-    private boolean isBorrowed;
-
+    private Integer bookID;
+    private String bookName, bookAuthor;
+    private int bookNums;
     /**
      *
      */
@@ -14,63 +11,56 @@ public class Book {
     }
 
     /**
-     * Contructor.
+     * Constructor.
      */
-    public Book(String id, String title, int numberOfBook, Author author) {
-        this.id = id;
-        this.title = title;
-        this.numberOfBook = numberOfBook;
-        this.author = author;
-    }
 
-    /**
-     * Constructor 3.
-     */
-    public Book(String title, Author author) {
-        this.author = author;
-        this.title = title;
+    public Book(Integer bookID, String bookName, String bookAuthor, int bookNums) {
+        this.bookID = bookID;
+        this.bookNums = bookNums;
+        this.bookAuthor = bookAuthor;
+        this.bookName = bookName;
     }
 
     /**
      * Getter n Setter.
      */
-    public String getId() {
-        return id;
+    public Integer getBookID() {
+        return bookID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBookID(Integer bookID) {
+        this.bookID = bookID;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public Author getAuthor() {
-        return author;
+    public String getBookAuthor() {
+        return bookAuthor;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
     }
 
-    public boolean isBorrowed() {
-        return isBorrowed;
+    public int getBookNums() {
+        return bookNums;
     }
 
-    public void setBorrowed(boolean borrowed) {
-        isBorrowed = borrowed;
+    public void setBookNums(int bookNums) {
+        this.bookNums = bookNums;
     }
 
     /**
      * Get info.
      */
-    public String getBookInfo() {
-        return String.format("Ma sach:%s\nTen sach:%s\nTac gia :%s\n",
-                this.id, this.title, author.toString());
-    }
+//    public String getBookInfo() {
+//        return String.format("Ma sach:%s\nTen sach:%s\nTac gia :%s\n",
+//                this.id, this.title, author.toString());
+//    }
 }

@@ -5,21 +5,15 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
     public Connection databaseLink;
+    protected static final String jdbcUrl = "jdbc:mysql://localhost:3306/librarymanagement";
 
     public Connection getDBConnection() {
-
-        String databaseName = "librarymanagement";
-        String databaseUser = "root";
-        String databasePassword = "Soulofwind@1";
-        String url = "jdbc:mysql://localhost/" + databaseName;
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
+            databaseLink = DriverManager.getConnection(jdbcUrl,"root","root");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return databaseLink;
     }
 }

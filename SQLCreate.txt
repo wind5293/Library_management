@@ -1,0 +1,36 @@
+create table library (
+    BookID int auto_increment primary key,
+    BookName varchar(50),
+    BookAuthor varchar(50),
+    ReleaseYear int
+);
+
+insert into library (BookName, BookAuthor, ReleaseYear)
+value
+    ('Harry Potter và Hòn Đá Phù Thủy', 'J.K. Rowling', 1997),
+    ('Chúa Tể Những Chiếc Nhẫn', 'J.R.R. Tolkien', 1954),
+    ('Đắc Nhân Tâm', 'Dale Carnegie', 1936),
+    ('Sapiens: Lược Sử Loài Người', 'Yuval Noah Harari', 2011),
+    ('Cuộc Sống Khác Biệt', 'Adam Grant', 2013),
+    ('Nhà Giả Kim', 'Paulo Coelho', 1988),
+    ('Tiếng Chim Hót Trong Bụi Mận Gai', 'Colleen McCullough', 1977),
+    ('Hoàng Tử Bé', 'Antoine de Saint-Exupéry', 1943'),
+    ('Bắt Trẻ Đồng Xanh', 'J.D. Salinger', 1951),
+    ('1984', 'George Orwell', 1949),
+    ('Cuốn Theo Chiều Gió', 'Margaret Mitchell', 1936),
+    ('Tôi Là Bêtô', 'Nguyễn Nhật Ánh', 2007),
+    ('Dế Mèn Phiêu Lưu Ký', 'Tô Hoài', 1941),
+    ('Đồi Gió Hú', 'Emily Brontë', 1847),
+    ('Những Kẻ Khốn Khổ', 'Victor Hugo', 1862),
+    ('Moby Dick', 'Herman Melville', 1851),
+    ('Pride and Prejudice', 'Jane Austen', 1813),
+    ('The Great Gatsby', 'F. Scott Fitzgerald', 1925),
+    ('To Kill a Mockingbird', 'Harper Lee', 1960),
+    ('The Catcher in the Rye', 'J.D. Salinger', 1951),
+    ('The Hobbit', 'J.R.R. Tolkien', 1937),
+    ('War and Peace', 'Leo Tolstoy', 1869),
+    ('The Alchemist', 'Paulo Coelho', 1988),
+    ('The Picture of Dorian Gray', 'Oscar Wilde'),
+    ('Brave New World', 'Aldous Huxley', 1932);
+
+select * from library;

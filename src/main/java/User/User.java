@@ -3,7 +3,7 @@ import DocumentManager.Book;
 
 import java.util.List;
 
-public abstract class User {
+public class User {
     private String userId;
     private String userName;
     private String password;
@@ -39,12 +39,4 @@ public abstract class User {
         this.password = password;
     }
 
-    //public abstract void addBook(Book book);
-
-    //public abstract String getUserType();
-
-    @Override
-    public String toString() {
-        return "User ID: " + userId + ", User Name: " + userName;
-    }
 }
