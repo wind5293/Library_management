@@ -10,7 +10,7 @@ public class DatabaseConnection {
     public Connection getDBConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseLink = DriverManager.getConnection(jdbcUrl,"root","root");
+            databaseLink = DriverManager.getConnection(jdbcUrl,"root","Soulofwind@1");
         } catch (Exception e) {
             e.printStackTrace();
         }

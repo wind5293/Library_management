@@ -1,14 +1,15 @@
 package GUI;
 
 import DataBaseSQL.DatabaseConnection;
-//import DataBaseSQL.LibraryManagementModel;
 import DocumentManager.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,8 +33,14 @@ public class ManageBooksStageController implements Initializable {
     @FXML
     private TableColumn<Book, String> BookAuthorColumn;
     @FXML
-    private TableColumn<Book, Integer> BookNumsColumn;
+    private TableColumn<Book, Integer> BookReleaseYearColumn;
 
+    @FXML
+    private Button addBookButton;
+    @FXML
+    private Button removeBookButton;
+    @FXML
+    private Button updateBooksButton;
 
     ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
 
@@ -42,10 +49,9 @@ public class ManageBooksStageController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String libraryViewQuery = "select bookID, title, author, ReleaseYear from booktable";
+        String libraryViewQuery = "select bookId, title, author, ReleaseYear from booktable";
 
         try {
-
             /*
              * Get books info table from database
              */
@@ -53,19 +59,18 @@ public class ManageBooksStageController implements Initializable {
             ResultSet queryOutput = statement.executeQuery(libraryViewQuery);
 
             while (queryOutput.next()) {
-                Integer queryBookID = queryOutput.getInt("bookID");
-                String queryBookName = queryOutput.getString("bookName");
-                String queryBookAuthor = queryOutput.getString("bookAuthor");
-                Integer queryBookNums = queryOutput.getInt("bookNums");
+                Integer queryBookID = queryOutput.getInt("bookId");
+                String queryBookName = queryOutput.getString("title");
+                String queryBookAuthor = queryOutput.getString("author");
+                Integer queryReleaseYear = queryOutput.getInt("ReleaseYear");
 
-                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor,
-                        queryBookNums));
+                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryReleaseYear));
             }
 
             BookIDColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
             BookAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("bookAuthor"));
-            BookNumsColumn.setCellValueFactory(new PropertyValueFactory<>("bookNums"));
+            BookReleaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
 
             BookTable.setItems(bookObservableList);
 
@@ -88,8 +93,6 @@ public class ManageBooksStageController implements Initializable {
                         return true;
                     } else if (book.getBookAuthor().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true;
-                    } else if (book.getBookNums.toString().toLowerCase().indexOf(searchKeyword) > -1) {
-                        return true;
                     } else
                         return false;
                 });
@@ -106,4 +109,14 @@ public class ManageBooksStageController implements Initializable {
         }
     }
 
+    public void AddButtonClicked(ActionEvent event) {
+        System.out.println("Add Button Clicked");
+    }
+
+    public void RemoveButtonClicked(ActionEvent event) {
+        System.out.println("Add Button Clicked");
+    }
+    public void UpdateButtonClicked(ActionEvent event) {
+        System.out.println("Add Button Clicked");
+    }
 }

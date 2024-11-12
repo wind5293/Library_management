@@ -13,7 +13,7 @@ public class Author {
     }
 
     /**
-     * Contructor.
+     * Constructor.
      */
     public Author(String authorName, String authorDoB, String authorBio) {
         this.authorName = authorName;
@@ -52,8 +52,7 @@ public class Author {
      * Get Information.
      */
     public String toString() {
-        return String.format("Tac gia: %s\nNgay sinh:%s\nTieu su:%s\n",
-                this.authorName, this.authorDoB, this.authorBio);
+        return this.authorName + " " + this.authorDoB + " " + this.authorBio;
     }
 
 }

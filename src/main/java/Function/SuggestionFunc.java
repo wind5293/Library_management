@@ -16,7 +16,7 @@ public class SuggestionFunc {
         List<Book> bookList = bookManagement.getBookList();
         List<Book> suggestions = new ArrayList<>();
         for (Book book : bookList) {
-            if (book.getTitle().startsWith(keyword)) {
+            if (book.getBookName().startsWith(keyword)) {
                 suggestions.add(book);
             }
         }
@@ -33,7 +33,7 @@ public class SuggestionFunc {
         List<Book> suggestionsBook = new ArrayList<>();
         List<Book> bookList = bookManagement.getBookList();
         for (Book books : bookList) {
-            if (books.getAuthor().equals(book.getAuthor())) {
+            if (books.getBookAuthor().equals(book.getBookAuthor())) {
                 suggestionsBook.add(books);
             }
         }
