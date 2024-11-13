@@ -8,15 +8,21 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +39,7 @@ public class ManageBooksStageController implements Initializable {
     @FXML
     private TableColumn<Book, String> BookAuthorColumn;
     @FXML
-    private TableColumn<Book, Integer> BookReleaseYearColumn;
+    private TableColumn<Book, Integer> BookNumsColumn;
 
     @FXML
     private Button addBookButton;
@@ -49,7 +55,7 @@ public class ManageBooksStageController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String libraryViewQuery = "select bookId, title, author, ReleaseYear from booktable";
+        String libraryViewQuery = "select bookId, bookName, bookAuthor, bookNums from booktable";
 
         try {
             /*
@@ -60,17 +66,17 @@ public class ManageBooksStageController implements Initializable {
 
             while (queryOutput.next()) {
                 Integer queryBookID = queryOutput.getInt("bookId");
-                String queryBookName = queryOutput.getString("title");
-                String queryBookAuthor = queryOutput.getString("author");
-                Integer queryReleaseYear = queryOutput.getInt("ReleaseYear");
+                String queryBookName = queryOutput.getString("bookName");
+                String queryBookAuthor = queryOutput.getString("bookAuthor");
+                Integer queryBookNums = queryOutput.getInt("bookNums");
 
-                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryReleaseYear));
+                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryBookNums));
             }
 
             BookIDColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
             BookAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("bookAuthor"));
-            BookReleaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+            BookNumsColumn.setCellValueFactory(new PropertyValueFactory<>("bookNums"));
 
             BookTable.setItems(bookObservableList);
 
@@ -109,8 +115,14 @@ public class ManageBooksStageController implements Initializable {
         }
     }
 
-    public void AddButtonClicked(ActionEvent event) {
-        System.out.println("Add Button Clicked");
+    public void AddButtonClicked(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/AddBookStage.fxml")));
+
+        Scene scene = new Scene(root);
+
+        Stage popupStage = new Stage();
+        popupStage.setScene(scene);
+        popupStage.show();
     }
 
     public void RemoveButtonClicked(ActionEvent event) {

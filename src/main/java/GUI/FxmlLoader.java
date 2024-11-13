@@ -11,7 +11,7 @@ public class FxmlLoader {
         Pane view;
         try {
 
-            URL fileUrl = MainStage.class.getResource(fileName + ".fxml");
+            URL fileUrl = AdminHomeController.class.getResource(fileName + ".fxml");
             if (fileUrl == null) {
                 throw new java.io.FileNotFoundException("FXML file cannot be found");
             }

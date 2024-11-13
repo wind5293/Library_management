@@ -29,5 +29,4 @@ public class AddBookStageController {
         bookDataBase.addToDataBase(bookName, bookAuthor, bookNum);
     }
 
-
 }

@@ -16,7 +16,7 @@
           <TableColumn fx:id="BookIDColumn" prefWidth="57.0" text="ID" />
           <TableColumn fx:id="BookNameColumn" minWidth="0.0" prefWidth="308.0" text="Tên sách" />
             <TableColumn fx:id="BookAuthorColumn" prefWidth="210.0" text="Tác giả" />
-            <TableColumn fx:id="BookReleaseYearColumn" prefWidth="126.0" text="Năm phát hành" />
+            <TableColumn fx:id="BookNumsColumn" prefWidth="126.0" text="Năm phát hành" />
         </columns>
       </TableView>
       <Button fx:id="addBookButton" layoutX="331.0" layoutY="85.0" mnemonicParsing="false" onAction="#AddButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Thêm">
