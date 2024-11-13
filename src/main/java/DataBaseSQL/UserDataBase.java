@@ -101,5 +101,23 @@ public class UserDataBase {
             throw e;
         }
     }
+
+    public boolean isUserExists(String username, String password) throws SQLException {
+        String query = "SELECT COUNT(*) FROM readerAccount WHERE username = ? AND password = ?";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement statement = con.prepareStatement(query)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                // Kiểm tra kết quả của truy vấn
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
 }
 
