@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddBookStageController">
+<AnchorPane prefHeight="350.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminGUI.AddBookStageController">
    <children>
       <Label layoutX="78.0" layoutY="85.0" text="Tên sách">
          <font>
@@ -41,7 +41,7 @@
             <Font name="SansSerif Regular" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="548.0" layoutY="313.0" mnemonicParsing="false" text="Huỷ">
+      <Button layoutX="548.0" layoutY="313.0" mnemonicParsing="false" onAction="#CancelButtonClicked" text="Huỷ">
          <font>
             <Font name="SansSerif Regular" size="12.0" />
          </font>

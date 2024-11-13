@@ -1,5 +1,6 @@
-package GUI;
+package GUI.AdminGUI;
 
+import GUI.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

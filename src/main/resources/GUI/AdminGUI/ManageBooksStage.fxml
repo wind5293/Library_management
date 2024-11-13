@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="1036.0" scaleShape="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ManageBooksStageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="1036.0" scaleShape="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminGUI.ManageBooksStageController">
    <children>
       <TextField fx:id="SearchBookTextField" layoutX="27.0" layoutY="29.0" prefHeight="25.0" prefWidth="389.0" promptText="Tìm kiếm sách..." />
       <TableView fx:id="BookTable" layoutX="28.0" layoutY="158.0" prefHeight="462.0" prefWidth="702.0">
@@ -23,7 +23,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@sourceImage/addButton.png" />
+                  <Image url="@../sourceImage/addButton.png" />
                </image>
             </ImageView>
          </graphic>
@@ -32,7 +32,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@sourceImage/Remove.png" />
+                  <Image url="@../sourceImage/Remove.png" />
                </image>
             </ImageView>
          </graphic>
