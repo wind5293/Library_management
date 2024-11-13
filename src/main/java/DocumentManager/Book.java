@@ -5,7 +5,6 @@ public class Book {
     private String bookName;
     private int bookNums;
     private String bookAuthor;
-    private Integer releaseYear;
 
     public Book() {
     }
@@ -13,9 +12,9 @@ public class Book {
     /**
      * Constructor.
      */
-    public Book(Integer bookID, String bookName, String bookAuthor, int releaseYear) {
+    public Book(Integer bookID, String bookName, String bookAuthor, int bookNums) {
         this.bookID = bookID;
-        this.releaseYear = releaseYear;
+        this.bookNums = bookNums;
         this.bookAuthor = bookAuthor;
         this.bookName = bookName;
     }
@@ -57,14 +56,6 @@ public class Book {
     public void setBookNums(int bookNums) {
 
         this.bookNums = bookNums;
-    }
-
-    public Integer getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
     }
 
     /**

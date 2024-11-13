@@ -10,4 +10,6 @@ module org.example.library_management {
     exports DataBaseSQL;
     opens DataBaseSQL to javafx.fxml;
     opens DocumentManager to javafx.base;
+    exports GUI.AdminGUI;
+    opens GUI.AdminGUI to javafx.fxml;
 }
