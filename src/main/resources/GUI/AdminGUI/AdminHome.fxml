@@ -22,7 +22,7 @@
                         </Label>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="46.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/bookIcon.png" />
+                                <Image url="@../sourceImage/bookIcon.png" />
                             </image>
                         </ImageView>
                     </children>
@@ -38,7 +38,7 @@
                         </Button>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/home.png" />
+                                <Image url="@../sourceImage/home.png" />
                             </image>
                         </ImageView>
                         <Button fx:id="manageBooksButton" layoutY="71.0" mnemonicParsing="false" onAction="#handleManageBooksButtonClicked" prefHeight="60.0" prefWidth="250.0" text="Manage Books">
@@ -48,7 +48,7 @@
                         </Button>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/book.png" />
+                                <Image url="@../sourceImage/book.png" />
                             </image>
                         </ImageView>
                         <Button fx:id="homePageButton1" layoutY="143.0" mnemonicParsing="false" onAction="#handleHomePageButtonClicked" prefHeight="60.0" prefWidth="250.0" text="Manage User">
@@ -58,7 +58,7 @@
                         </Button>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/membership.png" />
+                                <Image url="@../sourceImage/membership.png" />
                             </image>
                         </ImageView>
                         <Button fx:id="homePageButton2" layoutY="213.0" mnemonicParsing="false" onAction="#handleHomePageButtonClicked" prefHeight="60.0" prefWidth="250.0" text="Home Page">
@@ -68,7 +68,7 @@
                         </Button>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/employee.png" />
+                                <Image url="@../sourceImage/employee.png" />
                             </image>
                         </ImageView>
                         <Button fx:id="homePageButton3" layoutY="285.0" mnemonicParsing="false" onAction="#handleHomePageButtonClicked" prefHeight="60.0" prefWidth="250.0" text="Home Page">
@@ -78,7 +78,7 @@
                         </Button>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/home.png" />
+                                <Image url="@../sourceImage/home.png" />
                             </image>
                         </ImageView>
                         <Button fx:id="homePageButton4" layoutY="359.0" mnemonicParsing="false" onAction="#handleHomePageButtonClicked" prefHeight="60.0" prefWidth="250.0" text="Home Page">
@@ -88,7 +88,7 @@
                         </Button>
                         <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@sourceImage/home.png" />
+                                <Image url="@../sourceImage/home.png" />
                             </image>
                         </ImageView>
                     </children>

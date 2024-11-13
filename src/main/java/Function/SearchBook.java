@@ -29,7 +29,7 @@ public class SearchBook {
         List<Book> bookList = bookManagement.getBookList();
         for (Book book : bookList) {
             // Lấy tiêu đề của cuốn sách hiện tại
-            String title = book.getTitle();
+            String title = book.getBookName();
 
             // Kiểm tra xem tiêu đề có chứa bất kỳ từ khóa nào không
             if (containsAnyWord(title, keywords)) {
@@ -63,7 +63,7 @@ public class SearchBook {
     public Book searchExactly (BookManagement bookManagement, String input) {
         List<Book> bookList = bookManagement.getBookList();
         for(Book book : bookList) {
-            if(book.getTitle().equalsIgnoreCase(book.getTitle())) {
+            if(book.getBookName().equalsIgnoreCase(book.getBookName())) {
                 return book;
             }
         }

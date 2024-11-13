@@ -2,18 +2,16 @@ package DocumentManager;
 
 public class Book {
     private Integer bookID;
-    private String bookName, bookAuthor;
+    private String bookName;
     private int bookNums;
-    /**
-     *
-     */
+    private String bookAuthor;
+
     public Book() {
     }
 
     /**
      * Constructor.
      */
-
     public Book(Integer bookID, String bookName, String bookAuthor, int bookNums) {
         this.bookID = bookID;
         this.bookNums = bookNums;
@@ -25,10 +23,12 @@ public class Book {
      * Getter n Setter.
      */
     public Integer getBookID() {
+
         return bookID;
     }
 
     public void setBookID(Integer bookID) {
+
         this.bookID = bookID;
     }
 
@@ -49,18 +49,20 @@ public class Book {
     }
 
     public int getBookNums() {
+
         return bookNums;
     }
 
     public void setBookNums(int bookNums) {
+
         this.bookNums = bookNums;
     }
 
     /**
      * Get info.
      */
-//    public String getBookInfo() {
-//        return String.format("Ma sach:%s\nTen sach:%s\nTac gia :%s\n",
-//                this.id, this.title, author.toString());
-//    }
+    public String getBookInfo() {
+        return this.bookID + " " + this.bookName + " " + bookAuthor.toString();
+    }
+
 }
