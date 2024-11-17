@@ -8,10 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RegisterStage {
@@ -31,31 +33,39 @@ public class RegisterStage {
     private TextField tf_cfpassword;
 
     @FXML
+    private Label informationText;
+
     public void SignUp(ActionEvent event) throws SQLException {
-        String userName = tf_username.getText();
-        String userPassWord = tf_password.getText();
-        String cfUserPassWord = tf_cfpassword.getText();
+        String username = tf_username.getText();
+        String password = tf_password.getText();
+        String cfPassword = tf_cfpassword.getText();
 
-        UserDataBase userDataBase = new UserDataBase();
+        if (checkValidInput(username, password, cfPassword)) {
+            try {
+                UserDataBase userDataBase = new UserDataBase();
 
-
-        /**
-         * Check userPassword == confirm
-         */
-
-        // Kiểm tra mật khẩu và confirm mật khẩu
-        if (!userPassWord.equals(cfUserPassWord)) {
-            ///showAlert(Alert.AlertType.ERROR, "Đăng ký thất bại", "Mật khẩu không khớp. Vui lòng kiểm tra lại.");
-            return;
+                userDataBase.addNewUser(username, password);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        // Lưu username và password vào database
-        try {
-            userDataBase.addNewUser(userName, userPassWord);
-            //showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        UserDataBase userDataBase = new UserDataBase();
+//
+//
+//        /**
+//         * Check userPassword == confirm
+//         */
+//
+//
+//
+//        // Lưu username và password vào database
+//        try {
+//            userDataBase.addNewUser(userName, userPassWord);
+//            //showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
 //    // Phương thức hiển thị alert
@@ -67,4 +77,20 @@ public class RegisterStage {
 //        alert.showAndWait();
 //    }
 
+    public boolean checkValidInput(String username, String password, String cfPassword) {
+        if (username.isEmpty()) {
+            informationText.setText("Vui lòng nhập tên nguòi dùng");
+            return false;
+        } else if (password.isEmpty()) {
+            informationText.setText("Vui lòng nhập mật khẩu");
+            return false;
+        } else if (cfPassword.isEmpty()) {
+            informationText.setText("Vui lòng nhập lại mật khẩu");
+            return false;
+        } else if (!Objects.equals(password, cfPassword)) {
+            informationText.setText("Mật khẩu không trùng khớp! Vui lòng nhập lại");
+            return false;
+        }
+        return true;
+    }
 }
