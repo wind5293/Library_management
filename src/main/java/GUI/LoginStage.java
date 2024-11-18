@@ -28,20 +28,7 @@ public class LoginStage {
     @FXML
     private Button button_signup_log;
     @FXML
-    private Label alert_label;
-
-
-    public boolean checkAdmin(String username, String password) {
-        return Objects.equals(username, "admin") && Objects.equals(password, "admin");
-    }
-
-    public void switchScene(ActionEvent event, String newSceneName) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newSceneName)));
-        Scene newScene = new Scene(root);
-        currentStage.setScene(newScene);
-    }
+    private Label informationText;
 
     public void Login(ActionEvent event) throws SQLException, IOException {
         String userName = tf_username.getText();
@@ -84,5 +71,28 @@ public class LoginStage {
     @FXML
     public void goToSignUp(ActionEvent event) throws IOException {
         switchScene(event,"RegisterStage.fxml");
+    }
+
+    public boolean checkValidInput(String username, String password) {
+        if (username.isEmpty()) {
+            informationText.setText("Vui lòng nhập tên nguòi dùng");
+            return false;
+        } else if (password.isEmpty()) {
+            informationText.setText("Vui lòng nhập mật khẩu");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkAdmin(String username, String password) {
+        return Objects.equals(username, "admin") && Objects.equals(password, "admin");
+    }
+
+    public void switchScene(ActionEvent event, String newSceneName) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newSceneName)));
+        Scene newScene = new Scene(root);
+        currentStage.setScene(newScene);
     }
 }

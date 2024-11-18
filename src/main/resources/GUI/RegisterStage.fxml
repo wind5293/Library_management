@@ -35,7 +35,7 @@
                   <Text layoutX="35.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORD" wrappingWidth="72.5367431640625" />
                   <Text layoutX="37.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm PASSWORD" wrappingWidth="72.53674316406261" />
                   <Button fx:id="button_cfsignup_reg" layoutX="73.0" layoutY="273.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="30.0" prefWidth="216.0" text="SIGN UP" />
-                  <Button fx:id="button_login_reg" layoutX="201.0" layoutY="329.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="LOGIN" />
+                  <Button fx:id="button_login_reg" layoutX="201.0" layoutY="329.0" mnemonicParsing="false" onAction="#LoginButtonClicked" prefHeight="30.0" prefWidth="65.0" text="LOGIN" />
                   <Text fontSmoothingType="LCD" layoutX="99.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: #DC143C;" text="REGISTER HERE !">
                      <font>
                         <Font size="25.0" />

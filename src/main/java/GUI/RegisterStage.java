@@ -5,12 +5,18 @@ import DataBaseSQL.UserDataBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -35,6 +41,14 @@ public class RegisterStage {
     @FXML
     private Label informationText;
 
+    public void switchScene(ActionEvent event, String newSceneName) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newSceneName)));
+        Scene newScene = new Scene(root);
+        currentStage.setScene(newScene);
+    }
+
     public void SignUp(ActionEvent event) throws SQLException {
         String username = tf_username.getText();
         String password = tf_password.getText();
@@ -43,39 +57,31 @@ public class RegisterStage {
         if (checkValidInput(username, password, cfPassword)) {
             try {
                 UserDataBase userDataBase = new UserDataBase();
-
                 userDataBase.addNewUser(username, password);
+
+                showAlert(Alert.AlertType.INFORMATION, "Hệ thống",
+                          "Đăng kí thành công");
+
+                switchScene(event, "LoginStage.fxml");
+
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
-
-//        UserDataBase userDataBase = new UserDataBase();
-//
-//
-//        /**
-//         * Check userPassword == confirm
-//         */
-//
-//
-//
-//        // Lưu username và password vào database
-//        try {
-//            userDataBase.addNewUser(userName, userPassWord);
-//            //showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 
-//    // Phương thức hiển thị alert
-//    private void showAlert(Alert.AlertType alertType, String title, String message) {
-//        Alert alert = new Alert(alertType);
-//        alert.setTitle(title);
-//        alert.setHeaderText(null);
-//        alert.setContentText(message);
-//        alert.showAndWait();
-//    }
+    public void LoginButtonClicked(ActionEvent event) throws IOException {
+        switchScene(event, "LoginStage.fxml");
+    }
+
+    // Phương thức hiển thị alert
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     public boolean checkValidInput(String username, String password, String cfPassword) {
         if (username.isEmpty()) {

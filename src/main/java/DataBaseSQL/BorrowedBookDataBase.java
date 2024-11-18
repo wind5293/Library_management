@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class BorrowedBookDataBase {
     private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    public void borrowBook(String userName, String bookName) throws SQLException {
+    public void orrowBook(String userName, String bookName) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
                 "VALUES (?, ?, CURRENT_DATE, ?);";
         try (Connection con = databaseConnection.getDBConnection()) {

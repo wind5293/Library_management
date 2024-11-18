@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class DeleteBookStageController {
+public class DeleteBook {
 
 
     @FXML

@@ -59,7 +59,7 @@
             <Button fx:id="button_login_log" layoutX="111.0" layoutY="254.0" mnemonicParsing="false" onAction="#Login" prefHeight="30.0" prefWidth="135.0" text="LOGIN" />
             <Text layoutX="27.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" wrappingWidth="151.20000000000005" />
             <Button fx:id="button_signup_log" layoutX="186.0" layoutY="336.0" mnemonicParsing="false" onAction="#goToSignUp" prefHeight="30.0" prefWidth="117.0" text="SIGN UP NOW !" textAlignment="CENTER" />
-            <Label fx:id="alert_label" layoutX="60.0" layoutY="122.0" prefHeight="17.0" prefWidth="212.0" />
+            <Label fx:id="informationText" layoutX="60.0" layoutY="122.0" prefHeight="17.0" prefWidth="212.0" />
             <PasswordField fx:id="tf_password" layoutX="121.0" layoutY="213.0" promptText="Enter password here" />
          </children>
       </AnchorPane>
