@@ -39,6 +39,15 @@ public class AdminHomeController implements Initializable {
 
     }
 
+    public void handleManageUserButtonClicked(ActionEvent event) {
+        System.out.println("You clicked manageUserButton");
+
+        FxmlLoader loader = new FxmlLoader();
+        Pane pane  = loader.getPage("ManageUserStage");
+        mainPane.setCenter(pane);
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resource) {
 

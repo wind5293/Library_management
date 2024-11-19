@@ -1,34 +1,31 @@
 package User;
-import DocumentManager.Book;
-
-import java.util.List;
 
 public class User {
-    private String userId;
-    private String userName;
+    private int userId;
+    private String username;
     private String password;
 
-    public User(String userId, String userName,
+    public User(int userId, String username,
                 String password) {
         this.userId = userId;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassWord() {

@@ -21,7 +21,7 @@ public class UserManagement {
      */
     public void addReaderAccount(ReaderAccount newAccount) throws Exception {
         for (ReaderAccount account : readerAccountsList) {
-            if (account.getUserName().equals(newAccount.getUserName())) {
+            if (account.getUsername().equals(newAccount.getUsername())) {
                 //day sang loginExcetion.
                 throw new Exception("Tên tài khoản đã tồn tại.");
             }
@@ -37,7 +37,7 @@ public class UserManagement {
     public boolean checkLogin(ReaderAccount loginAccount) throws LoginException {
         boolean check = false;
         for (ReaderAccount account : readerAccountsList) {
-            if (account.getUserName().equals(loginAccount.getUserName())) {
+            if (account.getUsername().equals(loginAccount.getUsername())) {
                 // Kiểm tra mật khẩu
                 if (account.getPassWord().equals(loginAccount.getPassWord())) {
                     return true;

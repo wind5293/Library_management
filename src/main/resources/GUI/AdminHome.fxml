@@ -51,7 +51,7 @@
                                 <Image url="@sourceImage/book.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="homePageButton1" layoutY="143.0" mnemonicParsing="false" onAction="#handleHomePageButtonClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: #FFFFFF;" text="Manage User">
+                        <Button layoutY="143.0" mnemonicParsing="false" onAction="#handleManageUserButtonClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: #FFFFFF;" text="Manage User">
                             <font>
                                 <Font name="Gadugi Bold" size="16.0" />
                             </font>

@@ -12,4 +12,6 @@ module org.example.library_management {
     opens DocumentManager to javafx.base;
     exports GUI.AdminGUI;
     opens GUI.AdminGUI to javafx.fxml;
+    opens User to javafx.base;
+
 }
