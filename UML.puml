@@ -28,9 +28,6 @@ class ManagerAccount extends User {
    +const passWord="admin" : String
 }
 
-class HoldRequest {
-
-}
 
 class Notification {
 
@@ -132,13 +129,20 @@ class SuggestSearch {
 
 }
 
-class GUI {}
-class RegisterGUI extends GUI {
-    +select : ReaderAccount or ManagerAccount;
+
+class BaseGUI {
+    addBook();
+    deleteBook();
 }
-class HomeGUI extends GUI {}
-class ReaderGUI extends GUI {}
-class ManagerGUI extends GUI {}
+class ReaderGUI extends BaseGUI {
+    borrowBook;
+    returnBook;
+}
+class ManagerGUI extends BaseGUI {
+    manageBook;
+    managUser;
+}
+
 
 class UserException {
     + UserException(message :String)
