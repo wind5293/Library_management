@@ -42,7 +42,7 @@ public class UserBorrowedBook implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String borrowedBookViewQuery = "select bookName, borrowedDate, returnDate from booktable where userName =?;";
+        String borrowedBookViewQuery = "select bookName, borrowDate, returnDate from borrowedbooks where userName = ?;";
 
         try {
             bookObservableList.clear(); // Xóa dữ liệu hiện tại
@@ -52,14 +52,14 @@ public class UserBorrowedBook implements Initializable {
 
             while (queryOutput.next()) {
                 String queryBookName = queryOutput.getString("bookName");
-                String queryBorrowedDate = queryOutput.getString("borrowedDate");
+                String queryBorrowedDate = queryOutput.getString("borrowDate");
                 String queryRetunrDate = queryOutput.getString("returnDate");
 
                 //bookObservableList.add(new );
             }
 
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
-            BorrowedDateColumn.setCellValueFactory(new PropertyValueFactory<>("borrowedDate"));
+            BorrowedDateColumn.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
             ReturnDateColumn.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
 
         } catch (SQLException e) {
