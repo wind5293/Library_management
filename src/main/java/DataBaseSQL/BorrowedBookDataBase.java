@@ -19,6 +19,17 @@ public class BorrowedBookDataBase {
                 preparedStatement.setDate(3, Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
+
+                //decrease numbers of book in database by 1
+                String updateBookNums = "Update bookTable set bookNums = " +
+                        "bookNums - 1 where bookName = ?;";
+
+                try (PreparedStatement changeBookNums = con.prepareStatement(updateBookNums)) {
+                    preparedStatement.setString(1, bookName);
+
+                    changeBookNums.executeUpdate();
+                }
+
                 System.out.println("Book " + bookName + " borrowed by " + userName);
             } catch (SQLException e) {
                 System.err.println("Error borrowing book: " + e.getMessage());
@@ -57,7 +68,7 @@ public class BorrowedBookDataBase {
      * Lay so luong sach da muon.
      * Can kiem tra phan nay.
      */
-    public int getIssuedBooks() {
+    public int getIssuedBooks() throws SQLException {
         String query = "Select Count(*) from borrowedBooks;";
         try (Connection con = databaseConnection.getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {

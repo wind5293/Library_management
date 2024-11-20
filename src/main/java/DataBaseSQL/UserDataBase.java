@@ -46,11 +46,13 @@ public class UserDataBase {
             }
         } catch (Exception e) {
             System.err.println("Can not connect");
+            throw e;
         }
     }
 
     /**
      * Method to delete user from database.
+     *
      * @param username username
      * @param password password for confirmation
      * @throws SQLException catch exception
@@ -76,7 +78,8 @@ public class UserDataBase {
 
     /**
      * method to update password.
-     * @param username username
+     *
+     * @param username    username
      * @param oldPassword old password for confirmation
      * @param newPassword new password to update
      * @throws SQLException catch exception
@@ -96,6 +99,41 @@ public class UserDataBase {
                 System.err.println("Can not change password");
                 throw e;
             }
+        } catch (SQLException e) {
+            System.err.println("Can not connect to database");
+            throw e;
+        }
+    }
+
+    /**
+     * Method to get password if forgot.
+     * @param username username
+     * @param email email address
+     * @return return password that belong to that users
+     * @throws SQLException catch Exception
+     */
+    public String forgotPassword(String username, String email) throws SQLException {
+        String currentPassword = "select password from readerAccount " +
+                "where username = ? AND email = ?;";
+
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(currentPassword)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, email);
+
+                ResultSet result = preparedStatement.executeQuery();
+
+                if (result.next()) {
+                    return result.getString("password");
+                } else {
+                    return "";
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Username or email is incorrect");
+                throw e;
+            }
+
         } catch (SQLException e) {
             System.err.println("Can not connect to database");
             throw e;
@@ -143,5 +181,6 @@ public class UserDataBase {
             throw e;
         }
     }
+
 }
 

@@ -34,9 +34,9 @@ public class BookDataBase {
 
                 try (ResultSet rs = checkCondition.executeQuery()) {
 
-                    if(rs.next()){
+                    if (rs.next()) {
                         //if book is in database
-                        try(PreparedStatement updateDB = con.prepareStatement(update)) {
+                        try (PreparedStatement updateDB = con.prepareStatement(update)) {
                             //increase book by bookNums
                             updateDB.setInt(1, bookNums);
                             updateDB.setString(2, bookName);
@@ -210,4 +210,28 @@ public class BookDataBase {
         }
     }
 
+
+    public int totalOfBooks() throws SQLException {
+        String query = "Select SUM(bookNums) AS totalOfBooks from bookTable";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+                ResultSet result = preparedStatement.executeQuery();
+
+                if (result.next()) {
+                    return result.getInt("totalOfBooks");
+                } else {
+                    return 0;
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error creating statement for total books");
+                throw e;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Cannot connect to database");
+            throw e;
+        }
+    }
 }
