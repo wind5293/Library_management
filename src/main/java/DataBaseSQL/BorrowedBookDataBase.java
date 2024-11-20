@@ -72,6 +72,7 @@ public class BorrowedBookDataBase {
             }
         } catch (SQLException e) {
             System.err.println("DataBase is not connected");
+            e.printStackTrace();
             throw e;
         }
     }
