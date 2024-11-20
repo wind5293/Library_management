@@ -1,25 +1,36 @@
 package DocumentManager;
 
 public class BorrowedBook {
-    private Book book;
-    private String borrwedDate;
+    private int id;
+
+
+    private String bookName;
+    private String borrowedDate;
     private String returnDate;
 
-    public BorrowedBook(Book book, String returnDate, String borrwedDate) {
-        this.book = book;
+    public BorrowedBook(String bookName, String returnDate, String borrwedDate) {
+        this.bookName = bookName;
         this.returnDate = returnDate;
-        this.borrwedDate = borrwedDate;
+        this.borrowedDate = borrwedDate;
     }
 
     /**
      * Getter n Setter.
      */
-    public Book getBook() {
-        return book;
+    public int getId() {
+        return id;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getReturnDate() {
@@ -30,11 +41,11 @@ public class BorrowedBook {
         this.returnDate = returnDate;
     }
 
-    public String getBorrwedDate() {
-        return borrwedDate;
+    public String getBorrowedDate() {
+        return borrowedDate;
     }
 
-    public void setBorrwedDate(String borrwedDate) {
-        this.borrwedDate = borrwedDate;
+    public void setBorrowedDate(String borrowedDate) {
+        this.borrowedDate = borrowedDate;
     }
 }
