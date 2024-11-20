@@ -34,9 +34,9 @@ public class BookDataBase {
 
                 try (ResultSet rs = checkCondition.executeQuery()) {
 
-                    if(rs.next()){
+                    if (rs.next()) {
                         //if book is in database
-                        try(PreparedStatement updateDB = con.prepareStatement(update)) {
+                        try (PreparedStatement updateDB = con.prepareStatement(update)) {
                             //increase book by bookNums
                             updateDB.setInt(1, bookNums);
                             updateDB.setString(2, bookName);
@@ -168,8 +168,31 @@ public class BookDataBase {
     }
 
     //@Override
-    public int numberOfRows() throws SQLException {
-        String query = "Select Count(*) from library;";
+//    public int numberOfRows() throws SQLException {
+//        String query = "Select Count(*) from library;";
+//        try (Connection con = databaseConnection.getDBConnection()) {
+//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+//
+//                ResultSet result = preparedStatement.executeQuery();
+//
+//                result.next();
+//                return result.getInt(1);
+//            } catch (SQLException e) {
+//                System.err.println(e.getMessage() + " " + e.getErrorCode());
+//                throw e;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("DataBase is not connected");
+//            throw e;
+//        }
+//    }
+
+    /**
+     * Get Total Number of Book.
+     * Can kiem tra phan nay.
+     */
+    public int getTotalBooks() throws SQLException {
+        String query = "SELECT SUM(bookNums) FROM bookTable";
         try (Connection con = databaseConnection.getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 
@@ -178,7 +201,7 @@ public class BookDataBase {
                 result.next();
                 return result.getInt(1);
             } catch (SQLException e) {
-                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                System.err.println(e.getMessage() + "get Total failed" + e.getErrorCode());
                 throw e;
             }
         } catch (SQLException e) {
@@ -187,4 +210,28 @@ public class BookDataBase {
         }
     }
 
+
+    public int totalOfBooks() throws SQLException {
+        String query = "Select SUM(bookNums) AS totalOfBooks from bookTable";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+                ResultSet result = preparedStatement.executeQuery();
+
+                if (result.next()) {
+                    return result.getInt("totalOfBooks");
+                } else {
+                    return 0;
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error creating statement for total books");
+                throw e;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Cannot connect to database");
+            throw e;
+        }
+    }
 }

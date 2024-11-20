@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="654.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminGUI.StatisticsStage">
+   <children>
+      <BarChart fx:id="ageBarChart" layoutX="200.0" layoutY="127.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxis" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <AnchorPane layoutX="14.0" layoutY="100.0" prefHeight="93.0" prefWidth="127.0" style="-fx-background-color: #A9A9A9;">
+         <children>
+            <Label fx:id="numReaders" alignment="CENTER" layoutX="31.0" layoutY="17.0" prefHeight="58.0" prefWidth="65.0" text="1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="16.0" layoutY="72.0" text="No. of Readers">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="14.0" layoutY="252.0" prefHeight="93.0" prefWidth="127.0" style="-fx-background-color: #A9A9A9;">
+         <children>
+            <Label fx:id="numBooks" alignment="CENTER" layoutX="31.0" layoutY="17.0" prefHeight="58.0" prefWidth="65.0" text="1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="22.0" layoutY="224.0" text="No. of Books">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="12.0" layoutY="409.0" prefHeight="93.0" prefWidth="127.0" style="-fx-background-color: #A9A9A9;">
+         <children>
+            <Label fx:id="issuedBooks" alignment="CENTER" layoutX="31.0" layoutY="17.0" prefHeight="58.0" prefWidth="65.0" text="1">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="20.0" layoutY="381.0" text="Issued Books">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <PieChart fx:id="bookGenrePieChart" layoutX="745.0" layoutY="147.0" prefHeight="235.0" prefWidth="253.0" style="-fx-background-color: #A9A9A9;" />
+      <Pane prefHeight="58.0" prefWidth="1036.0" style="-fx-background-color: #00FFFF;">
+         <children>
+            <Label alignment="CENTER" layoutX="465.0" layoutY="-11.0" text="Statistic">
+               <font>
+                  <Font size="54.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="58.0" fitWidth="78.0" layoutX="373.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../sourceImage/images.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label alignment="CENTER" layoutX="217.0" layoutY="76.0" prefHeight="47.0" prefWidth="490.0" text="Age Distribution of Library Users">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="785.0" layoutY="402.0" text="Book Genres Borrowed">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
