@@ -119,5 +119,29 @@ public class UserDataBase {
         }
         return false;
     }
+
+
+    /**
+     * Lay so luong nguoi dung.
+     * Can sua phan nay
+     */
+    public int getTotalUsers() throws SQLException {
+        String query = "Select Count(*) from readeraccount;";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+                ResultSet result = preparedStatement.executeQuery();
+
+                result.next();
+                return result.getInt(1);
+            } catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
+    }
 }
 
