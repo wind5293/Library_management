@@ -189,6 +189,7 @@ public class BookDataBase {
 
     /**
      * Get Total Number of Book.
+     * Can kiem tra phan nay.
      */
     public int getTotalBooks() throws SQLException {
         String query = "SELECT SUM(bookNums) FROM bookTable";

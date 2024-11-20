@@ -15,7 +15,7 @@ public class BorrowedBookDataBase {
                 preparedStatement.setString(2, bookName);
 
                 //set return date = 7 days after the day the book was borrowed
-                LocalDate returnDate = LocalDate.now(). plusWeeks(1);
+                LocalDate returnDate = LocalDate.now().plusWeeks(1);
                 preparedStatement.setDate(3, Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
@@ -53,6 +53,28 @@ public class BorrowedBookDataBase {
         }
     }
 
+    /**
+     * Lay so luong sach da muon.
+     * Can kiem tra phan nay.
+     */
+    public int getIssuedBooks() {
+        String query = "Select Count(*) from borrowedBooks;";
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+                ResultSet result = preparedStatement.executeQuery();
+
+                result.next();
+                return result.getInt(1);
+            } catch (SQLException e) {
+                System.err.println(e.getMessage() + " " + e.getErrorCode());
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
+    }
 //    public void returnBook(String userName, String bookName) throws SQLException {
 //        String checkQuery = "SELECT returnDate FROM borrowedBooks WHERE userName = ? AND bookName = ?";
 //        String updateQuery = "UPDATE borrowedBooks SET returnDate = CURRENT_DATE WHERE userName = ? AND bookName = ?";

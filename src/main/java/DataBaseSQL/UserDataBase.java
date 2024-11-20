@@ -123,7 +123,7 @@ public class UserDataBase {
 
     /**
      * Lay so luong nguoi dung.
-     * Can sua phan nay
+     * Can kiem tra phan nay.
      */
     public int getTotalUsers() throws SQLException {
         String query = "Select Count(*) from readeraccount;";

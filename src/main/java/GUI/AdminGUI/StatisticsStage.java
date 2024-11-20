@@ -2,12 +2,20 @@ package GUI.AdminGUI;
 
 import java.sql.*;
 
+import DataBaseSQL.BookDataBase;
+import DataBaseSQL.BorrowedBookDataBase;
+import DataBaseSQL.UserDataBase;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
 public class StatisticsStage {
+    private final BookDataBase bookDataBase = new BookDataBase();
+    private final UserDataBase userDataBase = new UserDataBase();
+    private final BorrowedBookDataBase borrowedBookDataBase
+            = new BorrowedBookDataBase();
+
     @FXML
     private Label numReaders;
 
@@ -23,57 +31,13 @@ public class StatisticsStage {
     @FXML
     private PieChart bookGenrePieChart;
 
-    // Truy vấn số lượng người đọc
-    private int getTotalReaders() throws SQLException {
-        String query = "SELECT COUNT(*) AS total_readers FROM user";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            if (rs.next()) {
-                return rs.getInt("total_readers");
-            }
-        }
-        return 0; // Nếu không có dữ liệu
-    }
-
-    // Truy vấn số lượng sách
-    private int getTotalBooks() throws SQLException {
-        String query = "SELECT COUNT(*) AS total_books FROM books";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            if (rs.next()) {
-                return rs.getInt("total_books");
-            }
-        }
-        return 0;
-    }
-
-    // Truy vấn số lượng sách đã được mượn
-    private int getIssuedBooks() throws SQLException {
-        String query = "SELECT COUNT(*) AS issued_books FROM borrowed_books";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            if (rs.next()) {
-                return rs.getInt("issued_books");
-            }
-        }
-        return 0;
-    }
 
     // Tải dữ liệu số người đọc, sách, sách đã mượn
     private void loadStatistics() {
         try {
-            numReaders.setText(String.valueOf(getTotalReaders()));
-            numBooks.setText(String.valueOf(getTotalBooks()));
-            issuedBooks.setText(String.valueOf(getIssuedBooks()));
+            numReaders.setText(String.valueOf(userDataBase.getTotalUsers()));
+            numBooks.setText(String.valueOf(bookDataBase.getTotalBooks()));
+            issuedBooks.setText(String.valueOf(borrowedBookDataBase.getIssuedBooks()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
