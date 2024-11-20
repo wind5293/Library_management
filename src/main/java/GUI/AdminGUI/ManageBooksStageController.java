@@ -38,6 +38,8 @@ public class ManageBooksStageController implements Initializable {
     @FXML
     private TableColumn<Book, String> BookAuthorColumn;
     @FXML
+    private TableColumn<Book, String> BookTypeColumn;
+    @FXML
     private TableColumn<Book, Integer> BookNumsColumn;
 
     @FXML
@@ -59,7 +61,7 @@ public class ManageBooksStageController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String libraryViewQuery = "select bookId, bookName, bookAuthor, bookNums from booktable";
+        String libraryViewQuery = "select bookId, bookName, bookAuthor, bookType, bookNums from booktable";
 
         try {
             bookObservableList.clear(); // Xóa dữ liệu hiện tại
@@ -71,14 +73,16 @@ public class ManageBooksStageController implements Initializable {
                 Integer queryBookID = queryOutput.getInt("bookId");
                 String queryBookName = queryOutput.getString("bookName");
                 String queryBookAuthor = queryOutput.getString("bookAuthor");
+                String queryBookType = queryOutput.getString("bookType");
                 Integer queryBookNums = queryOutput.getInt("bookNums");
 
-                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryBookNums));
+                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryBookType, queryBookNums));
             }
 
             BookIDColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
             BookAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("bookAuthor"));
+            BookTypeColumn.setCellValueFactory(new PropertyValueFactory<>("bookType"));
             BookNumsColumn.setCellValueFactory(new PropertyValueFactory<>("bookNums"));
 
             BookTable.setItems(bookObservableList);
@@ -98,7 +102,8 @@ public class ManageBooksStageController implements Initializable {
                 }
                 String searchKeyword = newValue.toLowerCase();
                 return book.getBookName().toLowerCase().contains(searchKeyword) ||
-                        book.getBookAuthor().toLowerCase().contains(searchKeyword);
+                        book.getBookAuthor().toLowerCase().contains(searchKeyword) ||
+                        book.getBookType().toLowerCase().contains(searchKeyword);
             });
         });
 

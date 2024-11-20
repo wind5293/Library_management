@@ -11,9 +11,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
 public class StatisticsStage {
-    private final BookDataBase bookDataBase = new BookDataBase();
-    private final UserDataBase userDataBase = new UserDataBase();
-    private final BorrowedBookDataBase borrowedBookDataBase
+    BookDataBase bookDataBase = new BookDataBase();
+    UserDataBase userDataBase = new UserDataBase();
+    BorrowedBookDataBase borrowedBookDataBase
             = new BorrowedBookDataBase();
 
     @FXML
@@ -33,6 +33,10 @@ public class StatisticsStage {
 
 
     // Tải dữ liệu số người đọc, sách, sách đã mượn
+
+    /**
+     * Duc Minh Kiem tra
+     */
     private void loadStatistics() {
         try {
             numReaders.setText(String.valueOf(userDataBase.getTotalUsers()));
@@ -53,10 +57,10 @@ public class StatisticsStage {
                 "WHEN age BETWEEN 21 AND 30 THEN '21-30' " +
                 "WHEN age BETWEEN 31 AND 40 THEN '31-40' " +
                 "ELSE '40+' END AS age_group, COUNT(*) AS total_users " +
-                "FROM user GROUP BY age_group";
+                "FROM readeraccount GROUP BY age_group";
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
+                "root", "Soulofwind@1");
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -78,7 +82,7 @@ public class StatisticsStage {
         String query = "SELECT genre, COUNT(*) AS total FROM books GROUP BY genre";
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
+                "root", "Soulofwind@1");
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 

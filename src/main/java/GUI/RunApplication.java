@@ -17,7 +17,7 @@ public class RunApplication extends Application {
     @Override
     public void start (Stage stage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/RegisterStage.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/AdminGUI/StatisticsStage.fxml")));
             Scene scene = new Scene(root);
 
             stage.setScene(scene);

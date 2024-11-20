@@ -28,7 +28,7 @@ public class ManageUserStageController implements Initializable {
     @FXML
     private TableColumn<User, String> UsernameColumn;
     @FXML
-    private TableColumn<User, Integer> UserAge;
+    private TableColumn<User, Integer> UserAgeColumn;
     @FXML
     private TableColumn<User, String> UserEmailColumn;
     @FXML
@@ -45,7 +45,7 @@ public class ManageUserStageController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String userViewQuery = "select userId, username, password from readeraccount";
+        String userViewQuery = "select userId, username, age, email, address from readeraccount";
 
         try {
             userObservableList.clear(); // Xóa dữ liệu hiện tại
@@ -56,14 +56,18 @@ public class ManageUserStageController implements Initializable {
             while (queryOutput.next()) {
                 int queryUserID = queryOutput.getInt("userId");
                 String queryUsername = queryOutput.getString("username");
-                String queryPassword = queryOutput.getString("password");
+                int queryAge = Integer.parseInt(queryOutput.getString("age"));
+                String queryEmail = queryOutput.getString("email");
+                String queryAddress = queryOutput.getString("address");
 
-
-                userObservableList.add(new User(queryUserID, queryUsername, queryPassword));
+                userObservableList.add(new User(queryUserID, queryUsername, queryAge, queryEmail, queryAddress));
             }
 
             UserIDColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
             UsernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+            UserAgeColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+            UserEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+            UserAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 
             UserTable.setItems(userObservableList);
 

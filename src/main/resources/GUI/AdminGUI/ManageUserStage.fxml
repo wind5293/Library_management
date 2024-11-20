@@ -13,8 +13,9 @@
         <columns>
           <TableColumn fx:id="UserIDColumn" prefWidth="58.0" text="ID" />
           <TableColumn fx:id="UsernameColumn" prefWidth="279.0" text="Name" />
-            <TableColumn fx:id="UserEmailColumn" prefWidth="379.0" text="Email" />
-            <TableColumn fx:id="UserAddressColumn" prefWidth="219.0" text="Address" />
+            <TableColumn fx:id="UserAgeColumn" prefWidth="75.0" text="Age" />
+            <TableColumn fx:id="UserEmailColumn" prefWidth="295.0" text="Email" />
+            <TableColumn fx:id="UserAddressColumn" prefWidth="228.0" text="Address" />
         </columns>
       </TableView>
       <ImageView fitHeight="302.0" fitWidth="462.0" layoutX="518.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">

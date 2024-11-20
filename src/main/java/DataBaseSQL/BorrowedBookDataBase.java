@@ -64,6 +64,34 @@ public class BorrowedBookDataBase {
         }
     }
 
+
+    /**
+     * Get Bookb->>Duc Minh
+     */
+    public void getBookFromBorrowed(String userName) throws SQLException {
+        String query = "SELECT bookName FROM borrowedBooks WHERE userName = ?";
+
+        try (Connection con = databaseConnection.getDBConnection()) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                preparedStatement.setString(1, userName); // Set tên người dùng
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String bookName = resultSet.getString("bookName");
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Lỗi khi truy vấn sách từ danh sách mượn.");
+                e.printStackTrace();
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     /**
      * Lay so luong sach da muon.
      * Can kiem tra phan nay.
@@ -87,54 +115,61 @@ public class BorrowedBookDataBase {
             throw e;
         }
     }
-//    public void returnBook(String userName, String bookName) throws SQLException {
-//        String checkQuery = "SELECT returnDate FROM borrowedBooks WHERE userName = ? AND bookName = ?";
-//        String updateQuery = "UPDATE borrowedBooks SET returnDate = CURRENT_DATE WHERE userName = ? AND bookName = ?";
-//        String deleteQuery = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
-//
-//        try (Connection con = databaseConnection.getDBConnection()) {
-//            // Kiểm tra xem sách đã được mượn chưa và nếu đã đến hạn trả hay chưa
-//            try (PreparedStatement checkStatement = con.prepareStatement(checkQuery)) {
-//                checkStatement.setString(1, userName);
-//                checkStatement.setString(2, bookName);
-//
-//                ResultSet resultSet = checkStatement.executeQuery();
-//                if (resultSet.next()) {
-//                    Date returnDate = resultSet.getDate("returnDate");
-//
-//                    // Nếu sách đã đến hạn hoặc đã trả, tiến hành cập nhật và xóa
-//                    if (returnDate == null || returnDate.compareTo(new Date()) <= 0) {
-//                        // Cập nhật ngày trả sách nếu chưa trả
-//                        try (PreparedStatement updateStatement = con.prepareStatement(updateQuery)) {
-//                            updateStatement.setString(1, userName);
-//                            updateStatement.setString(2, bookName);
-//                            updateStatement.executeUpdate();
-//                            System.out.println("Sách đã được trả, ngày trả là: " + new Date());
-//                        }
-//
-//                        // Xóa sách khỏi borrowedBooks sau khi trả
-//                        try (PreparedStatement deleteStatement = con.prepareStatement(deleteQuery)) {
-//                            deleteStatement.setString(1, userName);
-//                            deleteStatement.setString(2, bookName);
-//                            deleteStatement.executeUpdate();
-//                            System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng " + userName);
-//                        }
-//                    } else {
-//                        System.out.println("Sách vẫn chưa đến hạn trả.");
-//                    }
-//                } else {
-//                    System.out.println("Không tìm thấy sách mượn của người dùng " + userName);
-//                }
-//            } catch (SQLException e) {
-//                System.err.println("Lỗi khi kiểm tra sách.");
-//                e.printStackTrace();
-//                throw e;
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("Lỗi khi kết nối cơ sở dữ liệu.");
-//            e.printStackTrace();
-//            throw e;
-//        }
-//    }
+
+    /**
+     *
+     * @param userName
+     * @param bookName
+     * @throws SQLException
+     */
+    public void returnBook(String userName, String bookName) throws SQLException {
+        String checkQuery = "SELECT returnDate FROM borrowedBooks WHERE userName = ? AND bookName = ?";
+        String updateQuery = "UPDATE borrowedBooks SET returnDate = CURRENT_DATE WHERE userName = ? AND bookName = ?";
+        String deleteQuery = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
+
+        try (Connection con = databaseConnection.getDBConnection()) {
+            // Kiểm tra xem sách đã được mượn chưa và nếu đã đến hạn trả hay chưa
+            try (PreparedStatement checkStatement = con.prepareStatement(checkQuery)) {
+                checkStatement.setString(1, userName);
+                checkStatement.setString(2, bookName);
+
+                ResultSet resultSet = checkStatement.executeQuery();
+                if (resultSet.next()) {
+                    Date returnDate = resultSet.getDate("returnDate");
+
+                    // Nếu sách đã đến hạn hoặc đã trả, tiến hành cập nhật và xóa
+                    if (returnDate == null || returnDate.compareTo(new Date()) <= 0) {
+                        // Cập nhật ngày trả sách nếu chưa trả
+                        try (PreparedStatement updateStatement = con.prepareStatement(updateQuery)) {
+                            updateStatement.setString(1, userName);
+                            updateStatement.setString(2, bookName);
+                            updateStatement.executeUpdate();
+                            System.out.println("Sách đã được trả, ngày trả là: " + new Date());
+                        }
+
+                        // Xóa sách khỏi borrowedBooks sau khi trả
+                        try (PreparedStatement deleteStatement = con.prepareStatement(deleteQuery)) {
+                            deleteStatement.setString(1, userName);
+                            deleteStatement.setString(2, bookName);
+                            deleteStatement.executeUpdate();
+                            System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng " + userName);
+                        }
+                    } else {
+                        System.out.println("Sách vẫn chưa đến hạn trả.");
+                    }
+                } else {
+                    System.out.println("Không tìm thấy sách mượn của người dùng " + userName);
+                }
+            } catch (SQLException e) {
+                System.err.println("Lỗi khi kiểm tra sách.");
+                e.printStackTrace();
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi kết nối cơ sở dữ liệu.");
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }
 
