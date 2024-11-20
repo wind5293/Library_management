@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,15 +11,86 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane layoutX="127.0" layoutY="143.0" prefHeight="572.0" prefWidth="1154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <AnchorPane prefHeight="658.0" prefWidth="206.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="658.0" prefWidth="206.0" style="-fx-background-color: #7FFFD4;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="UserLibraryButton" layoutX="66.0" layoutY="39.0" mnemonicParsing="false" onAction="#UserLibraryButtonClicked" text="Your books" />
-                  <Button layoutX="61.0" layoutY="89.0" mnemonicParsing="false" text="Your account" />
-                  <Button layoutX="77.0" layoutY="145.0" mnemonicParsing="false" text="Button" />
+                  <ButtonBar layoutX="4.0" layoutY="217.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
+                    <buttons>
+                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@sourceImage/tải%20xuống.jpg" />
+                           </image>
+                        </ImageView>
+                      <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Log Out">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                    </buttons>
+                  </ButtonBar>
+                  <ButtonBar layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="194.0">
+                     <buttons>
+                        <ButtonBar prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
+                           <buttons>
+                              <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@sourceImage/4705.png_860.png" />
+                                 </image>
+                              </ImageView>
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Notification">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </buttons>
+                        </ButtonBar>
+                     </buttons>
+                  </ButtonBar>
+                  <ButtonBar layoutX="4.0" layoutY="67.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
+                     <buttons>
+                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@sourceImage/books.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Your Book">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </buttons>
+                  </ButtonBar>
+                  <ButtonBar layoutX="4.0" layoutY="117.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
+                     <buttons>
+                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@sourceImage/2417791.png" />
+                           </image>
+                        </ImageView>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Borrow Book">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </buttons>
+                  </ButtonBar>
+                  <ButtonBar layoutX="8.0" layoutY="166.0" prefHeight="40.0" prefWidth="206.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
+                     <buttons>
+                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@sourceImage/274-2743840_book-returns-policy-returns-icon.png" />
+                           </image>
+                        </ImageView>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" style="-fx-background-color: #DC143C;" text="Return Book">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </buttons>
+                  </ButtonBar>
                </children>
             </AnchorPane>
          </left>
