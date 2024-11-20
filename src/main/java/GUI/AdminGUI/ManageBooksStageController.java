@@ -2,6 +2,7 @@ package GUI.AdminGUI;
 
 import DataBaseSQL.DatabaseConnection;
 import DocumentManager.Book;
+import User.ManagerAccount;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -23,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -123,16 +122,30 @@ public class ManageBooksStageController implements Initializable {
         popupStage.setOnHidden(e -> refresh());
     }
 
-    public void RemoveButtonClicked(ActionEvent event) throws IOException {
+    public void RemoveButtonClicked(ActionEvent event) throws IOException, SQLException {
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/AdminGUI/DeleteBookStage.fxml")));
-        Scene scene = new Scene(root);
-        Stage popupStage = new Stage();
-        popupStage.setScene(scene);
-        popupStage.show();
+        Book selectedBook = BookTable.getSelectionModel().getSelectedItem();
 
-        // Làm mới bảng sau khi thêm sách mới
-        popupStage.setOnHidden(e -> refresh());
+        // System.out.println(selectedBook.getBookID() + " " + selectedBook.getBookName());
+
+        // Thông báo admin database sẽ xoá dữ iệu của sách
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Bạn thật sự muốn xoá dữ liệu của cuốn sách này?");
+
+        ButtonType button_type_yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        ButtonType button_type_no = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+        alert.getButtonTypes().setAll(button_type_yes, button_type_no);
+
+        Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.get() == button_type_yes) {
+            ManagerAccount managerAccount = new ManagerAccount();
+            managerAccount.deleteBook(selectedBook.getBookName(), selectedBook.getBookAuthor());
+        }
+
+        refresh();
     }
     public void UpdateButtonClicked(ActionEvent event) {
         System.out.println("Add Button Clicked");

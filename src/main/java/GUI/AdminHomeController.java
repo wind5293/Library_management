@@ -1,6 +1,6 @@
-package GUI.AdminGUI;
+package GUI;
 
-import GUI.BaseGUI.FxmlLoader;
+import GUI.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +34,7 @@ public class AdminHomeController implements Initializable {
         System.out.println("You clicked manageBooksButton");
 
         FxmlLoader loader = new FxmlLoader();
-        Pane pane  = loader.getPage("ManageBooksStage");
+        Pane pane  = loader.getPage("AdminGUI/ManageBooksStage");
         mainPane.setCenter(pane);
 
     }
@@ -43,7 +43,7 @@ public class AdminHomeController implements Initializable {
         System.out.println("You clicked manageUserButton");
 
         FxmlLoader loader = new FxmlLoader();
-        Pane pane  = loader.getPage("ManageUserStage");
+        Pane pane  = loader.getPage("AdminGUI/ManageUserStage");
         mainPane.setCenter(pane);
     }
 

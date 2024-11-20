@@ -28,6 +28,8 @@ public class ManageUserStageController implements Initializable {
     @FXML
     private TableColumn<User, String> UsernameColumn;
     @FXML
+    private TableColumn<User, Integer> UserAge;
+    @FXML
     private TableColumn<User, String> UserEmailColumn;
     @FXML
     private TableColumn<User, String> UserAddressColumn;
