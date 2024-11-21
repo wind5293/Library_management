@@ -195,9 +195,7 @@ public class BookDataBase {
         String query = "SELECT SUM(bookNums) FROM bookTable";
         try (Connection con = databaseConnection.getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-
                 ResultSet result = preparedStatement.executeQuery();
-
                 result.next();
                 return result.getInt(1);
             } catch (SQLException e) {
