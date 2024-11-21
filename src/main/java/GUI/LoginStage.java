@@ -44,6 +44,7 @@ public class LoginStage {
             // Đăng nhập thành công
             showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công",
                     "Chào mừng " + userName + "!");
+
         }
         else {
             // Đăng nhập thất bại

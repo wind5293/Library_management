@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserHomeController">
    <children>
-      <BorderPane layoutX="127.0" layoutY="143.0" prefHeight="572.0" prefWidth="1154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="mainPane" layoutX="127.0" layoutY="143.0" prefHeight="572.0" prefWidth="1154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <AnchorPane prefHeight="658.0" prefWidth="206.0" style="-fx-background-color: #7FFFD4;" BorderPane.alignment="CENTER">
                <children>
@@ -24,29 +24,25 @@
                               <Image url="@sourceImage/tải%20xuống.jpg" />
                            </image>
                         </ImageView>
-                      <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Log Out">
+                      <Button fx:id="LogoutButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#LogoutButtonClicked" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Log Out">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
                     </buttons>
                   </ButtonBar>
-                  <ButtonBar layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="194.0">
+                  <ButtonBar layoutX="3.0" layoutY="14.0" prefHeight="42.0" prefWidth="198.0" style="-fx-background-color: #FFFFFF;">
                      <buttons>
-                        <ButtonBar prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
-                           <buttons>
-                              <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@sourceImage/4705.png_860.png" />
-                                 </image>
-                              </ImageView>
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Notification">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Button>
-                           </buttons>
-                        </ButtonBar>
+                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@sourceImage/4705.png_860.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="NotificationButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#NotificationButtonClicked" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Notification">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                      </buttons>
                   </ButtonBar>
                   <ButtonBar layoutX="4.0" layoutY="67.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
@@ -56,35 +52,7 @@
                               <Image url="@sourceImage/books.jpg" />
                            </image>
                         </ImageView>
-                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Your Book">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                     </buttons>
-                  </ButtonBar>
-                  <ButtonBar layoutX="4.0" layoutY="117.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
-                     <buttons>
-                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@sourceImage/2417791.png" />
-                           </image>
-                        </ImageView>
-                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Borrow Book">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                     </buttons>
-                  </ButtonBar>
-                  <ButtonBar layoutX="8.0" layoutY="166.0" prefHeight="40.0" prefWidth="206.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
-                     <buttons>
-                        <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@sourceImage/274-2743840_book-returns-policy-returns-icon.png" />
-                           </image>
-                        </ImageView>
-                        <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" style="-fx-background-color: #DC143C;" text="Return Book">
+                        <Button fx:id="YourBookButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#YourBookButtonClicked" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Your Book">
                            <font>
                               <Font size="18.0" />
                            </font>

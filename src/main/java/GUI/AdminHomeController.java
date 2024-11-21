@@ -25,7 +25,7 @@ public class AdminHomeController implements Initializable {
         System.out.println("You clicked homePageButton");
 
         FxmlLoader loader = new FxmlLoader();
-        Pane pane  = loader.getPage("StartStage");
+        Pane pane  = loader.getPage("AdminGUI/StatisticsStage");
         mainPane.setCenter(pane);
     }
 
@@ -50,6 +50,8 @@ public class AdminHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resource) {
-
+        FxmlLoader loader = new FxmlLoader();
+        Pane pane  = loader.getPage("AdminGUI/StatisticsStage");
+        mainPane.setCenter(pane);
     }
 }
