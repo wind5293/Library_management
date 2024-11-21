@@ -1,12 +1,11 @@
-package GUI;
+package GUI.UserGUI;
 
 import DocumentManager.Book;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class BookDetails {
+public class UserBookDetails {
     @FXML
     private Label bookName;
     @FXML
@@ -15,6 +14,10 @@ public class BookDetails {
     private Label bookType;
     @FXML
     private Label bookNums;
+    @FXML
+    private Button deleteBtn;
+    @FXML
+    private Button borrowBtn;
 
     public void setBook(Book book) {
         bookName.setText(book.getBookName());
@@ -22,7 +25,4 @@ public class BookDetails {
         bookType.setText(book.getBookType());
         bookNums.setText(String.valueOf(book.getBookNums()));
     }
-
-
-
 }
