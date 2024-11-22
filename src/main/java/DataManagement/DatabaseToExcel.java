@@ -31,7 +31,7 @@ public abstract class DatabaseToExcel {
     public abstract String getQuery();
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
-    public void exportToExcel(Label statusLabel) {
+    public void exportToExcel() {
         try (Connection con = databaseConnection.getDBConnection()) {
             String query = getQuery();
             Statement statement = con.createStatement();
@@ -54,22 +54,16 @@ public abstract class DatabaseToExcel {
                     workbook.close();
                     String successMessage = "File saved successfully: " + file.getAbsolutePath();
                     System.out.println(successMessage);
-                    if (statusLabel != null) {
-                        statusLabel.setText(successMessage);
-                    }
+
                 }
             } else {
                 String cancelMessage = "Save operation was cancelled.";
                 System.out.println(cancelMessage);
-                if (statusLabel != null) {
-                    statusLabel.setText(cancelMessage);
-                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if (statusLabel != null) {
-                statusLabel.setText("Error: " + e.getMessage());
-            }
+
         }
     }
 
