@@ -1,11 +1,13 @@
 package GUI.AdminGUI;
 
 import DataBaseSQL.BookDataBase;
+import DataManagement.ExcelToDatabase;
 import User.ManagerAccount;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -20,16 +22,24 @@ public class AddBook {
     private TextField bookAuthorTextField;
     @FXML
     private TextField bookNumTextField;
+    @FXML
+    private TextField ExcelLinkTextField;
 
     @FXML
     public void AddButtonSubmit(ActionEvent event) throws SQLException {
 
-        String bookName = bookNameTextField.getText();
-        String bookAuthor = bookAuthorTextField.getText();
-        int bookNum = Integer.parseInt(bookNumTextField.getText());
+        if (ExcelLinkTextField.getText() != null) {
+            ExcelToDatabase importer = new ExcelToDatabase(ExcelLinkTextField.getText());
+            importer.importData();
+        } else {
+            String bookName = bookNameTextField.getText();
+            String bookAuthor = bookAuthorTextField.getText();
+            int bookNum = Integer.parseInt(bookNumTextField.getText());
 
-        ManagerAccount managerAccount = new ManagerAccount();
-        managerAccount.addBook(bookName, bookAuthor, bookNum);
+            ManagerAccount managerAccount = new ManagerAccount();
+            managerAccount.addBook(bookName, bookAuthor, bookNum);
+        }
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Thêm sách thành công");
@@ -43,5 +53,6 @@ public class AddBook {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
+
 
 }

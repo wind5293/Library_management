@@ -44,7 +44,7 @@ public class BorrowedBook {
         return borrowedDate;
     }
 
-    public void setBorrowedDate(String borrowedDate) {
+    public void setBorrowedDate() {
         this.borrowedDate = borrowedDate;
     }
 }

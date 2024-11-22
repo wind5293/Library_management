@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserGUI.UserBorrowBookDetails">
    <children>
-      <Label layoutX="287.0" layoutY="32.0" text="Thông tin">
+      <Label layoutX="201.0" layoutY="14.0" text="Thông tin mượn sách">
          <font>
             <Font name="SansSerif Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="314.0" layoutY="84.0" text="Tên sách">
+      <Label layoutX="314.0" layoutY="132.0" text="Tên sách">
          <font>
             <Font name="SansSerif Regular" size="20.0" />
          </font>
@@ -24,42 +24,33 @@
             <Image url="@../sourceImage/books.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="BookNameLabel" layoutX="439.0" layoutY="81.0" text="abdc">
+      <Label fx:id="BookNameLabel" layoutX="466.0" layoutY="129.0" text="abdc">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="314.0" layoutY="128.0" text="Tác giả">
+      <Label layoutX="314.0" layoutY="175.0" text="Ngày mượn">
          <font>
             <Font name="SansSerif Regular" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="BookAuthorLabel" layoutX="439.0" layoutY="124.0" text="Abcd">
+      <Label fx:id="BorrowedDateLabel" layoutX="464.0" layoutY="172.0" text="Abcd">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="314.0" layoutY="175.0" text="Thể loại">
+      <Label layoutX="314.0" layoutY="222.0" text="Ngày trả">
          <font>
             <Font name="SansSerif Regular" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="BookTypeLabel" layoutX="439.0" layoutY="172.0" text="Abcd">
+      <Label fx:id="ReturnDateLabel" layoutX="464.0" layoutY="219.0" text="Abcd">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="314.0" layoutY="222.0" text="Số lượng">
-         <font>
-            <Font name="SansSerif Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="BookNumLabel" layoutX="439.0" layoutY="219.0" text="Abcd">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Button layoutX="464.0" layoutY="391.0" mnemonicParsing="false" onAction="#BorrowButtonClicked" text="Mượn sách này!" />
-      <Button layoutX="593.0" layoutY="391.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách " />
+      <Button layoutX="589.0" layoutY="390.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách" />
+      <Button layoutX="314.0" layoutY="281.0" mnemonicParsing="false" text="Xuất link excel" />
+      <Label layoutX="438.0" layoutY="285.0" text="Label" />
    </children>
 </AnchorPane>

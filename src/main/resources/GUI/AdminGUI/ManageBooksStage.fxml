@@ -8,19 +8,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="1036.0" scaleShape="false" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminGUI.ManageBooksStageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="1036.0" scaleShape="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminGUI.ManageBooksStageController">
    <children>
       <TextField fx:id="SearchBookTextField" layoutX="27.0" layoutY="29.0" prefHeight="25.0" prefWidth="389.0" promptText="Tìm kiếm sách..." />
-      <TableView fx:id="BookTable" layoutX="28.0" layoutY="158.0" prefHeight="462.0" prefWidth="866.0">
+      <TableView fx:id="BookTable" layoutX="28.0" layoutY="158.0" prefHeight="462.0" prefWidth="974.0">
         <columns>
           <TableColumn fx:id="BookIDColumn" prefWidth="57.0" text="ID" />
-          <TableColumn fx:id="BookNameColumn" minWidth="0.0" prefWidth="304.0" text="Tên sách" />
-            <TableColumn fx:id="BookAuthorColumn" prefWidth="174.0" text="Tác giả" />
-            <TableColumn fx:id="BookTypeColumn" prefWidth="177.0" text="Thể loại" />
-            <TableColumn fx:id="BookNumColumn" prefWidth="153.0" text="Số sách" />
+          <TableColumn fx:id="BookNameColumn" minWidth="0.0" prefWidth="340.0" text="Tên sách" />
+            <TableColumn fx:id="BookAuthorColumn" prefWidth="240.0" text="Tác giả" />
+            <TableColumn fx:id="BookTypeColumn" prefWidth="179.0" text="Thể loại" />
+            <TableColumn fx:id="BookNumColumn" prefWidth="157.0" text="Số sách" />
         </columns>
       </TableView>
-      <Button fx:id="addBookButton" layoutX="331.0" layoutY="85.0" mnemonicParsing="false" onAction="#AddButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Thêm">
+      <Button fx:id="addBookButton" layoutX="591.0" layoutY="85.0" mnemonicParsing="false" onAction="#AddButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Thêm">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -29,7 +29,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="removeBookButton" layoutX="472.0" layoutY="85.0" mnemonicParsing="false" onAction="#RemoveButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Xoá">
+      <Button fx:id="removeBookButton" layoutX="736.0" layoutY="85.0" mnemonicParsing="false" onAction="#RemoveButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Xoá">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,10 +38,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="updateBooksButton" layoutX="610.0" layoutY="85.0" mnemonicParsing="false" onAction="#UpdateButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Sửa">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
+      <Button fx:id="DetailsButton" layoutX="882.0" layoutY="85.0" mnemonicParsing="false" onAction="#DetailsButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Thông tin" />
    </children>
 </AnchorPane>

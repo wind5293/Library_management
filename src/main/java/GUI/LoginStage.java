@@ -45,6 +45,9 @@ public class LoginStage {
             showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công",
                     "Chào mừng " + userName + "!");
 
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+
         }
         else {
             // Đăng nhập thất bại
