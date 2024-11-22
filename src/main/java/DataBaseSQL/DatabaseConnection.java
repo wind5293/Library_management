@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
     public Connection databaseLink;
-    protected static final String jdbcUrl = "jdbc:mysql://localhost:3306/librarymanagement";
+    protected final String jdbcUrl = "jdbc:mysql://localhost:3306/librarymanagement";
 
     public Connection getDBConnection() {
         try {

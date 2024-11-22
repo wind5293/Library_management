@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -31,22 +32,28 @@ public abstract class DatabaseToExcel {
     public abstract String getQuery();
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
+
     public void exportToExcel() {
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = databaseConnection.getDBConnection()) { 
+
+            // Thực hiện query lấy dữ liệu
             String query = getQuery();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
-            Workbook workbook = new XSSFWorkbook();
+            // Tạo sheet và viết dữ liệu
             Sheet sheet = workbook.createSheet("Data");
+            writeDataToSheet(sheet, resultSet);
 
-            writeDataToSheet(sheet, resultSet); // Lớp con sẽ triển khai
+            // Tạo file tạm trong thư mục hệ thống
+            File tempFile = File.createTempFile("temp_excel", ".xlsx");
+            tempFile.deleteOnExit(); // Xóa file khi chương trình kết thúc
 
-            // Chọn vị trí lưu file
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save Excel File");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
-            File file = fileChooser.showSaveDialog(null);
+            // Ghi dữ liệu ra file tạm
+            try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
+                workbook.write(outputStream);
+            }
+
 
             if (file != null) {
                 try (FileOutputStream outputStream = new FileOutputStream(file)) {
@@ -61,10 +68,10 @@ public abstract class DatabaseToExcel {
                 System.out.println(cancelMessage);
 
             }
+
         } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
-
 }
