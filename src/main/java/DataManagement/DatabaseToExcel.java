@@ -1,10 +1,14 @@
 package DataManagement;
 
 import DataBaseSQL.DatabaseConnection;
+import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,8 +31,8 @@ public abstract class DatabaseToExcel {
     public abstract String getQuery();
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
-    public void exportToExcel() {
-        try (Connection con = databaseConnection.getDBConnection()){
+    public void exportToExcel(Label statusLabel) {
+        try (Connection con = databaseConnection.getDBConnection()) {
             String query = getQuery();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -36,11 +40,36 @@ public abstract class DatabaseToExcel {
             Workbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet("Data");
 
-            writeDataToSheet(sheet, resultSet);
+            writeDataToSheet(sheet, resultSet); // Lớp con sẽ triển khai
 
+            // Chọn vị trí lưu file
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Excel File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+            File file = fileChooser.showSaveDialog(null);
 
+            if (file != null) {
+                try (FileOutputStream outputStream = new FileOutputStream(file)) {
+                    workbook.write(outputStream);
+                    workbook.close();
+                    String successMessage = "File saved successfully: " + file.getAbsolutePath();
+                    System.out.println(successMessage);
+                    if (statusLabel != null) {
+                        statusLabel.setText(successMessage);
+                    }
+                }
+            } else {
+                String cancelMessage = "Save operation was cancelled.";
+                System.out.println(cancelMessage);
+                if (statusLabel != null) {
+                    statusLabel.setText(cancelMessage);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            if (statusLabel != null) {
+                statusLabel.setText("Error: " + e.getMessage());
+            }
         }
     }
 
