@@ -45,9 +45,7 @@ public class LoginStage {
             showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công",
                     "Chào mừng " + userName + "!");
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-
+            switchScene(event, "UserHome.fxml");
         }
         else {
             // Đăng nhập thất bại

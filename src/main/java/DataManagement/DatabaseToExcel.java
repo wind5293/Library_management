@@ -32,9 +32,9 @@ public abstract class DatabaseToExcel {
     public abstract String getQuery();
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
-    public void exportExcel(Label label) {
-        try (Connection con = databaseConnection.getDBConnection();
-             Workbook workbook = new XSSFWorkbook()) { // Sửa cú pháp đúng
+
+    public void exportToExcel() {
+        try (Connection con = databaseConnection.getDBConnection()) { 
 
             // Thực hiện query lấy dữ liệu
             String query = getQuery();
@@ -54,15 +54,24 @@ public abstract class DatabaseToExcel {
                 workbook.write(outputStream);
             }
 
-            // Mở file tạm bằng ứng dụng mặc định
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(tempFile);
+
+            if (file != null) {
+                try (FileOutputStream outputStream = new FileOutputStream(file)) {
+                    workbook.write(outputStream);
+                    workbook.close();
+                    String successMessage = "File saved successfully: " + file.getAbsolutePath();
+                    System.out.println(successMessage);
+
+                }
             } else {
-                System.out.println("Desktop is not supported. Cannot open the file automatically.");
+                String cancelMessage = "Save operation was cancelled.";
+                System.out.println(cancelMessage);
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 }

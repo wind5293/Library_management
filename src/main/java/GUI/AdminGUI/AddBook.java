@@ -31,15 +31,13 @@ public class AddBook {
         if (ExcelLinkTextField.getText() != null) {
             ExcelToDatabase importer = new ExcelToDatabase(ExcelLinkTextField.getText());
             importer.importData();
-        } else {
-            String bookName = bookNameTextField.getText();
-            String bookAuthor = bookAuthorTextField.getText();
-            int bookNum = Integer.parseInt(bookNumTextField.getText());
-
-            ManagerAccount managerAccount = new ManagerAccount();
-            managerAccount.addBook(bookName, bookAuthor, bookNum);
         }
+        String bookName = bookNameTextField.getText();
+        String bookAuthor = bookAuthorTextField.getText();
+        int bookNum = Integer.parseInt(bookNumTextField.getText());
 
+        ManagerAccount managerAccount = new ManagerAccount();
+        managerAccount.addBook(bookName, bookAuthor, bookNum);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Thêm sách thành công");
