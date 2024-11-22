@@ -92,32 +92,6 @@ public class BookDataBase {
         }
     }
 
-//    /**
-//     * Method to search for Document in DataBase using book's name or author's name.
-//     * @param arg name of author or book
-//     * @return ResultSet include bookId, book name, author and release year
-//     * @throws SQLException catch exception if not found
-//     */
-//    @Override
-//    public ResultSet searchFromDataBase(String arg) throws SQLException {
-//        String query = "SELECT BookID, BookName, BookAuthor, ReleaseYear" +
-//                " From library where BookName = ? or BookAuthor = ?;";
-//        try(Connection con = databaseConnection.getDBConnection()) {
-//            try(PreparedStatement preparedStatement = con.prepareStatement(query)) {
-//                preparedStatement.setString(1, arg);
-//                preparedStatement.setString(2, arg);
-//
-//                return preparedStatement.executeQuery();
-//            } catch (SQLException e) {
-//                System.err.println(e.getMessage() + " " + e.getErrorCode());
-//                throw e;
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("DataBase is not connected");
-//            throw e;
-//        }
-//    }
-
     /**
      * Method to get Info of all the books.
      *
@@ -166,26 +140,6 @@ public class BookDataBase {
             throw e;
         }
     }
-
-    //@Override
-//    public int numberOfRows() throws SQLException {
-//        String query = "Select Count(*) from library;";
-//        try (Connection con = databaseConnection.getDBConnection()) {
-//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-//
-//                ResultSet result = preparedStatement.executeQuery();
-//
-//                result.next();
-//                return result.getInt(1);
-//            } catch (SQLException e) {
-//                System.err.println(e.getMessage() + " " + e.getErrorCode());
-//                throw e;
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("DataBase is not connected");
-//            throw e;
-//        }
-//    }
 
     /**
      * Get Total Number of Book.

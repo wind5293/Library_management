@@ -11,6 +11,6 @@ public class ExportData {
 
     public void onExportBooksClicked() {
         DatabaseToExcel exportBooks = new ExportBooks();
-        exportBooks.exportToExcel(statusLabel);
+        exportBooks.exportExcel(statusLabel);
     }
 }

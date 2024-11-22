@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -31,46 +32,37 @@ public abstract class DatabaseToExcel {
     public abstract String getQuery();
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
-    public void exportToExcel(Label statusLabel) {
-        try (Connection con = databaseConnection.getDBConnection()) {
+    public void exportExcel(Label label) {
+        try (Connection con = databaseConnection.getDBConnection();
+             Workbook workbook = new XSSFWorkbook()) { // Sửa cú pháp đúng
+
+            // Thực hiện query lấy dữ liệu
             String query = getQuery();
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
-            Workbook workbook = new XSSFWorkbook();
+            // Tạo sheet và viết dữ liệu
             Sheet sheet = workbook.createSheet("Data");
+            writeDataToSheet(sheet, resultSet);
 
-            writeDataToSheet(sheet, resultSet); // Lớp con sẽ triển khai
+            // Tạo file tạm trong thư mục hệ thống
+            File tempFile = File.createTempFile("temp_excel", ".xlsx");
+            tempFile.deleteOnExit(); // Xóa file khi chương trình kết thúc
 
-            // Chọn vị trí lưu file
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save Excel File");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
-            File file = fileChooser.showSaveDialog(null);
-
-            if (file != null) {
-                try (FileOutputStream outputStream = new FileOutputStream(file)) {
-                    workbook.write(outputStream);
-                    workbook.close();
-                    String successMessage = "File saved successfully: " + file.getAbsolutePath();
-                    System.out.println(successMessage);
-                    if (statusLabel != null) {
-                        statusLabel.setText(successMessage);
-                    }
-                }
-            } else {
-                String cancelMessage = "Save operation was cancelled.";
-                System.out.println(cancelMessage);
-                if (statusLabel != null) {
-                    statusLabel.setText(cancelMessage);
-                }
+            // Ghi dữ liệu ra file tạm
+            try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
+                workbook.write(outputStream);
             }
+
+            // Mở file tạm bằng ứng dụng mặc định
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(tempFile);
+            } else {
+                System.out.println("Desktop is not supported. Cannot open the file automatically.");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            if (statusLabel != null) {
-                statusLabel.setText("Error: " + e.getMessage());
-            }
         }
     }
-
 }
