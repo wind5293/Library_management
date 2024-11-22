@@ -2,16 +2,15 @@ package DocumentManager;
 
 public class BorrowedBook {
     private int id;
-
-
     private String bookName;
     private String borrowedDate;
     private String returnDate;
 
-    public BorrowedBook(String bookName, String returnDate, String borrwedDate) {
+    public BorrowedBook(int id, String bookName, String returnDate, String borrowedDate) {
+        this.id = id;
         this.bookName = bookName;
         this.returnDate = returnDate;
-        this.borrowedDate = borrwedDate;
+        this.borrowedDate = borrowedDate;
     }
 
     /**

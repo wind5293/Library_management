@@ -40,7 +40,7 @@ public class ManageBooksStageController implements Initializable {
     @FXML
     private TableColumn<Book, String> BookTypeColumn;
     @FXML
-    private TableColumn<Book, Integer> BookNumsColumn;
+    private TableColumn<Book, Integer> BookNumColumn;
 
     @FXML
     private Button addBookButton;
@@ -74,16 +74,16 @@ public class ManageBooksStageController implements Initializable {
                 String queryBookName = queryOutput.getString("bookName");
                 String queryBookAuthor = queryOutput.getString("bookAuthor");
                 String queryBookType = queryOutput.getString("bookType");
-                Integer queryBookNums = queryOutput.getInt("bookNums");
+                Integer queryBookNum = queryOutput.getInt("bookNums");
 
-                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryBookType, queryBookNums));
+                bookObservableList.add(new Book(queryBookID, queryBookName, queryBookAuthor, queryBookType, queryBookNum));
             }
 
             BookIDColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
             BookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
             BookAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("bookAuthor"));
             BookTypeColumn.setCellValueFactory(new PropertyValueFactory<>("bookType"));
-            BookNumsColumn.setCellValueFactory(new PropertyValueFactory<>("bookNums"));
+            BookNumColumn.setCellValueFactory(new PropertyValueFactory<>("bookNums"));
 
             BookTable.setItems(bookObservableList);
 

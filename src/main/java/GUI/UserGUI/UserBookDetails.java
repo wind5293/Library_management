@@ -1,28 +1,24 @@
 package GUI.UserGUI;
 
-import DocumentManager.Book;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-public class UserBookDetails {
-    @FXML
-    private Label bookName;
-    @FXML
-    private Label bookAuthor;
-    @FXML
-    private Label bookType;
-    @FXML
-    private Label bookNums;
-    @FXML
-    private Button deleteBtn;
-    @FXML
-    private Button borrowBtn;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public void setBook(Book book) {
-        bookName.setText(book.getBookName());
-        bookAuthor.setText(book.getBookAuthor());
-        bookType.setText(book.getBookType());
-        bookNums.setText(String.valueOf(book.getBookNums()));
+public class UserBookDetails implements Initializable {
+    @FXML
+    private Label BookNameLabel;
+    @FXML
+    private Label BookAuthorLabel;
+    @FXML
+    private Label BookTypeLabel;
+    @FXML
+    private Label BookNumLabel;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

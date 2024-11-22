@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="658.0" prefWidth="1074.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserGUI.UserBorrowedBook">
     <children>
         <Label layoutX="88.0" layoutY="97.0" text="THƯ VIỆN CỦA BẠN" textFill="#1dcf8b">
@@ -23,7 +22,7 @@
                 <TableColumn fx:id="ReturnDateColumn" prefWidth="155.0" text="Ngày trả" />
             </columns>
         </TableView>
-        <Button layoutX="839.0" layoutY="557.0" mnemonicParsing="false" onAction="#DetailsButtonClicked" text="Thông tin" />
-        <Button layoutX="927.0" layoutY="557.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách" />
+        <Button fx:id="DetailsButton" layoutX="839.0" layoutY="557.0" mnemonicParsing="false" onAction="#DetailsButtonClicked" text="Thông tin" />
+        <Button fx:id="ReturnButton" layoutX="927.0" layoutY="557.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách" />
     </children>
 </AnchorPane>

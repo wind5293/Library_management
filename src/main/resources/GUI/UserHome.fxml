@@ -17,7 +17,7 @@
          <left>
             <AnchorPane prefHeight="658.0" prefWidth="206.0" style="-fx-background-color: #7FFFD4;" BorderPane.alignment="CENTER">
                <children>
-                  <ButtonBar layoutX="4.0" layoutY="217.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
+                  <ButtonBar layoutX="4.0" layoutY="119.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #F0F8FF;" styleClass="blender">
                     <buttons>
                         <ImageView accessibleRole="DECREMENT_BUTTON" fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
