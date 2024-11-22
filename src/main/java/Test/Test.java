@@ -4,6 +4,7 @@ import DataBaseSQL.BookDataBase;
 import DataBaseSQL.BorrowedBookDataBase;
 import DataBaseSQL.DatabaseConnection;
 import DataBaseSQL.UserDataBase;
+import DataManagement.ExcelToDatabase;
 import DocumentManager.Author;
 import DocumentManager.Book;
 import Function.BookManagement;
@@ -18,15 +19,8 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws SQLException {
-        BookDataBase bookDataBase = new BookDataBase();
-        UserDataBase userDataBase = new UserDataBase();
-        BorrowedBookDataBase borrowedBookDataBase
-                = new BorrowedBookDataBase();
-
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getDBConnection();
-        System.out.println(String.valueOf(userDataBase.getTotalUsers()));
-        System.out.println(String.valueOf(bookDataBase.getTotalBooks()));
-        System.out.println(String.valueOf(borrowedBookDataBase.getIssuedBooks()));
+        String excelPath = "D:\\IdeaProjects\\LibMan\\BookExcelData.xlsx";
+        ExcelToDatabase importer = new ExcelToDatabase(excelPath);
+        importer.importData();
     }
 }

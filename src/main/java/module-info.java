@@ -4,6 +4,8 @@ module org.example.library_management {
     requires java.desktop;
     requires java.sql;
     requires mysql.connector.j;
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
 
     opens GUI to javafx.fxml;
     exports GUI;
