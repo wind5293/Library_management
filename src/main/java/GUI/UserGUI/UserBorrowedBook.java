@@ -1,15 +1,14 @@
 package GUI.UserGUI;
 
 import DataBaseSQL.DatabaseConnection;
-import DocumentManager.Book;
 import DocumentManager.BorrowedBook;
+import User.SaveUserName;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,10 +43,18 @@ public class UserBorrowedBook implements Initializable {
     @FXML
     private Button ReturnButton;
 
+    private String getUsername;
+
+    public void setLoggedInUsername(String username) {
+        this.getUsername = username;
+
+    }
+
     ObservableList<BorrowedBook> borrowedObservableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resource) {
+        getUsername = SaveUserName.getLoggedInUsername();
         initializeTable();
     }
 
@@ -55,13 +62,13 @@ public class UserBorrowedBook implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String borrowedBookViewQuery = "select bookName, borrowDate, returnDate from borrowedbooks where userName = ?";
+        String borrowedBookViewQuery = "select borrowId, bookName, borrowDate, returnDate from borrowedbooks where userName = ?";
 
         try {
             borrowedObservableList.clear(); // Xóa dữ liệu hiện tại
 
             PreparedStatement statement = connectDB.prepareStatement(borrowedBookViewQuery);
-            statement.setString(1, "exampleUserName");
+            statement.setString(1, "23020700");
             ResultSet queryOutput = statement.executeQuery();
 
             while (queryOutput.next()) {
@@ -86,6 +93,13 @@ public class UserBorrowedBook implements Initializable {
     }
 
     public void DetailsButtonClicked(ActionEvent event) throws IOException {
+
+        BorrowedBook selectedBook = BorrowedBookTable.getSelectionModel().getSelectedItem();
+        if (selectedBook == null) {
+            System.out.println("No book selected!");
+            return;
+        }
+
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
@@ -93,10 +107,11 @@ public class UserBorrowedBook implements Initializable {
         Parent detailsSceneRoot = loader.load();
         Scene scene = new Scene(detailsSceneRoot);
 
-        UserBookDetails userBookDetails = loader.getController();
-        // Book selectedBook =
+        UserBorrowBookDetails userBookDetails = loader.getController();
+        userBookDetails.setBookDetails(selectedBook);
 
         stage.setScene(scene);
+        stage.show();
     }
 
     public void ReturnButtonClicked(ActionEvent event) {

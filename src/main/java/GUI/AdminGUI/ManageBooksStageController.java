@@ -47,7 +47,7 @@ public class ManageBooksStageController implements Initializable {
     @FXML
     private Button removeBookButton;
     @FXML
-    private Button updateBooksButton;
+    private Button DetailsButton;
 
     ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
 
@@ -152,7 +152,25 @@ public class ManageBooksStageController implements Initializable {
 
         refresh();
     }
-    public void UpdateButtonClicked(ActionEvent event) {
-        System.out.println("Add Button Clicked");
+
+    public void DetailsButtonClicked(ActionEvent event) throws IOException {
+        Book selectedBook = BookTable.getSelectionModel().getSelectedItem();
+        if (selectedBook == null) {
+            System.out.println("Không có sách được chọn");
+        }
+
+        Stage stage = new Stage();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AdminBookDetails.fxml"));
+        Parent detailsSceneRoot = loader.load();
+        Scene scene = new Scene(detailsSceneRoot);
+
+        AdminBookDetails adminBookDetails = loader.getController();
+        adminBookDetails.setBookDetails(selectedBook);
+
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
