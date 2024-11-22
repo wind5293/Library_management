@@ -39,5 +39,6 @@
          </graphic>
       </Button>
       <Button fx:id="DetailsButton" layoutX="882.0" layoutY="85.0" mnemonicParsing="false" onAction="#DetailsButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Thông tin" />
+      <Button fx:id="ExcelExportButton" layoutX="28.0" layoutY="85.0" mnemonicParsing="false" onAction="#ExcelExportClicked" prefHeight="40.0" prefWidth="120.0" text="Xuất file Excel" />
    </children>
 </AnchorPane>

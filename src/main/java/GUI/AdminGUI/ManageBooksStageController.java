@@ -1,6 +1,8 @@
 package GUI.AdminGUI;
 
 import DataBaseSQL.DatabaseConnection;
+import DataManagement.DatabaseToExcel;
+import DataManagement.ExportBooks;
 import DocumentManager.Book;
 import User.ManagerAccount;
 import javafx.collections.FXCollections;
@@ -48,6 +50,8 @@ public class ManageBooksStageController implements Initializable {
     private Button removeBookButton;
     @FXML
     private Button DetailsButton;
+    @FXML
+    private Button ExcelExportButton;
 
     ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
 
@@ -172,5 +176,10 @@ public class ManageBooksStageController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void ExcelExportClicked(ActionEvent event) {
+        DatabaseToExcel exportBooks = new ExportBooks();
+        exportBooks.exportToExcel();
     }
 }
