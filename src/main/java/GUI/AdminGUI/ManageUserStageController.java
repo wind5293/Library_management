@@ -1,9 +1,12 @@
 package GUI.AdminGUI;
 
 import DataBaseSQL.DatabaseConnection;
+import DataManagement.DatabaseToExcel;
+import DataManagement.ExportReaderAccounts;
 import User.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -75,4 +78,10 @@ public class ManageUserStageController implements Initializable {
             Logger.getLogger(ManageUserStageController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public void ExportExcelButtonClicked(ActionEvent event) {
+        DatabaseToExcel exportReaderAccounts = new ExportReaderAccounts();
+        exportReaderAccounts.exportToExcel();
+    }
+
 }
