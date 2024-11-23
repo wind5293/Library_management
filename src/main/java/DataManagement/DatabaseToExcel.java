@@ -34,7 +34,8 @@ public abstract class DatabaseToExcel {
 
 
     public void exportToExcel() {
-        try (Connection con = databaseConnection.getDBConnection()) { 
+        try (Connection con = databaseConnection.getDBConnection();
+             Workbook workbook = new XSSFWorkbook()) {
 
             // Thực hiện query lấy dữ liệu
             String query = getQuery();
@@ -54,19 +55,10 @@ public abstract class DatabaseToExcel {
                 workbook.write(outputStream);
             }
 
-
-            if (file != null) {
-                try (FileOutputStream outputStream = new FileOutputStream(file)) {
-                    workbook.write(outputStream);
-                    workbook.close();
-                    String successMessage = "File saved successfully: " + file.getAbsolutePath();
-                    System.out.println(successMessage);
-
-                }
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(tempFile);
             } else {
-                String cancelMessage = "Save operation was cancelled.";
-                System.out.println(cancelMessage);
-
+                System.out.println("Desktop is not supported. Cannot open the file automatically.");
             }
 
         } catch (Exception e) {

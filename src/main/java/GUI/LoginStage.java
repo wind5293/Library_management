@@ -43,9 +43,9 @@ public class LoginStage {
         // Kiểm tra người dùng có tồn tại trong database hay không với mật khẩu
         else if (userDataBase.isUserExists(userName, userPassWord)) {
             // Đăng nhập thành công
+            SaveUserName.setLoggedInUsername(userName);
             showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công",
                     "Chào mừng " + userName + "!");
-            SaveUserName.setLoggedInUsername(userName);
 
             switchScene(event, "UserHome.fxml");
         }
