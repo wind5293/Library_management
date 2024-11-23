@@ -29,7 +29,9 @@ public class AddBook {
     public void AddButtonSubmit(ActionEvent event) throws SQLException {
 
         if (ExcelLinkTextField.getText() != null) {
-            ExcelToDatabase importer = new ExcelToDatabase(ExcelLinkTextField.getText());
+            //sua lai link excel
+            String fixExcelLink = ExcelLinkTextField.getText().replace("\\","\\\\");
+            ExcelToDatabase importer = new ExcelToDatabase(fixExcelLink);
             importer.importData();
         }
         String bookName = bookNameTextField.getText();
