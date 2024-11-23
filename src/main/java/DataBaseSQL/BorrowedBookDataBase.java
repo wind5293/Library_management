@@ -15,7 +15,7 @@ public class BorrowedBookDataBase {
                 preparedStatement.setString(2, bookName);
 
                 //set return date = 7 days after the day the book was borrowed
-                LocalDate returnDate = LocalDate.now().plusWeeks(1);
+                returnDate = LocalDate.now().plusWeeks(1);
                 preparedStatement.setDate(3, Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
