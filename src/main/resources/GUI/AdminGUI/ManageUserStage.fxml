@@ -12,10 +12,10 @@
       <TableView fx:id="UserTable" layoutX="46.0" layoutY="376.0" prefHeight="231.0" prefWidth="940.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
           <TableColumn fx:id="UserIDColumn" prefWidth="58.0" text="ID" />
-          <TableColumn fx:id="UsernameColumn" prefWidth="279.0" text="Name" />
-            <TableColumn fx:id="UserAgeColumn" prefWidth="75.0" text="Age" />
+          <TableColumn fx:id="UsernameColumn" prefWidth="279.0" text="Tên người dùng" />
+            <TableColumn fx:id="UserAgeColumn" prefWidth="75.0" text="Tuổi" />
             <TableColumn fx:id="UserEmailColumn" prefWidth="295.0" text="Email" />
-            <TableColumn fx:id="UserAddressColumn" prefWidth="228.0" text="Address" />
+            <TableColumn fx:id="UserAddressColumn" prefWidth="228.0" text="Địa chỉ" />
         </columns>
       </TableView>
       <ImageView fitHeight="302.0" fitWidth="462.0" layoutX="518.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
@@ -23,8 +23,6 @@
             <Image url="@../sourceImage/OIP.png" />
          </image>
       </ImageView>
-      <Button layoutX="50.0" layoutY="302.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="143.0" layoutY="302.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="234.0" layoutY="302.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="50.0" layoutY="302.0" mnemonicParsing="false" onAction="#ExportExcelButtonClicked" text="Xuất dữ liệu sang excel" />
    </children>
 </AnchorPane>

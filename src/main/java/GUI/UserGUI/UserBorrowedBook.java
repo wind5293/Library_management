@@ -1,6 +1,8 @@
 package GUI.UserGUI;
 
 import DataBaseSQL.DatabaseConnection;
+import DataManagement.DatabaseToExcel;
+import DataManagement.ExportBorrowedBooks;
 import DocumentManager.BorrowedBook;
 import User.SaveUserName;
 import javafx.collections.FXCollections;
@@ -68,7 +70,7 @@ public class UserBorrowedBook implements Initializable {
             borrowedObservableList.clear(); // Xóa dữ liệu hiện tại
 
             PreparedStatement statement = connectDB.prepareStatement(borrowedBookViewQuery);
-            statement.setString(1, "23020700");
+            statement.setString(1, getUsername);
             ResultSet queryOutput = statement.executeQuery();
 
             while (queryOutput.next()) {
@@ -116,6 +118,11 @@ public class UserBorrowedBook implements Initializable {
 
     public void ReturnButtonClicked(ActionEvent event) {
         System.out.println("Return clicked");
+    }
+
+    public void ExportExcelButtonClicked(ActionEvent event) {
+        DatabaseToExcel exportBorrowBook = new ExportBorrowedBooks(getUsername);
+        exportBorrowBook.exportToExcel();
     }
 
 }

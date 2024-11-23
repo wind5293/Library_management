@@ -1,4 +1,4 @@
-package GUI.AdminGUI;
+package GUI.UserGUI;
 
 import User.ManagerAccount;
 import javafx.event.ActionEvent;

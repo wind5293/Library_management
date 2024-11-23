@@ -14,10 +14,10 @@ public class RunApplication extends Application {
         launch(args);
     }
 
-    @Override
+    @Override 
     public void start (Stage stage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/AdminGUI/ManageBooksStage.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/LoginStage.fxml")));
             Scene scene = new Scene(root);
 
             stage.setScene(scene);

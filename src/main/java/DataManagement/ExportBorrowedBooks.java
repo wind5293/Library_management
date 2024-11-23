@@ -15,7 +15,7 @@ public class ExportBorrowedBooks extends DatabaseToExcel {
 
     @Override
     public String getQuery() {
-        return "SELECT * FROM borrowedbook WHERE username = '" + username + "'";
+        return "SELECT * FROM borrowedbooks WHERE username = '" + username + "'";
     }
 
     @Override

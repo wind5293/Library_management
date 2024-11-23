@@ -1,6 +1,7 @@
 package GUI;
 
 import DataBaseSQL.UserDataBase;
+import User.SaveUserName;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,7 @@ public class LoginStage {
             // Đăng nhập thành công
             showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công",
                     "Chào mừng " + userName + "!");
+            SaveUserName.setLoggedInUsername(userName);
 
             switchScene(event, "UserHome.fxml");
         }

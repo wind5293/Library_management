@@ -24,5 +24,6 @@
         </TableView>
         <Button fx:id="DetailsButton" layoutX="839.0" layoutY="557.0" mnemonicParsing="false" onAction="#DetailsButtonClicked" text="Thông tin" />
         <Button fx:id="ReturnButton" layoutX="927.0" layoutY="557.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách" />
+      <Button layoutX="88.0" layoutY="201.0" mnemonicParsing="false" onAction="#ExportExcelButtonClicked" text="Xuất dữ liệu..." />
     </children>
 </AnchorPane>

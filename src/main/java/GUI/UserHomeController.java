@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.UserGUI.UserBorrowedBook;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +73,12 @@ public class UserHomeController implements Initializable {
     }
 
     @FXML
-    public void YourBookButtonClicked(ActionEvent event) {}
+    public void YourBookButtonClicked(ActionEvent event) {
+        FxmlLoader loader = new FxmlLoader();
+        Pane pane = loader.getPage("UserGUI/UserBorrowedBook");
+
+        mainPane.setCenter(pane);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
