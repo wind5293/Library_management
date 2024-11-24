@@ -50,7 +50,5 @@
          </font>
       </Label>
       <Button layoutX="589.0" layoutY="390.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách" />
-      <Button layoutX="314.0" layoutY="281.0" mnemonicParsing="false" text="Xuất link excel" />
-      <Label layoutX="438.0" layoutY="285.0" text="Label" />
    </children>
 </AnchorPane>

@@ -1,6 +1,8 @@
 package GUI;
 
 import GUI.UserGUI.UserBorrowedBook;
+import GUI.UserGUI.UserSearchStageController;
+import User.SaveUserName;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -26,17 +25,16 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private Button LogoutButton;
-
     @FXML
     private Button NotificationButton;
-
     @FXML
     private Button YourBookButton;
-
     @FXML
     private BorderPane mainPane;
-
-
+    @FXML
+    private Label welcomeText;
+    @FXML
+    private TextField SearchTextField;
 
     @FXML
     public void LogoutButtonClicked(ActionEvent event) throws IOException {
@@ -82,9 +80,26 @@ public class UserHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        String getUserName = SaveUserName.getLoggedInUsername();
+        welcomeText.setText("Welcome back, " + getUserName);
+
         FxmlLoader loader = new FxmlLoader();
         Pane pane = loader.getPage("AdminGUI/StatisticsStage");
 
         mainPane.setCenter(pane);
     }
+
+    public void SearchButtonClicked(ActionEvent event) throws IOException {
+        String searchText = SearchTextField.getText();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/UserGUI/UserSearchStage.fxml"));
+        Pane pane = loader.load();
+
+        UserSearchStageController userSearchStageController = loader.getController();
+        userSearchStageController.SearchTextSet(searchText);
+
+        mainPane.setCenter(pane);
+    }
+
 }
