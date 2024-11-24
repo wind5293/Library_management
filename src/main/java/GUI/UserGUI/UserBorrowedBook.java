@@ -105,7 +105,7 @@ public class UserBorrowedBook implements Initializable {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("UserBookDetails.fxml"));
+        loader.setLocation(getClass().getResource("UserBorrowBookDetails.fxml"));
         Parent detailsSceneRoot = loader.load();
         Scene scene = new Scene(detailsSceneRoot);
 

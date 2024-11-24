@@ -71,17 +71,18 @@
                         <Font name="SansSerif Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="240.0" layoutY="15.0" prefHeight="18.0" prefWidth="195.0" promptText="Search....." style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-padding: 5 10; -fx-font-size: 14px;" />
+                  <TextField fx:id="SearchTextField" layoutX="240.0" layoutY="15.0" prefHeight="18.0" prefWidth="195.0" promptText="Tìm sách..." style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-padding: 5 10; -fx-font-size: 14px;" />
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1198.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@sourceImage/employee.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="1028.0" layoutY="22.0" text="Welcome back, Phong">
+                  <Label fx:id="welcomeText" layoutX="1012.0" layoutY="23.0" text="Welcome back">
                      <font>
                         <Font name="SansSerif Bold" size="14.0" />
                      </font>
                   </Label>
+                  <Button layoutX="459.0" layoutY="20.0" mnemonicParsing="false" onAction="#SearchButtonClicked" text="Tìm kiếm" />
                </children>
             </AnchorPane>
          </top>

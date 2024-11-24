@@ -21,6 +21,14 @@ public class Book {
         this.bookName = bookName;
     }
 
+
+    public Book(String bookName, String bookAuthor, String bookType, int bookNums) {
+        this.bookName = bookName;
+        this.bookAuthor = bookAuthor;
+        this.bookType = bookType;
+        this.bookNums = bookNums;
+    }
+
     /**
      * Getter n Setter.
      */
