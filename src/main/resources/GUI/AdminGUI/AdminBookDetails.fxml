@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminGUI.AdminBookDetails">
    <children>
-      <Label layoutX="201.0" layoutY="14.0" text="Thông tin mượn sách">
+      <Label layoutX="250.0" layoutY="14.0" text="Thông tin sách">
          <font>
             <Font name="SansSerif Bold" size="30.0" />
          </font>
@@ -60,5 +60,6 @@
          </font>
       </Label>
       <Button layoutX="586.0" layoutY="397.0" mnemonicParsing="false" onAction="#OkButtonClicked" text="Xác nhận" />
+      <Button layoutX="479.0" layoutY="397.0" mnemonicParsing="false" onAction="#EditBook" text="Sửa thông tin " />
    </children>
 </AnchorPane>
