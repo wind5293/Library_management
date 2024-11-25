@@ -13,8 +13,9 @@ public class UserDataBase {
      * @param password password
      * @throws SQLException catch exception
      */
-    public void addNewUser(String username, String password) throws SQLException {
-        String insert = "INSERT INTO readerAccount(username, password) VALUES (?, ?);";
+    public void addNewUser(String username, String password, String email,
+                           String address, int age) throws SQLException {
+        String insert = "INSERT INTO readerAccount(username, password, email, address, age) VALUES (?, ?, ?, ?);";
         String check = "Select username from readerAccount where username = ?";
         String check2 = "Select password from readerAccount where password = ?";
 
@@ -32,6 +33,9 @@ public class UserDataBase {
             try (PreparedStatement insertUser = con.prepareStatement(insert)) {
                 insertUser.setString(1, username);
                 insertUser.setString(2, password);
+                insertUser.setString(3, email);
+                insertUser.setString(4, address);
+                insertUser.setString(5, String.valueOf(age));
 
                 insertUser.executeUpdate();
             } catch (SQLException e) {
