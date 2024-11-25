@@ -19,20 +19,22 @@ public abstract class DatabaseToExcel {
 
     /**
      * Export to Excel.
-     * Su dung cho nguoi dung xuat danh sach sa muon
-     * -> Query -> "select * from borrowedbook where username = ?"
-     * SU dung cho Admin
-     * + Xuat danh sach nguoi dung
-     * -> Query -> "select * from readeraccount"
-     * + Xuat danh sach borrowedBook
-     * -> Query -> "select * from borrowedBook"
-     * + Xuat danh sach sach
-     * -> Query -> "select * from bookTable"
+     * Su dung cho nguoi dung xuat danh sach da muon.
+     * -> Query -> "select * from borrowedbook where username = ?".
+     * SU dung cho Admin.
+     * + Xuat danh sach nguoi dung.
+     * -> Query -> "select * from readeraccount".
+     * + Xuat danh sach borrowedBook.
+     * -> Query -> "select * from borrowedBook".
+     * + Xuat danh sach sach.
+     * -> Query -> "select * from bookTable".
      */
     public abstract String getQuery();
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
-
+    /**
+     * Method export to excel.
+     */
     public void exportToExcel() {
 
         try (Connection con = databaseConnection.getDBConnection();

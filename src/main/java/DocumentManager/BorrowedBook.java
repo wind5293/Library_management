@@ -6,6 +6,9 @@ public class BorrowedBook {
     private String borrowedDate;
     private String returnDate;
 
+    /**
+     * Contructor 0.
+     */
     public BorrowedBook(int id, String bookName, String returnDate, String borrowedDate) {
         this.id = id;
         this.bookName = bookName;

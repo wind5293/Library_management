@@ -11,7 +11,7 @@ public class Book {
     }
 
     /**
-     * Constructor.
+     * Constructor 1.
      */
     public Book(Integer bookID, String bookName, String bookAuthor, String bookType, int bookNums) {
         this.bookID = bookID;
@@ -21,7 +21,9 @@ public class Book {
         this.bookName = bookName;
     }
 
-
+    /**
+     * Contructor 2.
+     */
     public Book(String bookName, String bookAuthor, String bookType, int bookNums) {
         this.bookName = bookName;
         this.bookAuthor = bookAuthor;
@@ -80,11 +82,11 @@ public class Book {
         this.bookType = bookType;
     }
 
-    /**
-     * Get info.
-     */
-    public String getBookInfo() {
-        return this.bookID + " " + this.bookName + " " + bookAuthor.toString();
-    }
+//    /**
+//     * Get info.
+//     */
+//    public String getBookInfo() {
+//        return this.bookID + " " + this.bookName + " " + bookAuthor.toString();
+//    }
 
 }

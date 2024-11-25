@@ -24,13 +24,13 @@ public class ReaderAccount extends User {
     }
 
     // Xóa sách khỏi cơ sở dữ liệu borrowedBooks.
-    public void removeBookFromBorrowed(String bookName, String bookAuthor) throws SQLException {
-        try {
-            borrowedBookDataBase.removeBookFromBorrowed(bookName, bookAuthor);
-            System.out.println("Sách '" + bookName + "' đã được xóa khỏi phieu muon.");
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi xóa sách: " + e.getMessage());
-            throw e;
-        }
-    }
+//    public void removeBookFromBorrowed(String bookName, String bookAuthor) throws SQLException {
+//        try {
+//            borrowedBookDataBase.removeBookFromBorrowed(bookName, bookAuthor);
+//            System.out.println("Sách '" + bookName + "' đã được xóa khỏi phieu muon.");
+//        } catch (SQLException e) {
+//            System.err.println("Lỗi khi xóa sách: " + e.getMessage());
+//            throw e;
+//        }
+//    }
 }

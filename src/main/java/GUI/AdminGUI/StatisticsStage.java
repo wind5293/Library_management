@@ -16,10 +16,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
 public class StatisticsStage implements Initializable {
-    BookDataBase bookDataBase = new BookDataBase();
-    UserDataBase userDataBase = new UserDataBase();
-    BorrowedBookDataBase borrowedBookDataBase
-            = new BorrowedBookDataBase();
 
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getDBConnection();
@@ -44,11 +40,12 @@ public class StatisticsStage implements Initializable {
         loadAllData();
     }
 
-    // Tải dữ liệu số người đọc, sách, sách đã mượn
-
     /**
-     * Duc Minh Kiem tra
+     * Load data for number of book, user, issued book.
      */
+    BookDataBase bookDataBase = new BookDataBase();
+    UserDataBase userDataBase = new UserDataBase();
+    BorrowedBookDataBase borrowedBookDataBase = new BorrowedBookDataBase();
     private void loadStatistics() {
         try {
             numReaders.setText(String.valueOf(userDataBase.getTotalUsers()));
@@ -60,7 +57,10 @@ public class StatisticsStage implements Initializable {
         }
     }
 
-    // Tải dữ liệu biểu đồ độ tuổi
+    /**
+     * Set Age Bar Chart.
+     * Get age data from user data.
+     */
     private void loadAgeBarChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Age Groups");
@@ -93,7 +93,9 @@ public class StatisticsStage implements Initializable {
         ageBarChart.getData().add(series);
     }
 
-    // Tải dữ liệu biểu đồ thể loại sách
+    /**
+     * Load data of book type for Pie Chart.
+     */
     private void loadBookGenrePieChart() {
         String query = "SELECT bookType, COUNT(*) AS total FROM booktable GROUP BY bookType;";
 
@@ -113,7 +115,9 @@ public class StatisticsStage implements Initializable {
         }
     }
 
-    // Gọi phương thức này để tải tất cả dữ liệu vào khi ứng dụng bắt đầu
+    /**
+     * Load all method that call data.
+     */
     public void loadAllData() {
         loadStatistics();
         loadAgeBarChart();

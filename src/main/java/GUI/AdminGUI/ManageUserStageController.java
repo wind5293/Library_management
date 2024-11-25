@@ -44,6 +44,9 @@ public class ManageUserStageController implements Initializable {
         initializeTable();
     }
 
+    /**
+     * Initialize Table all the use //userid//username//userage//useremail.
+     */
     public void initializeTable() {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
@@ -79,6 +82,9 @@ public class ManageUserStageController implements Initializable {
         }
     }
 
+    /**
+     * Catch button event and call method.
+     */
     public void ExportExcelButtonClicked(ActionEvent event) {
         DatabaseToExcel exportReaderAccounts = new ExportReaderAccounts();
         exportReaderAccounts.exportToExcel();

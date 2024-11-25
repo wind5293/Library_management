@@ -7,6 +7,9 @@ public class DatabaseConnection {
     public Connection databaseLink;
     protected final String jdbcUrl = "jdbc:mysql://localhost:3306/librarymanagement";
 
+    /**
+     * Connect to database MySQL.
+     */
     public Connection getDBConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

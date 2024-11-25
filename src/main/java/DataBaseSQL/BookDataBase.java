@@ -14,14 +14,13 @@ public class BookDataBase {
      * @param bookNums   quantity of book
      * @throws SQLException catch exception
      */
-    //@Override
     public void addToDataBase(String bookName, String bookAuthor, int bookNums) throws SQLException {
-        //Query to add new rows
+        //Query to add new rows.
         String insert = "insert into bookTable(bookName, bookAuthor, bookNums) VALUES (?, ?, ?);";
-        //Query to check for existing book in Database
+        //Query to check for existing book in Database.
         String check = "Select bookName, bookAuthor, bookNums from bookTable where " +
                 "bookName = ? AND bookAuthor = ?;";
-        //Query to add book to existed book in Database
+        //Query to add book to existed book in Database.
         String update = "UPDATE bookTable SET bookNums = bookNums + ? WHERE " +
                 "bookName = ? AND bookAuthor = ?;";
 
@@ -72,7 +71,6 @@ public class BookDataBase {
      * @param bookAuthor author's name
      * @throws SQLException catch error if query not executed
      */
-    //@Override
     public void deleteFromDataBase(String bookName, String bookAuthor) throws SQLException {
         String arg = "Delete from bookTable where bookName = ? AND bookAuthor = ?;";
         try (Connection con = databaseConnection.getDBConnection()) {
@@ -92,26 +90,26 @@ public class BookDataBase {
         }
     }
 
-    /**
-     * Method to get Info of all the books.
-     *
-     * @return ResultSet of all Documents.
-     * @throws SQLException handle exception
-     */
-    public ResultSet getAllDocument() throws SQLException {
-        String query = "select * from bookTable;";
-        try (Connection con = databaseConnection.getDBConnection()) {
-            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-                return preparedStatement.executeQuery();
-            } catch (SQLException e) {
-                System.err.println(e.getMessage() + " " + e.getErrorCode());
-                throw e;
-            }
-        } catch (SQLException e) {
-            System.err.println("DataBase is not connected");
-            throw e;
-        }
-    }
+//    /**
+//     * Method to get Info of all the books.
+//     *
+//     * @return ResultSet of all Documents.
+//     * @throws SQLException handle exception
+//     */
+//    public ResultSet getAllDocument() throws SQLException {
+//        String query = "select * from bookTable;";
+//        try (Connection con = databaseConnection.getDBConnection()) {
+//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+//                return preparedStatement.executeQuery();
+//            } catch (SQLException e) {
+//                System.err.println(e.getMessage() + " " + e.getErrorCode());
+//                throw e;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("DataBase is not connected");
+//            throw e;
+//        }
+//    }
 
     /**
      * Method to update Document in DataBase.
@@ -143,7 +141,9 @@ public class BookDataBase {
 
     /**
      * Get Total Number of Book.
-     * Can kiem tra phan nay.
+     *
+     * @return
+     * @throws SQLException
      */
     public int getTotalBooks() throws SQLException {
         String query = "SELECT SUM(bookNums) FROM bookTable";
@@ -162,28 +162,4 @@ public class BookDataBase {
         }
     }
 
-
-    public int totalOfBooks() throws SQLException {
-        String query = "Select SUM(bookNums) AS totalOfBooks from bookTable";
-        try (Connection con = databaseConnection.getDBConnection()) {
-            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-
-                ResultSet result = preparedStatement.executeQuery();
-
-                if (result.next()) {
-                    return result.getInt("totalOfBooks");
-                } else {
-                    return 0;
-                }
-
-            } catch (SQLException e) {
-                System.err.println("Error creating statement for total books");
-                throw e;
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Cannot connect to database");
-            throw e;
-        }
-    }
 }

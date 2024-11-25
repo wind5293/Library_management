@@ -4,12 +4,6 @@ import java.sql.*;
 
 public class UserDataBase {
 
-    /**
-     * Xoa user
-     * Truy cap thong tin:
-     * Ten User
-     * Phieu muon (borrowedBooks data0
-     */
     private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     /**
@@ -77,8 +71,7 @@ public class UserDataBase {
     }
 
     /**
-     * method to update password.
-     *
+     * Method to update password.
      * @param username    username
      * @param oldPassword old password for confirmation
      * @param newPassword new password to update

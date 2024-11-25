@@ -16,11 +16,16 @@ public class ExcelToDatabase {
     private final DatabaseConnection databaseConnection = new DatabaseConnection();
     private final String excelFilePath;
 
-    // Constructor nhận đường dẫn tệp Excel
+    /**
+     * Get excel file path.
+     */
     public ExcelToDatabase(String excelFilePath) {
         this.excelFilePath = excelFilePath;
     }
 
+    /**
+     * Import data from excel sheet.
+     */
     public void importData() {
         try (Connection con = databaseConnection.getDBConnection();
              FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
@@ -36,7 +41,7 @@ public class ExcelToDatabase {
                  PreparedStatement updateStatement = con.prepareStatement(updateQuery)) {
 
                 for (Row row : sheet) {
-                    if (row.getRowNum() == 0) continue; // Bỏ qua dòng tiêu đề
+                    if (row.getRowNum() == 0) continue;
 
                     String bookName = row.getCell(0).getStringCellValue();
                     String bookAuthor = row.getCell(1).getStringCellValue();

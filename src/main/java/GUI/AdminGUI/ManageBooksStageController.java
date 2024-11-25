@@ -135,9 +135,8 @@ public class ManageBooksStageController implements Initializable {
 
         Book selectedBook = BookTable.getSelectionModel().getSelectedItem();
 
-        // System.out.println(selectedBook.getBookID() + " " + selectedBook.getBookName());
-
         // Thông báo admin database sẽ xoá dữ iệu của sách
+        // Alert delete book
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm");
         alert.setHeaderText("Bạn thật sự muốn xoá dữ liệu của cuốn sách này?");

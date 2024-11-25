@@ -6,6 +6,13 @@ import java.time.LocalDate;
 public class BorrowedBookDataBase {
     private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    /**
+     * Method borrowBook get the book in bookTable.
+     *
+     * @param userName
+     * @param bookName
+     * @throws SQLException
+     */
     public void borrowBook(String userName, String bookName) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
                 "VALUES (?, ?, CURRENT_DATE, ?);";
@@ -35,6 +42,7 @@ public class BorrowedBookDataBase {
                 if (e.getSQLState().equals("45000")) {
 
                     //Catch SQL Trigger that limit 5 books borrowed per users
+                    //Alert
                     System.out.println("Maximum borrowed books reached. Please " +
                             "return previous book before borrow");
                     System.out.println(e.getMessage());
@@ -46,31 +54,33 @@ public class BorrowedBookDataBase {
         }
     }
 
-    public void removeBookFromBorrowed(String userName, String bookName) throws SQLException {
-        String query = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
-
-        try (Connection con = databaseConnection.getDBConnection()) {
-            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-                preparedStatement.setString(1, userName); // Set tên người dùng
-                preparedStatement.setString(2, bookName); // Set tên sách
-
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng " + userName);
-                } else {
-                    System.out.println("Không tìm thấy sách '" + bookName + "' trong danh sách mượn của người dùng " + userName);
-                }
-            } catch (SQLException e) {
-                System.err.println("Lỗi khi xóa sách khỏi danh sách mượn.");
-                e.printStackTrace();
-                throw e;
-            }
-        } catch (SQLException e) {
-            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
-            e.printStackTrace();
-            throw e;
-        }
-    }
+//    public void removeBookFromBorrowed(String userName, String bookName) throws SQLException {
+//        String query = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
+//
+//        try (Connection con = databaseConnection.getDBConnection()) {
+//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+//                preparedStatement.setString(1, userName); // Set tên người dùng
+//                preparedStatement.setString(2, bookName); // Set tên sách
+//
+//                int rowsAffected = preparedStatement.executeUpdate();
+//                if (rowsAffected > 0) {
+//                    System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng "
+//                            + userName);
+//                } else {
+//                    System.out.println("Không tìm thấy sách '" + bookName + "' trong danh sách mượn của người dùng "
+//                            + userName);
+//                }
+//            } catch (SQLException e) {
+//                System.err.println("Lỗi khi xóa sách khỏi danh sách mượn.");
+//                e.printStackTrace();
+//                throw e;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
+//            e.printStackTrace();
+//            throw e;
+//        }
+//    }
 
 
     /**
