@@ -109,7 +109,12 @@ public class UserSearchStageController implements Initializable {
     }
 
     public void BorrowBookButtonClicked(ActionEvent event) {
-        System.out.println("BorrowBookButtonClicked");
+        Book selectedBook = searchBookTableView.getSelectionModel().getSelectedItem();
+        if (selectedBook == null) {
+            System.out.println("Không có sách được chọn");
+        }
+
+
     }
 
     public void DetailsButtonClicked(ActionEvent event) {

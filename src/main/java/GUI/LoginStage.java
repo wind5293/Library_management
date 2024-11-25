@@ -30,6 +30,8 @@ public class LoginStage {
     private Button button_signup_log;
     @FXML
     private Label informationText;
+    @FXML
+    private Label forgotPasswordLabel;
 
     public void Login(ActionEvent event) throws SQLException, IOException {
         String userName = tf_username.getText();
@@ -98,5 +100,9 @@ public class LoginStage {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newSceneName)));
         Scene newScene = new Scene(root);
         currentStage.setScene(newScene);
+    }
+
+    public void ForgotPassword() {
+        System.out.println("ForgotPassword");
     }
 }
