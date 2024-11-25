@@ -189,7 +189,6 @@ public class BorrowedBookDataBase {
                             } else {
                                 System.out.println("No record found to return");
                             }
-
                         }
                     } else {
                         System.out.println("Sách vẫn chưa đến hạn trả.");

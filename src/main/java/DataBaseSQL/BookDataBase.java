@@ -1,5 +1,7 @@
 package DataBaseSQL;
 
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 
 public class BookDataBase {
@@ -90,26 +92,6 @@ public class BookDataBase {
         }
     }
 
-//    /**
-//     * Method to get Info of all the books.
-//     *
-//     * @return ResultSet of all Documents.
-//     * @throws SQLException handle exception
-//     */
-//    public ResultSet getAllDocument() throws SQLException {
-//        String query = "select * from bookTable;";
-//        try (Connection con = databaseConnection.getDBConnection()) {
-//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-//                return preparedStatement.executeQuery();
-//            } catch (SQLException e) {
-//                System.err.println(e.getMessage() + " " + e.getErrorCode());
-//                throw e;
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("DataBase is not connected");
-//            throw e;
-//        }
-//    }
 
     /**
      * Method to update Document in DataBase.
@@ -162,4 +144,30 @@ public class BookDataBase {
         }
     }
 
+    /**
+     * Fix book infor in database
+     */
+    public void fixBookInfo(String bookName, String bookAuthor, String bookType,
+                             int bookNums, int currentBookId) throws Exception {
+        String query = "UPDATE books SET bookName = ?, bookAuthor = ?, bookType = ?, bookNums = ? WHERE bookId = ?";
+
+        try (Connection con = databaseConnection.getDBConnection();
+             PreparedStatement statement = con.prepareStatement(query)) {
+
+            statement.setString(1, bookName);
+            statement.setString(2, bookAuthor);
+            statement.setString(3, bookType);
+            statement.setInt(4, bookNums);
+            statement.setInt(5, currentBookId);
+
+            // Thực thi câu lệnh
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated <= 0) {
+                throw new SQLException("Failed to update book");
+            }
+        } catch (SQLException e) {
+            System.err.println("DataBase is not connected");
+            throw e;
+        }
+    }
 }

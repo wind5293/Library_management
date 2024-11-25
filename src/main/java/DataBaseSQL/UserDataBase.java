@@ -72,7 +72,7 @@ public class UserDataBase {
 
     /**
      * Method to update password.
-     * @param username    username
+     * @param username username
      * @param oldPassword old password for confirmation
      * @param newPassword new password to update
      * @throws SQLException catch exception
@@ -133,6 +133,9 @@ public class UserDataBase {
         }
     }
 
+    /**
+     * Check User is Exist.
+     */
     public boolean isUserExists(String username, String password) throws SQLException {
         String query = "SELECT COUNT(*) FROM readerAccount WHERE username = ? AND password = ?";
         try (Connection con = databaseConnection.getDBConnection()) {
