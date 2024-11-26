@@ -109,21 +109,21 @@ public class UserDataBase {
      * @return return password that belong to that users
      * @throws SQLException catch Exception
      */
-    public String forgotPassword(String username, String email) throws SQLException {
-        String currentPassword = "select password from readerAccount " +
+    public void forgotPassword(String username, String email, String newPass) throws SQLException {
+        String newPassword = "update readerAccount set password = ? " +
                 "where username = ? AND email = ?;";
 
         try (Connection con = databaseConnection.getDBConnection()) {
-            try (PreparedStatement preparedStatement = con.prepareStatement(currentPassword)) {
-                preparedStatement.setString(1, username);
-                preparedStatement.setString(2, email);
+            try (PreparedStatement preparedStatement = con.prepareStatement(newPassword)) {
+                preparedStatement.setString(1, newPass);
+                preparedStatement.setString(2, username);
+                preparedStatement.setString(3, email);
 
-                ResultSet result = preparedStatement.executeQuery();
+                int affected = preparedStatement.executeUpdate();
 
-                if (result.next()) {
-                    return result.getString("password");
-                } else {
-                    return "";
+                if(affected < 1) {
+                    System.err.println("No matching user found!");
+                    return;
                 }
 
             } catch (SQLException e) {
