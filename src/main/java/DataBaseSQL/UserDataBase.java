@@ -77,19 +77,19 @@ public class UserDataBase {
     /**
      * Method to update password.
      * @param username username
-     * @param oldPassword old password for confirmation
+     * @param email user's email
      * @param newPassword new password to update
      * @throws SQLException catch exception
      */
-    public void updatePassword(String username, String oldPassword,
+    public void updatePassword(String username, String email,
                                String newPassword) throws SQLException {
-        String update = "Update readerAccount set password = ? where username = ? AND password = ?;";
+        String update = "Update readerAccount set password = ? where username = ? AND email = ?;";
 
         try (Connection con = databaseConnection.getDBConnection()) {
             try (PreparedStatement updateQuery = con.prepareStatement(update)) {
                 updateQuery.setString(1, newPassword);
                 updateQuery.setString(2, username);
-                updateQuery.setString(3, oldPassword);
+                updateQuery.setString(3, email);
 
                 updateQuery.executeUpdate();
             } catch (SQLException e) {
@@ -181,6 +181,7 @@ public class UserDataBase {
             throw e;
         }
     }
+
 
 }
 
