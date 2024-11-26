@@ -51,7 +51,7 @@ public class ManageUserStageController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getDBConnection();
 
-        String userViewQuery = "select userId, username, age, email, address from readeraccount";
+        String userViewQuery = "select userId, username, age, email, address from readerAccount";
 
         try {
             userObservableList.clear(); // Xóa dữ liệu hiện tại

@@ -160,7 +160,8 @@ public class BorrowedBookDataBase {
                     LocalDate today = LocalDate.now();
 
                     // Nếu sách đã đến hạn hoặc đã trả, tiến hành cập nhật và xóa
-                    if (returnDate == null || returnDate.compareTo(today) <= 0) {
+                    //Sửa: bỏ returnDate = null
+                    if (!returnDate.isAfter(today)) {
                         // Cập nhật ngày trả sách nếu chưa trả
                         try (PreparedStatement updateStatement = con.prepareStatement(updateQuery)) {
                             updateStatement.setString(1, userName);

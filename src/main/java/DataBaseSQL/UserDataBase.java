@@ -76,8 +76,9 @@ public class UserDataBase {
 
     /**
      * Method to update password.
-     * @param username username
-     * @param email user's email
+     *
+     * @param username    username
+     * @param email       user's email
      * @param newPassword new password to update
      * @throws SQLException catch exception
      */
@@ -104,12 +105,13 @@ public class UserDataBase {
 
     /**
      * Method to get password if forgot.
+     *
      * @param username username
-     * @param email email address
+     * @param email    email address
      * @return return password that belong to that users
      * @throws SQLException catch Exception
      */
-    public void forgotPassword(String username, String email, String newPass) throws SQLException {
+    public boolean forgotPassword(String username, String email, String newPass) throws SQLException {
         String newPassword = "update readerAccount set password = ? " +
                 "where username = ? AND email = ?;";
 
@@ -121,10 +123,12 @@ public class UserDataBase {
 
                 int affected = preparedStatement.executeUpdate();
 
-                if(affected < 1) {
+                if (affected < 1) {
                     System.err.println("No matching user found!");
-                    return;
+                    return false;
                 }
+
+                return true;
 
             } catch (SQLException e) {
                 System.err.println("Username or email is incorrect");

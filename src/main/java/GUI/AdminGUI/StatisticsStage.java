@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
 public class StatisticsStage implements Initializable {
 
     DatabaseConnection connectNow = new DatabaseConnection();
-    Connection connectDB = connectNow.getDBConnection();
 
     @FXML
     private Label numReaders;
@@ -73,11 +72,10 @@ public class StatisticsStage implements Initializable {
                 "    ELSE '40+' " +
                 "END AS age_group, " +
                 "COUNT(*) AS total_users " +
-                "FROM readeraccount " +
+                "FROM readerAccount " +
                 "GROUP BY age_group;";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
+        try (Connection conn = connectNow.getDBConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -99,8 +97,7 @@ public class StatisticsStage implements Initializable {
     private void loadBookGenrePieChart() {
         String query = "SELECT bookType, COUNT(*) AS total FROM booktable GROUP BY bookType;";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement",
-                "root", "root");
+        try (Connection conn = connectNow.getDBConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
