@@ -12,9 +12,9 @@ public class ManagerAccount {
     private BookDataBase bookDataBase = new BookDataBase();
 
     // Thêm sách vào cơ sở dữ liệu
-    public void addBook(String bookName, String bookAuthor, int bookNums) throws SQLException {
+    public void addBook(String bookName, String bookAuthor, String bookType, int bookNums) throws SQLException {
         try {
-            bookDataBase.addToDataBase(bookName, bookAuthor, bookNums);
+            bookDataBase.addToDataBase(bookName, bookAuthor, bookType, bookNums);
             System.out.println("Sách '" + bookName + "' đã được thêm vào cơ sở dữ liệu.");
         } catch (SQLException e) {
             System.err.println("Lỗi khi thêm sách: " + e.getMessage());
@@ -23,17 +23,17 @@ public class ManagerAccount {
     }
 
     // Cập nhật thông tin sách trong cơ sở dữ liệu
-    public void updateDataBase(String bookName, String bookAuthor, int oldBookId) throws SQLException {
-        // Đầu tiên tìm và cập nhật thông tin sách
-        try {
-            // Cập nhật thông tin sách
-            bookDataBase.updateDataBase(bookName, bookAuthor, oldBookId);
-            System.out.println("Sách đã được cập nhật thành công!");
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi cập nhật sách: " + e.getMessage());
-            throw e;
-        }
-    }
+//    public void updateDataBase(String bookName, String bookAuthor, int oldBookId) throws SQLException {
+//        // Đầu tiên tìm và cập nhật thông tin sách
+//        try {
+//            // Cập nhật thông tin sách
+//            bookDataBase.updateDataBase(bookName, bookAuthor, oldBookId);
+//            System.out.println("Sách đã được cập nhật thành công!");
+//        } catch (SQLException e) {
+//            System.err.println("Lỗi khi cập nhật sách: " + e.getMessage());
+//            throw e;
+//        }
+//    }
 
     // Xóa sách khỏi cơ sở dữ liệu
     public void deleteBook(String bookName, String bookAuthor) throws SQLException {

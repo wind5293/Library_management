@@ -3,6 +3,7 @@ package GUI;
 import DataBaseSQL.UserDataBase;
 import User.SaveUserName;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -94,15 +96,21 @@ public class LoginStage {
         return Objects.equals(username, "admin") && Objects.equals(password, "admin");
     }
 
-    public void switchScene(ActionEvent event, String newSceneName) throws IOException {
+    public void ForgotPassword(MouseEvent event) throws IOException {
+        switchScene(event, "/GUI/ForgotPasswordStage.fxml");
+    }
+
+    public void switchScene(Event event, String newSceneName) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(newSceneName)));
         Scene newScene = new Scene(root);
-        currentStage.setScene(newScene);
+        Stage newStage = new Stage();
+        newStage.setScene(newScene);
+        newStage.show();
+
+        currentStage.close();
     }
 
-    public void ForgotPassword() {
-        System.out.println("ForgotPassword");
-    }
+
 }

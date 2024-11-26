@@ -2,19 +2,23 @@ package GUI.UserGUI;
 
 import DataBaseSQL.DatabaseConnection;
 import DocumentManager.Book;
-import GUI.AdminGUI.ManageBooksStageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -42,10 +46,7 @@ public class UserSearchStageController implements Initializable {
 
     ObservableList<Book> bookObservableList = FXCollections.observableArrayList();
 
-    private String SearchText;
-
     public void SearchTextSet(String SearchText) {
-        this.SearchText = SearchText;
         searchBarTextField.setText(SearchText);
     }
 
@@ -108,17 +109,24 @@ public class UserSearchStageController implements Initializable {
         searchBookTableView.setItems(sortedData);
     }
 
-    public void BorrowBookButtonClicked(ActionEvent event) {
+    public void DetailsButtonClicked(ActionEvent event) throws IOException {
         Book selectedBook = searchBookTableView.getSelectionModel().getSelectedItem();
         if (selectedBook == null) {
             System.out.println("Không có sách được chọn");
         }
 
+        Stage stage = new Stage();
 
-    }
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("BookDetails.fxml"));
+        Parent detailsSceneRoot = loader.load();
+        Scene scene = new Scene(detailsSceneRoot);
 
-    public void DetailsButtonClicked(ActionEvent event) {
-        System.out.println("DetailsButtonClicked");
+        BookDetails bookDetails = loader.getController();
+        bookDetails.setBookDetails(selectedBook);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

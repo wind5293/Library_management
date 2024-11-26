@@ -24,6 +24,8 @@ public class AddBook {
     private TextField bookNumTextField;
     @FXML
     private TextField ExcelLinkTextField;
+    @FXML
+    private TextField bookTypeTextField;
 
     @FXML
     public void AddButtonSubmit(ActionEvent event) throws SQLException {
@@ -36,10 +38,11 @@ public class AddBook {
         }
         String bookName = bookNameTextField.getText();
         String bookAuthor = bookAuthorTextField.getText();
+        String bookType = bookTypeTextField.getText();
         int bookNum = Integer.parseInt(bookNumTextField.getText());
 
         ManagerAccount managerAccount = new ManagerAccount();
-        managerAccount.addBook(bookName, bookAuthor, bookNum);
+        managerAccount.addBook(bookName, bookAuthor, bookType, bookNum);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Thêm sách thành công");
