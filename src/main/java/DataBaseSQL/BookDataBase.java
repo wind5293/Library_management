@@ -101,7 +101,6 @@ public class BookDataBase {
      * @param bookAuthor changed author
      * @throws SQLException catch exception
      */
-    //@Override
     public void updateDataBase(String bookName, String bookAuthor, int oldBookId) throws SQLException {
         String query = "Update bookTable Set bookName = ?, bookAuthor = ? where bookId = ?;";
         try (Connection con = databaseConnection.getDBConnection()) {
@@ -124,8 +123,8 @@ public class BookDataBase {
     /**
      * Get Total Number of Book.
      *
-     * @return
-     * @throws SQLException
+     * @return total quantity of books
+     * @throws SQLException catch exception.
      */
     public int getTotalBooks() throws SQLException {
         String query = "SELECT SUM(bookNums) FROM bookTable";

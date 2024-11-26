@@ -15,7 +15,7 @@ public class UserDataBase {
      */
     public void addNewUser(String username, String password, String email,
                            String address, int age) throws SQLException {
-        String insert = "INSERT INTO readerAccount(username, password, email, address, age) VALUES (?, ?, ?, ?);";
+        String insert = "INSERT INTO readerAccount(username, password, email, address, age) VALUES (?, ?, ?, ?, ?);";
         String check = "Select username from readerAccount where username = ?";
         String check2 = "Select password from readerAccount where password = ?";
 
