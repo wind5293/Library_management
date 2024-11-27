@@ -160,7 +160,7 @@ public class BorrowedBookDataBase {
 
                     // Nếu sách đã đến hạn hoặc đã trả, tiến hành cập nhật và xóa
                     //Sửa: bỏ returnDate = null
-                    if (!returnDate.isAfter(today)) {
+                    if (returnDate.isAfter(today) || returnDate.equals(today)) {
                         // Cập nhật ngày trả sách nếu chưa trả
                         try (PreparedStatement updateStatement = con.prepareStatement(updateQuery)) {
                             updateStatement.setString(1, userName);
@@ -191,7 +191,7 @@ public class BorrowedBookDataBase {
                             }
                         }
                     } else {
-                        System.out.println("Sách vẫn chưa đến hạn trả.");
+                        System.out.println("Sách đã quá hạn trả.");
                     }
                 } else {
                     System.out.println("Không tìm thấy sách mượn của người dùng " + userName);
