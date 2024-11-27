@@ -33,6 +33,7 @@ public class BorrowedBookDataBase {
                 try (PreparedStatement changeBookNums = con.prepareStatement(updateBookNums)) {
                     changeBookNums.setString(1, bookName);
                     changeBookNums.executeUpdate();
+
                 }
 
                 System.out.println("Book " + bookName + " borrowed by " + userName);
@@ -144,7 +145,7 @@ public class BorrowedBookDataBase {
         String updateQuery = "UPDATE borrowedBooks SET returnDate = CURRENT_DATE WHERE userName = ? AND bookName = ?";
         String deleteQuery = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
         String returnValue = "Update bookTable set bookNums = bookNums + 1 " +
-                "where username = ? AND bookName = ?;";
+                "where bookName = ?;";
 
         try (Connection con = databaseConnection.getDBConnection()) {
             // Kiểm tra xem sách đã được mượn chưa và nếu đã đến hạn trả hay chưa
