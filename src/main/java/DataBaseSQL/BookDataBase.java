@@ -183,7 +183,7 @@ public class BookDataBase {
      */
     public void fixBookInfo(String bookName, String bookAuthor, String bookType,
                             int bookNums, int currentBookId) throws Exception {
-        String query = "UPDATE books SET bookName = ?, bookAuthor = ?, bookType = ?, bookNums = ? WHERE bookId = ?";
+        String query = "UPDATE booktable SET bookName = ?, bookAuthor = ?, bookType = ?, bookNums = ? WHERE bookId = ?";
 
         try (Connection con = databaseConnection.getDBConnection();
              PreparedStatement statement = con.prepareStatement(query)) {
