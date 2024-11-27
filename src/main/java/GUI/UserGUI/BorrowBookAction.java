@@ -56,15 +56,29 @@ public class BorrowBookAction implements Initializable {
         String username = SaveUserName.getLoggedInUsername();
         String bookName = book.getBookName();
         LocalDate returnDate = ReturnDatePicker.getValue();
-
+        LocalDate borrowDate = LocalDate.now();
         Optional<ButtonType> result = confirmAlert();
+
 
         if (result.get().getButtonData() == ButtonBar.ButtonData.YES) {
             BorrowedBookDataBase borrowedBookDataBase = new BorrowedBookDataBase();
-            borrowedBookDataBase.borrowBook(username, bookName, returnDate);
-
-            Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
-            infoAlert.setHeaderText("Mượn sách thành công");
+            if (returnDate == null || !returnDate.isAfter(borrowDate)) {
+                Alert dateAlert = new Alert(Alert.AlertType.INFORMATION);
+                dateAlert.setHeaderText("Ngày trả không hợp lệ!");
+                dateAlert.setContentText("Vui lòng chọn ngày trả sau ngày mượn.");
+                dateAlert.show();
+            }
+            else {
+                try {
+                    borrowedBookDataBase.borrowBook(username, bookName, borrowDate, returnDate);
+                    Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+                    infoAlert.setHeaderText("Mượn sách thành công");
+                } catch (SQLException e) {
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setHeaderText("Lỗi khi mượn sách!");
+                    errorAlert.show();
+                }
+            }
         }
         currentStage.close();
     }

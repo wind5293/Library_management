@@ -13,13 +13,15 @@ public class BorrowedBookDataBase {
      * @param bookName
      * @throws SQLException
      */
-    public void borrowBook(String userName, String bookName, LocalDate returnDate) throws SQLException {
+    public void borrowBook(String userName, String bookName,LocalDate borrowDate, LocalDate returnDate) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
-                "VALUES (?, ?, CURRENT_DATE, ?);";
+                "VALUES (?, ?, ?, ?);";
+        borrowDate = LocalDate.now();
         try (Connection con = databaseConnection.getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 preparedStatement.setString(1, userName);  // Liên kết với UserDataBase
                 preparedStatement.setString(2, bookName);
+                preparedStatement.setDate(3, java.sql.Date.valueOf(borrowDate));
                 preparedStatement.setDate(3, java.sql.Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
@@ -82,29 +84,29 @@ public class BorrowedBookDataBase {
     /**
      * Get Bookb->>Duc Minh
      */
-    public void getBookFromBorrowed(String userName) throws SQLException {
-        String query = "SELECT bookName FROM borrowedBooks WHERE userName = ?";
-
-        try (Connection con = databaseConnection.getDBConnection()) {
-            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-                preparedStatement.setString(1, userName); // Set tên người dùng
-
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    while (resultSet.next()) {
-                        String bookName = resultSet.getString("bookName");
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println("Lỗi khi truy vấn sách từ danh sách mượn.");
-                e.printStackTrace();
-                throw e;
-            }
-        } catch (SQLException e) {
-            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
-            e.printStackTrace();
-            throw e;
-        }
-    }
+//    public void getBookFromBorrowed(String userName) throws SQLException {
+//        String query = "SELECT bookName FROM borrowedBooks WHERE userName = ?";
+//
+//        try (Connection con = databaseConnection.getDBConnection()) {
+//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+//                preparedStatement.setString(1, userName); // Set tên người dùng
+//
+//                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                    while (resultSet.next()) {
+//                        String bookName = resultSet.getString("bookName");
+//                    }
+//                }
+//            } catch (SQLException e) {
+//                System.err.println("Lỗi khi truy vấn sách từ danh sách mượn.");
+//                e.printStackTrace();
+//                throw e;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
+//            e.printStackTrace();
+//            throw e;
+//        }
+//    }
 
     /**
      * Lay so luong sach da muon.
