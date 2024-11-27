@@ -82,6 +82,11 @@ public class RegisterStage implements Initializable {
         alert.showAndWait();
     }
 
+    private static final String USERNAME_REGEX = "^[a-zA-Z0-9_]{3,20}$";
+    private static final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    private static final String ADDRESS_REGEX = "^.{5,100}$";
+    private static final String PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
     public boolean checkValidInput() {
         String username = UserNameTF.getText();
         String email = EmailTF.getText();
@@ -90,20 +95,20 @@ public class RegisterStage implements Initializable {
         String password = PasswordTF.getText();
         String cfPassword = CFPasswordTF.getText();
 
-        if (username.isEmpty()) {
-            informationText.setText("Vui lòng nhập tên người dùng");
+        if (username.isEmpty() || !username.matches(USERNAME_REGEX)) {
+            informationText.setText("Vui lòng nhập tên người dùng hợp lệ (3-20 ký tự, không ký tự đặc biệt)");
             return false;
-        } else if (email.isEmpty() || !isValidEmail(email)) {
+        } else if (email.isEmpty() || !email.matches(EMAIL_REGEX)) {
             informationText.setText("Vui lòng nhập email hợp lệ");
             return false;
-        } else if (age == null) {
-            informationText.setText("Vui lòng chọn độ tuổi");
+        } else if (age == null || age < 10 || age > 120) {
+            informationText.setText("Vui lòng chọn độ tuổi hợp lệ (10-120)");
             return false;
-        } else if (address.isEmpty()) {
-            informationText.setText("Vui lòng nhập địa chỉ");
+        } else if (address.isEmpty() || !address.matches(ADDRESS_REGEX)) {
+            informationText.setText("Vui lòng nhập địa chỉ hợp lệ (5-100 ký tự)");
             return false;
-        } else if (password.isEmpty()) {
-            informationText.setText("Vui lòng nhập mật khẩu");
+        } else if (password.isEmpty() || !password.matches(PASSWORD_REGEX)) {
+            informationText.setText("Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt");
             return false;
         } else if (cfPassword.isEmpty()) {
             informationText.setText("Vui lòng nhập lại mật khẩu");
@@ -113,11 +118,6 @@ public class RegisterStage implements Initializable {
             return false;
         }
         return true;
-    }
-
-    private boolean isValidEmail(String email) {
-        String emailRegex = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-        return email.matches(emailRegex);
     }
 
     @Override
