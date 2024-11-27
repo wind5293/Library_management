@@ -61,6 +61,16 @@
                                 <Image url="@sourceImage/membership.png" />
                             </image>
                         </ImageView>
+                  <Button layoutY="215.0" mnemonicParsing="false" onAction="#logoutButtonClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: #FFFFFF;" text="Log out">
+                     <font>
+                        <Font name="Gadugi Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@sourceImage/tải%20xuống.jpg" />
+                     </image>
+                  </ImageView>
                     </children>
                 </Pane>
             </left>

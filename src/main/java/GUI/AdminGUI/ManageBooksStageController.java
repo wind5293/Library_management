@@ -175,6 +175,7 @@ public class ManageBooksStageController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+        stage.setOnHidden(e -> refresh());
     }
 
     public void ExcelExportClicked(ActionEvent event) {
