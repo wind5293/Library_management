@@ -21,8 +21,8 @@ public class BorrowedBookDataBase {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 preparedStatement.setString(1, userName);  // Liên kết với UserDataBase
                 preparedStatement.setString(2, bookName);
-                preparedStatement.setDate(3, java.sql.Date.valueOf(borrowDate));
-                preparedStatement.setDate(3, java.sql.Date.valueOf(returnDate));
+                preparedStatement.setDate(3, Date.valueOf(borrowDate));
+                preparedStatement.setDate(3, Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
 
@@ -142,7 +142,6 @@ public class BorrowedBookDataBase {
      */
     public void returnBook(String userName, String bookName) throws SQLException {
         String checkQuery = "SELECT returnDate FROM borrowedBooks WHERE userName = ? AND bookName = ?";
-        String updateQuery = "UPDATE borrowedBooks SET returnDate = CURRENT_DATE WHERE userName = ? AND bookName = ?";
         String deleteQuery = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
         String returnValue = "Update bookTable set bookNums = bookNums + 1 " +
                 "where bookName = ?;";
@@ -153,49 +152,40 @@ public class BorrowedBookDataBase {
                 checkStatement.setString(1, userName);
                 checkStatement.setString(2, bookName);
 
-                ResultSet resultSet = checkStatement.executeQuery();
-                if (resultSet.next()) {
-                    LocalDate returnDate = resultSet.getDate("returnDate").toLocalDate();
-                    LocalDate today = LocalDate.now();
+                ResultSet returnVal = checkStatement.executeQuery();
 
-                    // Nếu sách đã đến hạn hoặc đã trả, tiến hành cập nhật và xóa
-                    //Sửa: bỏ returnDate = null
-                    if (returnDate.isAfter(today) || returnDate.equals(today)) {
-                        // Cập nhật ngày trả sách nếu chưa trả
-                        try (PreparedStatement updateStatement = con.prepareStatement(updateQuery)) {
-                            updateStatement.setString(1, userName);
-                            updateStatement.setString(2, bookName);
-                            updateStatement.executeUpdate();
-                            System.out.println("Sách đã được trả, ngày trả là: " + LocalDate.now());
-                        }
-
-                        // Xóa sách khỏi borrowedBooks sau khi trả
-                        try (PreparedStatement deleteStatement = con.prepareStatement(deleteQuery);
-                             PreparedStatement returnQuantity = con.prepareStatement(returnValue)) {
-
-                            deleteStatement.setString(1, userName);
-                            deleteStatement.setString(2, bookName);
-
-                            returnQuantity.setString(1, userName);
-                            returnQuantity.setString(2, bookName);
-
-                            //Check if the book has been successfully returned or not
-                            int check = deleteStatement.executeUpdate();
-
-                            if (check > 0) {
-                                System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng " + userName);
-                                //if returned successfully, increase number of that book by one
-                                returnQuantity.executeUpdate();
-                            } else {
-                                System.out.println("No record found to return");
-                            }
-                        }
-                    } else {
-                        System.out.println("Sách đã quá hạn trả.");
-                    }
+                LocalDate returnDate = null;
+                LocalDate today = LocalDate.now();
+                if (returnVal.next()) {
+                   returnDate = returnVal.getDate("returnDate").toLocalDate();
                 } else {
-                    System.out.println("Không tìm thấy sách mượn của người dùng " + userName);
+                    System.err.println("No book record found");
+                    return;
                 }
+
+                if (returnDate.isAfter(today) || returnDate.equals(today)) {
+                    // Xóa sách khỏi borrowedBooks sau khi trả
+                    try (PreparedStatement deleteStatement = con.prepareStatement(deleteQuery);
+                         PreparedStatement returnQuantity = con.prepareStatement(returnValue)) {
+
+                        deleteStatement.setString(1, userName);
+                        deleteStatement.setString(2, bookName);
+
+                        returnQuantity.setString(1, bookName);
+
+                        //Check if the book has been successfully returned or not
+                        int check = deleteStatement.executeUpdate();
+
+                        if (check > 0) {
+                            System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng " + userName);
+                            //if returned successfully, increase number of that book by one
+                            returnQuantity.executeUpdate();
+                        } else {
+                            System.out.println("No record found to return");
+                        }
+                    }
+                }
+
             } catch (SQLException e) {
                 System.err.println("Lỗi khi kiểm tra sách.");
                 e.printStackTrace();
