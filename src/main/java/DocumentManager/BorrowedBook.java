@@ -9,7 +9,7 @@ public class BorrowedBook {
     /**
      * Contructor 0.
      */
-    public BorrowedBook(int id, String bookName, String returnDate, String borrowedDate) {
+    public BorrowedBook(int id, String bookName, String borrowedDate, String returnDate) {
         this.id = id;
         this.bookName = bookName;
         this.returnDate = returnDate;
