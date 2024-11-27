@@ -13,17 +13,14 @@ public class BorrowedBookDataBase {
      * @param bookName
      * @throws SQLException
      */
-    public void borrowBook(String userName, String bookName) throws SQLException {
+    public void borrowBook(String userName, String bookName, LocalDate returnDate) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
                 "VALUES (?, ?, CURRENT_DATE, ?);";
         try (Connection con = databaseConnection.getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 preparedStatement.setString(1, userName);  // Liên kết với UserDataBase
                 preparedStatement.setString(2, bookName);
-
-                //set return date = 7 days after the day the book was borrowed
-                LocalDate returnDate = LocalDate.now().plusWeeks(1);
-                preparedStatement.setDate(3, Date.valueOf(returnDate));
+                preparedStatement.setDate(3, java.sql.Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
 
@@ -32,8 +29,7 @@ public class BorrowedBookDataBase {
                         "bookNums - 1 where bookName = ?;";
 
                 try (PreparedStatement changeBookNums = con.prepareStatement(updateBookNums)) {
-                    preparedStatement.setString(1, bookName);
-
+                    changeBookNums.setString(1, bookName);
                     changeBookNums.executeUpdate();
                 }
 

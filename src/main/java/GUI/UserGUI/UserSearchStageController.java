@@ -109,7 +109,7 @@ public class UserSearchStageController implements Initializable {
         searchBookTableView.setItems(sortedData);
     }
 
-    public void DetailsButtonClicked(ActionEvent event) throws IOException {
+    public void BorrowButtonClicked(ActionEvent event) throws IOException {
         Book selectedBook = searchBookTableView.getSelectionModel().getSelectedItem();
         if (selectedBook == null) {
             System.out.println("Không có sách được chọn");
@@ -118,11 +118,12 @@ public class UserSearchStageController implements Initializable {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("BookDetails.fxml"));
+        loader.setLocation(getClass().getResource("BorrowBookAction.fxml"));
         Parent detailsSceneRoot = loader.load();
         Scene scene = new Scene(detailsSceneRoot);
 
-        BookDetails bookDetails = loader.getController();
+        BorrowBookAction bookDetails = loader.getController();
+        assert selectedBook != null;
         bookDetails.setBookDetails(selectedBook);
 
         stage.setScene(scene);

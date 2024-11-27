@@ -33,7 +33,7 @@ public class AdminBookDetails implements Initializable {
 
     @FXML
     public void OkButtonClicked(ActionEvent event) {
-        System.out.println("OkButtonClicked");
+        System.out.println("CancelButtonClicked");
     }
 
 }
