@@ -17,8 +17,6 @@ import javafx.scene.control.Label;
 
 public class StatisticsStage implements Initializable {
 
-    DatabaseConnection connectNow = new DatabaseConnection();
-
     @FXML
     private Label numReaders;
 
@@ -75,7 +73,7 @@ public class StatisticsStage implements Initializable {
                 "FROM readerAccount " +
                 "GROUP BY age_group;";
 
-        try (Connection conn = connectNow.getDBConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getDBConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -97,7 +95,7 @@ public class StatisticsStage implements Initializable {
     private void loadBookGenrePieChart() {
         String query = "SELECT bookType, COUNT(*) AS total FROM booktable GROUP BY bookType;";
 
-        try (Connection conn = connectNow.getDBConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getDBConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 

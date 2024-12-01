@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public abstract class DatabaseToExcel {
-     private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     /**
      * Export to Excel.
@@ -37,7 +36,7 @@ public abstract class DatabaseToExcel {
      */
     public void exportToExcel() {
 
-        try (Connection con = databaseConnection.getDBConnection();
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection();
              Workbook workbook = new XSSFWorkbook()) {
 
             // Thực hiện query lấy dữ liệu

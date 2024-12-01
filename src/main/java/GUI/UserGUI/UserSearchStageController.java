@@ -57,8 +57,7 @@ public class UserSearchStageController implements Initializable {
     }
 
     private void initializeTable() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getDBConnection();
+        Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 
         String libraryViewQuery = "select bookName, bookAuthor, bookType, bookNums from booktable";
 

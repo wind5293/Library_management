@@ -4,7 +4,6 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class BorrowedBookDataBase {
-    private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     /**
      * Method borrowBook get the book in bookTable.
@@ -17,12 +16,12 @@ public class BorrowedBookDataBase {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
                 "VALUES (?, ?, ?, ?);";
         borrowDate = LocalDate.now();
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
                 preparedStatement.setString(1, userName);  // Liên kết với UserDataBase
                 preparedStatement.setString(2, bookName);
                 preparedStatement.setDate(3, Date.valueOf(borrowDate));
-                preparedStatement.setDate(3, Date.valueOf(returnDate));
+                preparedStatement.setDate(4, Date.valueOf(returnDate));
 
                 preparedStatement.executeUpdate();
 
@@ -115,7 +114,7 @@ public class BorrowedBookDataBase {
      */
     public int getIssuedBooks() throws SQLException {
         String query = "Select Count(*) from borrowedBooks;";
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 
                 ResultSet result = preparedStatement.executeQuery();
@@ -146,7 +145,7 @@ public class BorrowedBookDataBase {
         String returnValue = "Update bookTable set bookNums = bookNums + 1 " +
                 "where bookName = ?;";
 
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             // Kiểm tra xem sách đã được mượn chưa và nếu đã đến hạn trả hay chưa
             try (PreparedStatement checkStatement = con.prepareStatement(checkQuery)) {
                 checkStatement.setString(1, userName);
@@ -156,6 +155,7 @@ public class BorrowedBookDataBase {
 
                 LocalDate returnDate = null;
                 LocalDate today = LocalDate.now();
+
                 if (returnVal.next()) {
                    returnDate = returnVal.getDate("returnDate").toLocalDate();
                 } else {
@@ -163,7 +163,7 @@ public class BorrowedBookDataBase {
                     return;
                 }
 
-                if (returnDate.isAfter(today) || returnDate.equals(today)) {
+                if (today.isBefore(returnDate) || returnDate.equals(today)) {
                     // Xóa sách khỏi borrowedBooks sau khi trả
                     try (PreparedStatement deleteStatement = con.prepareStatement(deleteQuery);
                          PreparedStatement returnQuantity = con.prepareStatement(returnValue)) {

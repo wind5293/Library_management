@@ -4,8 +4,6 @@ import java.sql.*;
 
 public class UserDataBase {
 
-    private final DatabaseConnection databaseConnection = new DatabaseConnection();
-
     /**
      * Method to add new User account to database.
      *
@@ -19,7 +17,7 @@ public class UserDataBase {
         String check = "Select username from readerAccount where username = ?";
         String check2 = "Select password from readerAccount where password = ?";
 
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement checkCondition = con.prepareStatement(check)) {
                 checkCondition.setString(1, username);
 
@@ -58,7 +56,7 @@ public class UserDataBase {
     public void deleteUser(String username, String password) throws SQLException {
         String delete = "Delete from readerAccount where username = ? AND password = ?;";
 
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement deleteQuery = con.prepareStatement(delete)) {
                 deleteQuery.setString(1, username);
                 deleteQuery.setString(2, password);
@@ -85,7 +83,7 @@ public class UserDataBase {
                                String newPassword) throws SQLException {
         String update = "Update readerAccount set password = ? where username = ? AND email = ?;";
 
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement updateQuery = con.prepareStatement(update)) {
                 updateQuery.setString(1, newPassword);
                 updateQuery.setString(2, username);
@@ -113,7 +111,7 @@ public class UserDataBase {
         String newPassword = "update readerAccount set password = ? " +
                 "where username = ? AND email = ?;";
 
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(newPassword)) {
                 preparedStatement.setString(1, newPass);
                 preparedStatement.setString(2, username);
@@ -139,7 +137,7 @@ public class UserDataBase {
      */
     public boolean isUserExists(String username, String password) throws SQLException {
         String query = "SELECT COUNT(*) FROM readerAccount WHERE username = ? AND password = ?";
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement statement = con.prepareStatement(query)) {
                 statement.setString(1, username);
                 statement.setString(2, password);
@@ -162,7 +160,7 @@ public class UserDataBase {
      */
     public int getTotalUsers() throws SQLException {
         String query = "Select Count(*) from readeraccount;";
-        try (Connection con = databaseConnection.getDBConnection()) {
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 
                 ResultSet result = preparedStatement.executeQuery();

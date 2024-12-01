@@ -62,8 +62,7 @@ public class ManageBooksStageController implements Initializable {
     }
 
     private void initializeTable() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getDBConnection();
+        Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 
         String libraryViewQuery = "select bookId, bookName, bookAuthor, bookType, bookNums from booktable";
 

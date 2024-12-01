@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ExcelToDatabase {
-    private final DatabaseConnection databaseConnection = new DatabaseConnection();
     private final String excelFilePath;
 
     /**
@@ -27,7 +26,7 @@ public class ExcelToDatabase {
      * Import data from excel sheet.
      */
     public void importData() {
-        try (Connection con = databaseConnection.getDBConnection();
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection();
              FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
              Workbook workbook = new XSSFWorkbook(inputStream)) {
 

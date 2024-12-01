@@ -61,8 +61,7 @@ public class UserBorrowedBook implements Initializable {
     }
 
     public void initializeTable() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getDBConnection();
+        Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 
         String borrowedBookViewQuery = "select borrowId, bookName, borrowDate, returnDate from borrowedbooks where userName = ?";
 

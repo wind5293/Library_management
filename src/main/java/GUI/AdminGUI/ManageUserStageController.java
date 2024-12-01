@@ -48,8 +48,7 @@ public class ManageUserStageController implements Initializable {
      * Initialize Table all the use //userid//username//userage//useremail.
      */
     public void initializeTable() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getDBConnection();
+        Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 
         String userViewQuery = "select userId, username, age, email, address from readerAccount";
 
