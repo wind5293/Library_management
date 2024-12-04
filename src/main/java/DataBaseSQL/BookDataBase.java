@@ -65,7 +65,13 @@ public class BookDataBase {
 //    }
 
     /**
-     * Ham moi voi 4 tham so dau vao: bookName, bookAuthor, bookType, bookNums.
+     * Method to add Document to Library Database.
+     *
+     * @param bookName   book's title
+     * @param bookAuthor author's name
+     * @param bookType book's genre
+     * @param bookNums   quantity of book
+     * @throws SQLException catch exception
      */
     public void addToDataBase(String bookName, String bookAuthor, String bookType, int bookNums) throws SQLException {
         //Query to add new rows.

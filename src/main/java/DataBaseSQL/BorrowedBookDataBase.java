@@ -56,8 +56,9 @@ public class BorrowedBookDataBase {
 
 
     /**
-     * Lay so luong sach da muon.
-     * Can kiem tra phan nay.
+     * method to count total number of borrowed books.
+     * @return int number of borrowed Books
+     * @throws SQLException catch Exception
      */
     public int getIssuedBooks() throws SQLException {
         String query = "Select Count(*) from borrowedBooks;";

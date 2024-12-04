@@ -133,7 +133,11 @@ public class UserDataBase {
     }
 
     /**
-     * Check User is Exist.
+     * Method to check if a user exists or not.
+     * @param username username
+     * @param password corresponding password
+     * @return True if existed, False if not
+     * @throws SQLException catch Exception
      */
     public boolean isUserExists(String username, String password) throws SQLException {
         String query = "SELECT COUNT(*) FROM readerAccount WHERE username = ? AND password = ?";
@@ -155,8 +159,9 @@ public class UserDataBase {
 
 
     /**
-     * Lay so luong nguoi dung.
-     * Can kiem tra phan nay.
+     * Method to get total number of users.
+     * @return int represent total number of users
+     * @throws SQLException catch Exception
      */
     public int getTotalUsers() throws SQLException {
         String query = "Select Count(*) from readeraccount;";

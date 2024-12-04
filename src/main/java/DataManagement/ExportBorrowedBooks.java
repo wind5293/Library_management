@@ -18,6 +18,12 @@ public class ExportBorrowedBooks extends DatabaseToExcel {
         return "SELECT * FROM borrowedbooks WHERE username = '" + username + "'";
     }
 
+    /**
+     * Method to write information to excel sheet.
+     * @param sheet Excel sheet
+     * @param resultSet Result set that contains information from Database
+     * @throws Exception catch Exception
+     */
     @Override
     public void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception {
 

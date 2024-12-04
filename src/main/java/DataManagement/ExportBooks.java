@@ -12,6 +12,12 @@ public class ExportBooks extends DatabaseToExcel {
         return "SELECT * FROM bookTable";
     }
 
+    /**
+     * Method to write information to excel sheet.
+     * @param sheet Excel sheet
+     * @param resultSet Result set that contains information from Database
+     * @throws Exception catch Exception
+     */
     @Override
     public void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception {
         // Ghi tiêu đề cột
