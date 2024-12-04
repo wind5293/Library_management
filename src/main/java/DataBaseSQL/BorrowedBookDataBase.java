@@ -8,11 +8,13 @@ public class BorrowedBookDataBase {
     /**
      * Method borrowBook get the book in bookTable.
      *
-     * @param userName
-     * @param bookName
-     * @throws SQLException
+     * @param userName is name
+     * @param bookName us book name
+     * @param borrowDate is now
+     * @param returnDate is
+     * @throws SQLException exception
      */
-    public void borrowBook(String userName, String bookName,LocalDate borrowDate, LocalDate returnDate) throws SQLException {
+    public void borrowBook(String userName, String bookName, LocalDate borrowDate, LocalDate returnDate) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
                 "VALUES (?, ?, ?, ?);";
         borrowDate = LocalDate.now();
@@ -52,61 +54,6 @@ public class BorrowedBookDataBase {
         }
     }
 
-//    public void removeBookFromBorrowed(String userName, String bookName) throws SQLException {
-//        String query = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
-//
-//        try (Connection con = databaseConnection.getDBConnection()) {
-//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-//                preparedStatement.setString(1, userName); // Set tên người dùng
-//                preparedStatement.setString(2, bookName); // Set tên sách
-//
-//                int rowsAffected = preparedStatement.executeUpdate();
-//                if (rowsAffected > 0) {
-//                    System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng "
-//                            + userName);
-//                } else {
-//                    System.out.println("Không tìm thấy sách '" + bookName + "' trong danh sách mượn của người dùng "
-//                            + userName);
-//                }
-//            } catch (SQLException e) {
-//                System.err.println("Lỗi khi xóa sách khỏi danh sách mượn.");
-//                e.printStackTrace();
-//                throw e;
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
-//            e.printStackTrace();
-//            throw e;
-//        }
-//    }
-
-
-    /**
-     * Get Bookb->>Duc Minh
-     */
-//    public void getBookFromBorrowed(String userName) throws SQLException {
-//        String query = "SELECT bookName FROM borrowedBooks WHERE userName = ?";
-//
-//        try (Connection con = databaseConnection.getDBConnection()) {
-//            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-//                preparedStatement.setString(1, userName); // Set tên người dùng
-//
-//                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//                    while (resultSet.next()) {
-//                        String bookName = resultSet.getString("bookName");
-//                    }
-//                }
-//            } catch (SQLException e) {
-//                System.err.println("Lỗi khi truy vấn sách từ danh sách mượn.");
-//                e.printStackTrace();
-//                throw e;
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("Không thể kết nối với cơ sở dữ liệu.");
-//            e.printStackTrace();
-//            throw e;
-//        }
-//    }
 
     /**
      * Lay so luong sach da muon.
@@ -134,7 +81,6 @@ public class BorrowedBookDataBase {
 
     /**
      * Method to return book by delete row in borrowedBook Table.
-     *
      * @param userName username
      * @param bookName book's title
      * @throws SQLException catch Exception
@@ -153,11 +99,61 @@ public class BorrowedBookDataBase {
 
                 ResultSet returnVal = checkStatement.executeQuery();
 
+                try (PreparedStatement deleteStatement = con.prepareStatement(deleteQuery);
+                     PreparedStatement returnQuantity = con.prepareStatement(returnValue)) {
+
+                    deleteStatement.setString(1, userName);
+                    deleteStatement.setString(2, bookName);
+
+                    returnQuantity.setString(1, bookName);
+
+                    //Check if the book has been successfully returned or not
+                    int check = deleteStatement.executeUpdate();
+
+                    if (check > 0) {
+                        System.out.println("Return book succeed");
+                        //if returned successfully, increase number of that book by one
+                        returnQuantity.executeUpdate();
+                    } else {
+                        System.out.println("No record found to return");
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error when check book in returnBook.");
+                e.printStackTrace();
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error when connect in returnBook.");
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+
+    /**
+     * Update Borrowedbook if overdue.
+     * Auto return book when overdue.
+     */
+    public void updateBorrowedBook(String userName, String bookName) throws SQLException {
+        String checkQuery = "SELECT returnDate FROM borrowedBooks WHERE userName = ? AND bookName = ?";
+        String deleteQuery = "DELETE FROM borrowedBooks WHERE userName = ? AND bookName = ?";
+        String returnValue = "Update bookTable set bookNums = bookNums + 1 " +
+                "where bookName = ?;";
+
+        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
+            // Kiểm tra xem sách đã được mượn chưa và nếu đã đến hạn trả hay chưa
+            try (PreparedStatement checkStatement = con.prepareStatement(checkQuery)) {
+                checkStatement.setString(1, userName);
+                checkStatement.setString(2, bookName);
+
+                ResultSet returnVal = checkStatement.executeQuery();
+
                 LocalDate returnDate = null;
                 LocalDate today = LocalDate.now();
 
                 if (returnVal.next()) {
-                   returnDate = returnVal.getDate("returnDate").toLocalDate();
+                    returnDate = returnVal.getDate("returnDate").toLocalDate();
                 } else {
                     System.err.println("No book record found");
                     return;
@@ -177,7 +173,7 @@ public class BorrowedBookDataBase {
                         int check = deleteStatement.executeUpdate();
 
                         if (check > 0) {
-                            System.out.println("Sách '" + bookName + "' đã được xóa khỏi danh sách mượn của người dùng " + userName);
+                            System.out.println("Return book succeed");
                             //if returned successfully, increase number of that book by one
                             returnQuantity.executeUpdate();
                         } else {
@@ -185,14 +181,13 @@ public class BorrowedBookDataBase {
                         }
                     }
                 }
-
             } catch (SQLException e) {
-                System.err.println("Lỗi khi kiểm tra sách.");
+                System.err.println("Error when check book in returnBook.");
                 e.printStackTrace();
                 throw e;
             }
         } catch (SQLException e) {
-            System.err.println("Lỗi khi kết nối cơ sở dữ liệu.");
+            System.err.println("Error when connect in returnBook.");
             e.printStackTrace();
             throw e;
         }
