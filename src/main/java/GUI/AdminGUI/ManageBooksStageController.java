@@ -135,8 +135,15 @@ public class ManageBooksStageController implements Initializable {
 
         Book selectedBook = BookTable.getSelectionModel().getSelectedItem();
 
-        // Thông báo admin database sẽ xoá dữ iệu của sách
-        // Alert delete book
+        if (selectedBook == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Chưa chọn sách");
+            alert.setContentText("Vui lòng chọn một cuốn sách để xoá.");
+            alert.show();
+            return;
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm");
         alert.setHeaderText("Bạn thật sự muốn xoá dữ liệu của cuốn sách này?");
@@ -148,9 +155,29 @@ public class ManageBooksStageController implements Initializable {
 
         Optional<ButtonType> option = alert.showAndWait();
 
-        if (option.get() == button_type_yes) {
+        if (option.isPresent() && option.get() == button_type_yes) {
             ManagerAccount managerAccount = new ManagerAccount();
-            managerAccount.deleteBook(selectedBook.getBookName(), selectedBook.getBookAuthor());
+            try {
+                // Nếu không có người mượn, tiến hành xóa sách
+                managerAccount.deleteBook(selectedBook.getBookName(), selectedBook.getBookAuthor());
+
+                // Hiển thị thông báo thành công
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Xóa Sách Thành Công");
+                successAlert.setHeaderText(null);
+                successAlert.setContentText("Cuốn sách '" + selectedBook.getBookName() +
+                        "' của tác giả '" + selectedBook.getBookAuthor() +
+                        "' đã được xóa khỏi cơ sở dữ liệu.");
+                successAlert.show();
+
+            } catch (SQLException e) {
+                // Hiển thị thông báo lỗi khi không xóa được sách
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Lỗi Xóa Sách");
+                errorAlert.setHeaderText("Không thể xóa sách");
+                errorAlert.setContentText("Lỗi khi xóa sách: Có người dùng đang mượn cuốn sách này." );
+                errorAlert.show();
+            }
         }
 
         refresh();
