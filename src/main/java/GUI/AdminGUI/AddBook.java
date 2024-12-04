@@ -27,6 +27,11 @@ public class AddBook {
     @FXML
     private TextField bookTypeTextField;
 
+    /**
+     * Button to add new book to database.
+     * @param event tracked event input
+     * @throws SQLException catch Exception
+     */
     @FXML
     public void AddButtonSubmit(ActionEvent event) throws SQLException {
 
@@ -52,6 +57,10 @@ public class AddBook {
         stage.close();
     }
 
+    /**
+     * close popped up window.
+     * @param event track event input
+     */
     public void CancelButtonClicked(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

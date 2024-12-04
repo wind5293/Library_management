@@ -32,6 +32,10 @@ public class AdminBookDetails implements Initializable {
 
     }
 
+    /**
+     * method to get book information.
+     * @param book book class that contain information from database
+     */
     public void setBookDetails(Book book) {
         selectedBook = book;
 
@@ -47,6 +51,11 @@ public class AdminBookDetails implements Initializable {
         currentStage.close();
     }
 
+    /**
+     * Method to edit book properties.
+     * @param event track input event
+     * @throws IOException catch exception
+     */
     public void EditBook(ActionEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

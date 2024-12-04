@@ -83,6 +83,10 @@ public class ForgotPasswordStage implements Initializable {
         currentStage.close();
     }
 
+    /**
+     * check password validation.
+     * @return true if the format is correct, False if not
+     */
     public boolean checkValidInput() {
         String usernameRegex = "^[a-z0-9]{3,20}$";
         String emailRegex = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";

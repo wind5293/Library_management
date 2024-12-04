@@ -61,6 +61,9 @@ public class ManageBooksStageController implements Initializable {
         setupSearchFilter();
     }
 
+    /**
+     * create table from database and print to screen.
+     */
     private void initializeTable() {
         Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 
@@ -95,6 +98,9 @@ public class ManageBooksStageController implements Initializable {
         }
     }
 
+    /**
+     * setup for search bar.
+     */
     private void setupSearchFilter() {
         FilteredList<Book> filteredData = new FilteredList<>(bookObservableList, b -> true);
 
@@ -119,6 +125,11 @@ public class ManageBooksStageController implements Initializable {
         initializeTable(); // Tải lại dữ liệu từ cơ sở dữ liệu và cập nhật bảng
     }
 
+    /**
+     * Method to handle event when add book button clicked.
+     * @param event track input event
+     * @throws IOException catch Exception
+     */
     public void AddButtonClicked(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/AdminGUI/AddBookStage.fxml")));
         Scene scene = new Scene(root);
@@ -130,6 +141,12 @@ public class ManageBooksStageController implements Initializable {
         popupStage.setOnHidden(e -> refresh());
     }
 
+    /**
+     * Method to delete book when remove button clicked.
+     * @param event track input event
+     * @throws IOException catch Exception
+     * @throws SQLException catch Exception
+     */
     public void RemoveButtonClicked(ActionEvent event) throws IOException, SQLException {
 
         Book selectedBook = BookTable.getSelectionModel().getSelectedItem();
@@ -182,6 +199,11 @@ public class ManageBooksStageController implements Initializable {
         refresh();
     }
 
+    /**
+     * Method to print book detail to screen.
+     * @param event track input event
+     * @throws IOException catch Exception
+     */
     public void DetailsButtonClicked(ActionEvent event) throws IOException {
         Book selectedBook = BookTable.getSelectionModel().getSelectedItem();
         if (selectedBook == null) {
@@ -204,6 +226,10 @@ public class ManageBooksStageController implements Initializable {
         stage.setOnHidden(e -> refresh());
     }
 
+    /**
+     * Convert data to excel.
+     * @param event track input event
+     */
     public void ExcelExportClicked(ActionEvent event) {
         DatabaseToExcel exportBooks = new ExportBooks();
         exportBooks.exportToExcel();

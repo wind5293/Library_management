@@ -8,8 +8,8 @@ public class BorrowedBookDataBase {
     /**
      * Method borrowBook get the book in bookTable.
      *
-     * @param userName is name
-     * @param bookName us book name
+     * @param userName   is name
+     * @param bookName   us book name
      * @param borrowDate is now
      * @param returnDate is
      * @throws SQLException exception
@@ -17,38 +17,52 @@ public class BorrowedBookDataBase {
     public void borrowBook(String userName, String bookName, LocalDate borrowDate, LocalDate returnDate) throws SQLException {
         String query = "INSERT INTO borrowedBooks(userName, bookName, borrowDate, returnDate) " +
                 "VALUES (?, ?, ?, ?);";
+        String check = "select count(*) as count from borrowedBooks where username = ?";
         borrowDate = LocalDate.now();
         try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
-            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-                preparedStatement.setString(1, userName);  // Liên kết với UserDataBase
-                preparedStatement.setString(2, bookName);
-                preparedStatement.setDate(3, Date.valueOf(borrowDate));
-                preparedStatement.setDate(4, Date.valueOf(returnDate));
 
-                preparedStatement.executeUpdate();
+            //Check if user already borrowed 5 books
+            try (PreparedStatement checkCondition = con.prepareStatement(check)) {
 
-                //decrease numbers of book in database by 1
-                String updateBookNums = "Update bookTable set bookNums = " +
-                        "bookNums - 1 where bookName = ?;";
+                checkCondition.setString(1, userName);
+                ResultSet borrowed = checkCondition.executeQuery();
 
-                try (PreparedStatement changeBookNums = con.prepareStatement(updateBookNums)) {
-                    changeBookNums.setString(1, bookName);
-                    changeBookNums.executeUpdate();
-
+                if (borrowed.next() && borrowed.getInt("count") >= 5) {
+                    System.err.println("Maximum borrowed reached");
+                    return;
                 }
 
-                System.out.println("Book " + bookName + " borrowed by " + userName);
-            } catch (SQLException e) {
-                if (e.getSQLState().equals("45000")) {
+                try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                    preparedStatement.setString(1, userName);
+                    preparedStatement.setString(2, bookName);
+                    preparedStatement.setDate(3, Date.valueOf(borrowDate));
+                    preparedStatement.setDate(4, Date.valueOf(returnDate));
 
-                    //Catch SQL Trigger that limit 5 books borrowed per users
-                    //Alert
-                    System.out.println("Maximum borrowed books reached. Please " +
-                            "return previous book before borrow");
-                    System.out.println(e.getMessage());
-                } else {
-                    System.err.println("Error borrowing book: " + e.getMessage());
-                    throw e;
+                    preparedStatement.executeUpdate();
+
+                    //decrease numbers of book in database by 1
+                    String updateBookNums = "Update bookTable set bookNums = " +
+                            "bookNums - 1 where bookName = ?;";
+
+                    try (PreparedStatement changeBookNums = con.prepareStatement(updateBookNums)) {
+                        changeBookNums.setString(1, bookName);
+                        changeBookNums.executeUpdate();
+
+                    }
+
+                    System.out.println("Book " + bookName + " borrowed by " + userName);
+                } catch (SQLException e) {
+                    if (e.getSQLState().equals("45000")) {
+
+                        //Catch SQL Trigger that limit 5 books borrowed per users
+                        //Alert
+                        System.out.println("Maximum borrowed books reached. Please " +
+                                "return previous book before borrow");
+                        System.out.println(e.getMessage());
+                    } else {
+                        System.err.println("Error borrowing book: " + e.getMessage());
+                        throw e;
+                    }
                 }
             }
         }
@@ -57,6 +71,7 @@ public class BorrowedBookDataBase {
 
     /**
      * method to count total number of borrowed books.
+     *
      * @return int number of borrowed Books
      * @throws SQLException catch Exception
      */
@@ -82,6 +97,7 @@ public class BorrowedBookDataBase {
 
     /**
      * Method to return book by delete row in borrowedBook Table.
+     *
      * @param userName username
      * @param bookName book's title
      * @throws SQLException catch Exception

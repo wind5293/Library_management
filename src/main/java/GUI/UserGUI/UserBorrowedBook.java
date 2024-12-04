@@ -61,6 +61,9 @@ public class UserBorrowedBook implements Initializable {
         initializeTable();
     }
 
+    /**
+     * create table from database and print to screen.
+     */
     public void initializeTable() {
         Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 

@@ -56,6 +56,9 @@ public class UserSearchStageController implements Initializable {
         setupSearchFilter();
     }
 
+    /**
+     * create table from database and print to screen.
+     */
     private void initializeTable() {
         Connection connectDB = DatabaseConnection.getInstance().getDBConnection();
 
