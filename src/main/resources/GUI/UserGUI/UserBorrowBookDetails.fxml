@@ -49,6 +49,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="589.0" layoutY="390.0" mnemonicParsing="false" onAction="#ReturnButtonClicked" text="Trả sách" />
+      <Button layoutX="589.0" layoutY="390.0" mnemonicParsing="false" onAction="#OKButtonClicked" text="Xác nhận" />
    </children>
 </AnchorPane>

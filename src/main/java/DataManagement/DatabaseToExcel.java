@@ -17,18 +17,16 @@ import java.sql.Statement;
 public abstract class DatabaseToExcel {
 
     /**
-     * Export to Excel.
-     * Su dung cho nguoi dung xuat danh sach da muon.
-     * -> Query -> "select * from borrowedbook where username = ?".
-     * SU dung cho Admin.
-     * + Xuat danh sach nguoi dung.
-     * -> Query -> "select * from readeraccount".
-     * + Xuat danh sach borrowedBook.
-     * -> Query -> "select * from borrowedBook".
-     * + Xuat danh sach sach.
-     * -> Query -> "select * from bookTable".
+     * Get query.
      */
     public abstract String getQuery();
+
+    /**
+     * Method help write data to sheet.
+     * @param sheet excel sheet
+     * @param resultSet get result set
+     * @throws Exception if there's an error
+     */
     public abstract void writeDataToSheet(Sheet sheet, ResultSet resultSet) throws Exception;
 
     /**

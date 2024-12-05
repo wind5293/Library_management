@@ -4,7 +4,9 @@ import DocumentManager.BorrowedBook;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +30,8 @@ public class UserBorrowBookDetails implements Initializable {
         ReturnDateLabel.setText(selectedBook.getReturnDate());
     }
 
-    public void ReturnButtonClicked(ActionEvent event) {
-        System.out.println("ReturnButtonClicked");
+    public void OKButtonClicked(ActionEvent event) {
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 }

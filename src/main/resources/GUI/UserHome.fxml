@@ -38,7 +38,7 @@
                               <Image url="@sourceImage/4705.png_860.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="NotificationButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#NotificationButtonClicked" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Notification">
+                        <Button fx:id="NotificationButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#NotificationButtonClicked" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #DC143C;" text="Home">
                            <font>
                               <Font size="18.0" />
                            </font>

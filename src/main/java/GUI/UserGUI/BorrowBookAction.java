@@ -57,8 +57,8 @@ public class BorrowBookAction implements Initializable {
         String bookName = book.getBookName();
         LocalDate returnDate = ReturnDatePicker.getValue();
         LocalDate borrowDate = LocalDate.now();
-        Optional<ButtonType> result = confirmAlert();
 
+        Optional<ButtonType> result = confirmAlert();
 
         if (result.get().getButtonData() == ButtonBar.ButtonData.YES) {
             BorrowedBookDataBase borrowedBookDataBase = new BorrowedBookDataBase();

@@ -16,7 +16,7 @@ public class ExcelToDatabase {
     private final String excelFilePath;
 
     /**
-     * Get excel file path.
+     * Get Excel file path.
      */
     public ExcelToDatabase(String excelFilePath) {
         this.excelFilePath = excelFilePath;

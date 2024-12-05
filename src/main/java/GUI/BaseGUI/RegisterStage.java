@@ -1,4 +1,4 @@
-package GUI;
+package GUI.BaseGUI;
 
 import DataBaseSQL.UserDataBase;
 import javafx.event.ActionEvent;
@@ -70,7 +70,7 @@ public class RegisterStage implements Initializable {
     }
 
     public void LoginButtonClicked(ActionEvent event) throws IOException {
-        switchScene(event, "LoginStage.fxml");
+        switchScene(event, "/GUI/BaseGUI/LoginStage.fxml");
     }
 
     // Phương thức hiển thị alert
@@ -82,6 +82,9 @@ public class RegisterStage implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Regex strings help check the valid input
+     */
     private static final String USERNAME_REGEX = "^[a-zA-Z0-9_]{3,20}$";
     private static final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     private static final String ADDRESS_REGEX = "^.{5,100}$";

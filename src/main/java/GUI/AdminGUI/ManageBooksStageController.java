@@ -122,7 +122,7 @@ public class ManageBooksStageController implements Initializable {
     }
 
     public void refresh() {
-        initializeTable(); // Tải lại dữ liệu từ cơ sở dữ liệu và cập nhật bảng
+        initializeTable();
     }
 
     /**
@@ -137,7 +137,6 @@ public class ManageBooksStageController implements Initializable {
         popupStage.setScene(scene);
         popupStage.show();
 
-        // Làm mới bảng sau khi thêm sách mới
         popupStage.setOnHidden(e -> refresh());
     }
 

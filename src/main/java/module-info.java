@@ -17,5 +17,9 @@ module org.example.library_management {
     opens User to javafx.base;
     exports GUI.UserGUI;
     opens GUI.UserGUI to javafx.fxml;
+    exports GUI.BaseGUI;
+    opens GUI.BaseGUI to javafx.fxml;
+    exports AppVersion;
+    opens AppVersion to javafx.fxml;
 
 }

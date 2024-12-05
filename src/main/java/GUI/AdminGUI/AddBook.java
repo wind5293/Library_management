@@ -40,14 +40,15 @@ public class AddBook {
             String fixExcelLink = ExcelLinkTextField.getText().replace("\\","\\\\");
             ExcelToDatabase importer = new ExcelToDatabase(fixExcelLink);
             importer.importData();
-        }
-        String bookName = bookNameTextField.getText();
-        String bookAuthor = bookAuthorTextField.getText();
-        String bookType = bookTypeTextField.getText();
-        int bookNum = Integer.parseInt(bookNumTextField.getText());
+        } else {
+            String bookName = bookNameTextField.getText();
+            String bookAuthor = bookAuthorTextField.getText();
+            String bookType = bookTypeTextField.getText();
+            int bookNum = Integer.parseInt(bookNumTextField.getText());
 
-        ManagerAccount managerAccount = new ManagerAccount();
-        managerAccount.addBook(bookName, bookAuthor, bookType, bookNum);
+            ManagerAccount managerAccount = new ManagerAccount();
+            managerAccount.addBook(bookName, bookAuthor, bookType, bookNum);
+        }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Thêm sách thành công");

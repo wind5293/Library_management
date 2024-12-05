@@ -130,6 +130,8 @@ public class UserSearchStageController implements Initializable {
 
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnHidden(e -> initializeTable());
     }
 
 }

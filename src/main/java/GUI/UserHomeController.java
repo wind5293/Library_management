@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.UserGUI.UserBorrowedBook;
+import GUI.BaseGUI.FxmlLoader;
 import GUI.UserGUI.UserSearchStageController;
 import User.SaveUserName;
 import javafx.event.ActionEvent;
@@ -52,7 +52,7 @@ public class UserHomeController implements Initializable {
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/LoginStage.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/BaseGUI/LoginStage.fxml")));
             Scene scene = new Scene(root);
             Stage loginStage = new Stage();
             loginStage.setScene(scene);
