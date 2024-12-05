@@ -1,4 +1,4 @@
-package GUI;
+package GUI.BaseGUI;
 
 import DataBaseSQL.UserDataBase;
 import User.SaveUserName;
@@ -35,6 +35,12 @@ public class LoginStage {
     @FXML
     private Label forgotPasswordLabel;
 
+    /**
+     * Handle event when user clicked into "Login" button.
+     * @param event event
+     * @throws SQLException if there's an error about SQL connected
+     * @throws IOException if there's an error about in/out
+     */
     public void Login(ActionEvent event) throws SQLException, IOException {
         String userName = tf_username.getText();
         String userPassWord = tf_password.getText();
@@ -42,19 +48,19 @@ public class LoginStage {
         UserDataBase userDataBase = new UserDataBase();
 
         if (checkAdmin(userName, userPassWord)) {
-            switchScene(event,"AdminHome.fxml");
+            switchScene(event,"/GUI/AdminHome.fxml");
         }
-        // Kiểm tra người dùng có tồn tại trong database hay không với mật khẩu
+        // Check if user is existed.
         else if (userDataBase.isUserExists(userName, userPassWord)) {
-            // Đăng nhập thành công
+            // Login success.
             SaveUserName.setLoggedInUsername(userName);
             showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công",
                     "Chào mừng " + userName + "!");
 
-            switchScene(event, "UserHome.fxml");
+            switchScene(event, "/GUI/UserHome.fxml");
         }
         else {
-            // Đăng nhập thất bại
+            // Login failed
             showAlert(Alert.AlertType.ERROR, "Đăng nhập thất bại",
                     "Tên người dùng hoặc mật khẩu không chính xác.");
         }
@@ -75,10 +81,10 @@ public class LoginStage {
         alert.showAndWait();
     }
 
-    // Hàm xử lý sự kiện khi người dùng nhấn vào nút "Đăng ký" (nếu có)
+    // Hàm xử lý sự kiện khi người dùng nhấn vào nút "Đăng ký" (nếu có).
     @FXML
     public void goToSignUp(ActionEvent event) throws IOException {
-        switchScene(event,"RegisterStage.fxml");
+        switchScene(event,"/GUI/BaseGUI/RegisterStage.fxml");
     }
 
     public boolean checkValidInput(String username, String password) {
@@ -97,9 +103,15 @@ public class LoginStage {
     }
 
     public void ForgotPassword(MouseEvent event) throws IOException {
-        switchScene(event, "/GUI/ForgotPasswordStage.fxml");
+        switchScene(event, "/GUI/BaseGUI/ForgotPasswordStage.fxml");
     }
 
+    /**
+     * Method helps change the scene.
+     * @param event the action event triggered by clicked buttons
+     * @param newSceneName name of the new scene will be loaded
+     * @throws IOException if there's an error about in/out
+     */
     public void switchScene(Event event, String newSceneName) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();;
 

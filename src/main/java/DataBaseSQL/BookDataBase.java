@@ -5,65 +5,6 @@ package DataBaseSQL;
 import java.sql.*;
 
 public class BookDataBase {
-
-//    /**
-//     * Method to add Document to Library Database.
-//     *
-//     * @param bookName   book's title
-//     * @param bookAuthor author's name
-//     * @param bookNums   quantity of book
-//     * @throws SQLException catch exception
-//     */
-//    public void addToDataBase(String bookName, String bookAuthor, int bookNums) throws SQLException {
-//        //Query to add new rows.
-//        String insert = "insert into bookTable(bookName, bookAuthor, bookNums) VALUES (?, ?, ?);";
-//        //Query to check for existing book in Database.
-//        String check = "Select bookName, bookAuthor, bookNums from bookTable where " +
-//                "bookName = ? AND bookAuthor = ?;";
-//        //Query to add book to existed book in Database.
-//        String update = "UPDATE bookTable SET bookNums = bookNums + ? WHERE " +
-//                "bookName = ? AND bookAuthor = ?;";
-//
-//        try (Connection con = DatabaseConnection.getInstance().getDBConnection()) {
-//
-//            //check if book is in database or not
-//            try (PreparedStatement checkCondition = con.prepareStatement(check)) {
-//                checkCondition.setString(1, bookName);
-//                checkCondition.setString(2, bookAuthor);
-//
-//                try (ResultSet rs = checkCondition.executeQuery()) {
-//
-//                    if (rs.next()) {
-//                        //if book is in database
-//                        try (PreparedStatement updateDB = con.prepareStatement(update)) {
-//                            //increase book by bookNums
-//                            updateDB.setInt(1, bookNums);
-//                            updateDB.setString(2, bookName);
-//                            updateDB.setString(3, bookAuthor);
-//                            updateDB.executeUpdate();
-//                        }
-//                        //if book is not in database
-//                    } else {
-//                        //add new row
-//                        try (PreparedStatement preparedStatement = con.prepareStatement(insert)) {
-//                            preparedStatement.setString(1, bookName);
-//                            preparedStatement.setString(2, bookAuthor);
-//                            preparedStatement.setInt(3, bookNums);
-//
-//                            preparedStatement.executeUpdate();
-//                        } catch (SQLException e) {
-//                            System.err.println(e.getMessage() + "add DataBase had ERROR!" + e.getErrorCode());
-//                            throw e;
-//                        }
-//                    }
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("DataBase is not connected");
-//            throw e;
-//        }
-//    }
-
     /**
      * Method to add Document to Library Database.
      *

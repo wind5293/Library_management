@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.FxmlLoader;
+import GUI.BaseGUI.FxmlLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,7 +57,7 @@ public class AdminHomeController implements Initializable {
     public void logoutButtonClicked(ActionEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/LoginStage.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GUI/BaseGUI/LoginStage.fxml")));
         Scene newScene = new Scene(root);
         Stage newStage = new Stage();
         newStage.setScene(newScene);

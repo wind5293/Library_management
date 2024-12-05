@@ -1,4 +1,4 @@
-package GUI;
+package GUI.BaseGUI;
 
 import DataBaseSQL.UserDataBase;
 import javafx.event.ActionEvent;
